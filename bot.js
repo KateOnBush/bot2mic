@@ -19,7 +19,7 @@ client.on('message', message => {
     if(command === "setprefix"){
     if (args[0] != undefined)
     {
-        if (args[0].length = 1)
+        if (args[0].length == 1)
         {
             message.guild.commandPrefix == args[0];
             message.channel.send("**Server Prefix** has been set to : " + args[0]);
