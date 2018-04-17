@@ -15,8 +15,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     if(command === "ping") {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
-}
-    if(command === "setprefix"){
+} else if(command === "setprefix"){
     if (args[0] != undefined)
     {
         if (args[0].length == 1)
@@ -26,13 +25,12 @@ client.on('message', message => {
         }
         else
         {
-            message.channel.send(":x: Prefix should contain only *1* letter/symbol.")
+            message.channel.send(":x: Prefix should contain only one letter/symbol.")
         }
     } else {
         message.channel.send(":x: **Please precise a symbol**")
     }
-    }
-    if(command === "say")
+} else if(command === "say")
     {
         if(args[0] != undefined)
         {
@@ -40,6 +38,8 @@ client.on('message', message => {
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
+    } else {
+        message.channel.send("Unknown command, try *" + message.guild.commandPrefix + "help* for a list of commands.")
     }
 }});
 
