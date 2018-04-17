@@ -22,9 +22,10 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if (message.toString().startsWith(commandPrefix + "setcommandprefix")) {
-        if not (message.toString().length >= 19)
+        if (message.toString().length < 19)
         {
-    	    message.channel.send(":x: Cannot set command prefix to : " + message.toString().charAt(19));
+    	    message.channel.send("**Usage :**);
+            message.channel.send(commandPrefix + "setcommandprefix <letter/symbol> : *Sets the bot's command prefix in this server.");
         }
         else
         {
