@@ -17,6 +17,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     if(command === "ping") {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
+    message.channel.send(":ping_pong: Bot Ping is about **" + client.ping + " ms** , hehe :ping_pong:")
 } else if(command === "setprefix"){
     if (args[0] != undefined)
     {
