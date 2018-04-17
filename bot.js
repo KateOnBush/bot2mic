@@ -22,13 +22,13 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if (message.toString().startsWith(commandPrefix + "setcommandprefix")) {
-        if (message.toString().length >== 19)
+        if (message.toString().length >= 19)
         {
     	    message.channel.send(":x: Cannot set command prefix to : " + message.toString().replace(commandPrefix + "setcommandprefix "));
         }
         else
         {
-            commandPrefix = message.toString().replace(commandPrefix + "setcommandprefix ");
+            commandPrefix = message.toString().charAt(19);
             message.channel.send(":white_check_mark: Command Prefix Successfully set to : " + commandPrefix)
         }
   	}
