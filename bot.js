@@ -44,15 +44,12 @@ client.on('message', message => {
         {
             message.reply("Here's your avatar : " + message.author.avatarURL);
         } else {
-            if(message.guild.members.exists("tag",args[0].replace("@","")) == true)
+            if(message.guild.members.exists("id",args[0].replace("<","").replace(">","").replace("!","")) == true)
             {
-                message.channel.send("Avatar of @" + message.guild.members.find("tag",args[0].replace("@","")).user.tag + " : " + message.guild.members.find("tag",args[0].replace("@","")).user.avatarURL);
+                message.channel.send("Avatar of @" + message.guild.members.find("id",args[0].replace("<","").replace(">","").replace("!","")).user.tag + " : " + message.guild.members.find("tag",args[0].replace("<","").replace(">","").replace("!","")).user.avatarURL);
                 
             } else {
                 message.channel.send("**Error :** Cannot find that user.");
-                message.channel.send(message.guild.members.exists("tag",args[0].replace("@","")));
-                message.channel.send(args[0].replace("@",""));
-                message.channel.send(message.author.id);
             }
         }
     }else {
