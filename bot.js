@@ -41,11 +41,15 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content.startsWith(commandPrefix + 'say') and (message.content !=== commandPrefix + "say" or message.content !=== commandPrefix + "say ")) {
+    if (message.content.startsWith(commandPrefix + 'say') {
+        if (message.content !=== commandPrefix + "say" or message.content !=== commandPrefix + "say ")
+        {
     	message.channel.send(message.content.replace(commandPrefix + "say"));
-  	} else {
-        message.channel.send("**LOL!** Want me to send an empty message? You stupid.");
-    }
+        }
+        else {
+            message.channel.send("**LOL!** Want me to send an empty message?! You stupid.")
+        }
+  	}
 });
 
 // THIS  MUST  BE  THIS  WAY
