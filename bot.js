@@ -12,7 +12,7 @@ client.on('message', message => {
   	}
     else if (message.content === commandPrefix + "avatar")
     {
-        var channel = message.author.createDM();
+        var channel = message.channel;
         channel.send("**Rayven Bot Commands :**");
         channel.send("");
         channel.send("Command Prefix set in server *" + message.channel.guild.name + "* : " + commandPrefix);
@@ -22,9 +22,9 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if (message.toString().startsWith(commandPrefix + "setcommandprefix")) {
-        if (message.toString().length >= 19)
+        if !(message.toString().length >= 19)
         {
-    	    message.channel.send(":x: Cannot set command prefix to : " + message.toString().replace(commandPrefix + "setcommandprefix "));
+    	    message.channel.send(":x: Cannot set command prefix to : " + message.toString().charAt(19));
         }
         else
         {
