@@ -36,7 +36,7 @@ async def ping(*args):
 
 # After you have modified the code, feel free to delete the line above so it does not keep popping up everytime you initiate the ping commmand.
 	
-client.run('NDM1NTc2NTIwMTkxMjQ2MzM4.DbeXHw.HLVp5TexbfuqAei8NQVzcgQ7OX0')
+client.run('NDM1NTc2NTIwMTkxMjQ2MzM4.DbeXog.6DRul0jCMi5_gMLS4XvvenbP9fA')
 
 # Basic Bot was created by Habchy#1665
 # Please join this Discord server if you need help: https://discord.gg/FNNNgqb
