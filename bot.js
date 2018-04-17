@@ -41,7 +41,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content.startsWith(commandPrefix + 'say') {
+    if (message.content.startsWith(commandPrefix + 'say')) {
         if (message.content !=== commandPrefix + "say" or message.content !=== commandPrefix + "say ")
         {
     	message.channel.send(message.content.replace(commandPrefix + "say"));
