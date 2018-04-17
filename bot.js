@@ -40,8 +40,8 @@ client.on('message', message => {
         }
     } else if(command === "help")
     {
-        message.react(":thumbsup:");
-        message.channel.send("Check your DM , <@" + message.author.id + ">);
+        message.react("thumbsup");
+        message.channel.send("Check your DM , <@" + message.author.id + ">");
         message.author.createDM();
         message.author.sendMessage("Hi there!");
     }else {
