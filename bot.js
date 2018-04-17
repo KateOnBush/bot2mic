@@ -26,13 +26,11 @@ client.on('message', message => {
         {
     	    message.channel.send("**Usage :**");
             message.channel.send(commandPrefix + "setcommandprefix <letter/symbol> : *Sets the bot's command prefix in this server.");
-            break;
         }
         if (message.content.length >= 19)
         {
             commandPrefix = message.content.charAt(19);
             message.channel.send(":white_check_mark: Command Prefix Successfully set to : " + commandPrefix);
-            break;
         }
   	}
 });
