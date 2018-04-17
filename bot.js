@@ -8,9 +8,9 @@ client.on('ready', () => {
     
 });
 client.on('message', message => {
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
+    const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
     if(command === "ping") {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
 }
@@ -18,10 +18,20 @@ client.on('message', message => {
     if (args[0] != undefined)
     {
         message.guild.commandPrefix == args[0];
-        message.channel.send("**Server Prefix** has been set to :" + args[0]);
+        message.channel.send("**Server Prefix** has been set to : " + args[0]);
     } else {
         message.channel.send(":x: **Please precise a symbol**")
     }
+    }
+    if(command === "say")
+    {
+        if(args[0] != undefined)
+        {
+            message.channel.send(args[0]);
+            message.delete();
+        } else {
+            message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
+        }
     }
 });
 
