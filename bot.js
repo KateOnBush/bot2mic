@@ -38,20 +38,11 @@ client.on('message', message => {
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
-    } else if(command === "avatar")
+    } else if(command === "help")
     {
-        if(args[0] == undefined)
-        {
-            message.reply("Here's your avatar : " + message.author.avatarURL);
-        } else {
-            if(message.guild.members.exists("id",args[0]) == true)
-            {
-                message.channel.send("Avatar of @" + message.guild.members.find("id",args[0].replace("<","").replace(">","").replace("!","")).user.tag + " : " + message.guild.members.find("tag",args[0].replace("<","").replace(">","").replace("!","")).user.avatarURL);
-                
-            } else {
-                message.channel.send("**Error :** Cannot find that user.");
-            }
-        }
+        message.react(":thumbsup:");
+        message.channel.send("Check your DM , @" + message.author.tag);
+        message.author.dmChannel.send("Hi there!");
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
