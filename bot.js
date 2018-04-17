@@ -14,6 +14,15 @@ client.on('message', message => {
     if(command === "ping") {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
 }
+    if(command === "setprefix"){
+    if (args[0] != undefined)
+    {
+        message.guild.commandPrefix == args[0];
+        message.channel.send("**Server Prefix** has been set to :" + args[0]);
+    } else {
+        message.channel.send(":x: **Please precise a symbol**")
+    }
+    }
 });
 
 // THIS  MUST  BE  THIS  WAY
