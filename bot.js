@@ -8,8 +8,11 @@ client.on('ready', () => {
     
 });
 client.on('message', message => {
+    if (message.channel.type !== "dm")
+    {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
-    if (message.content.startsWith(message.guild.commandPrefix))
+    }
+    if ((message.content.startsWith(message.guild.commandPrefix)) && (message.channel.type !== "dm"))
     {
     const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
