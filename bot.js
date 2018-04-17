@@ -9,6 +9,8 @@ client.on('ready', () => {
 });
 client.on('message', message => {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
+    if (message.content.startsWith(message.guild.commandPrefix))
+    {
     const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     if(command === "ping") {
@@ -27,18 +29,12 @@ client.on('message', message => {
     {
         if(args[0] != undefined)
         {
-            var msg = "";
-            for(i = 0;args[i] != undefined; i++)
-            {
-                msg += args[i];
-            }
-            message.channel.send(msg);
-            message.delete();
+            message.channel.send(message.content.replace(message.guild.commandPrefix + "say "));
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
     }
-});
+}});
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
