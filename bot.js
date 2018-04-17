@@ -44,7 +44,12 @@ client.on('message', message => {
         {
             message.reply("Here's your avatar : " + message.author.avatarURL);
         } else {
-            message.channel.send(message.guild.member(args[0]) + " j " + message.author.username + " , " + message.author.tag + " : " + message.author.avatarURL)
+            if(message.guild.members.exists(args[0]))
+            {
+                message.channel.send("Avatar of @" + message.guild.members.find(args[0]).user.tag + " : " + message.guild.members.find(args[0]).user.avatarURL);
+            } else {
+                message.channel.send("**Error :** Cannot find that user.")
+            }
         }
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
