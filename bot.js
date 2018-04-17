@@ -15,7 +15,7 @@ client.on('message', message => {
     if (message.toString().startsWith(commandPrefix + "setcommandprefix")) {
         if (message.toString().replace(commandPrefix + "setcommandprefix ").length !== 1)
         {
-    	    message.channel.send(":x: Error while trying to set the command prefix. Please try again.");
+    	    message.channel.send(":x: Cannot set command prefix to : " + message.toString().replace(commandPrefix + "setcommandprefix "));
         }
         else
         {
