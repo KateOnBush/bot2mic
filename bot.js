@@ -27,7 +27,12 @@ client.on('message', message => {
     {
         if(args[0] != undefined)
         {
-            message.channel.send(args[0]);
+            var msg = "";
+            for(i = 0;args[i] != undefined; i++)
+            {
+                msg += args[i];
+            }
+            message.channel.send(msg);
             message.delete();
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
