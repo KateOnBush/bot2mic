@@ -40,11 +40,11 @@ client.on('message', message => {
         }
     } else if(command === "avatar")
     {
-        if(arg[0] == undefined)
+        if(args[0] == undefined)
         {
             message.reply("Here's your avatar : " + message.author.avatarURL);
         } else {
-            message.channel.send(message.guild.member(arg[0]) + " j " + message.author.username + " , " + message.author.tag + " : " + message.author.avatarURL)
+            message.channel.send(message.guild.member(args[0]) + " j " + message.author.username + " , " + message.author.tag + " : " + message.author.avatarURL)
         }
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
