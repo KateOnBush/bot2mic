@@ -38,8 +38,16 @@ client.on('message', message => {
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
-    } else {
-        message.channel.send("Unknown command, try *" + message.guild.commandPrefix + "help* for a list of commands.")
+    } else if(command === "avatar")
+    {
+        if(arg[0] == undefined)
+        {
+            message.reply("Here's your avatar : " + message.author.avatarURL);
+        } else {
+            message.channel.send(message.guild.member(arg[0]) + " j " + message.author.username + " , " + message.author.tag + " : " + message.author.avatarURL)
+        }
+    }else {
+        message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
 }});
 
