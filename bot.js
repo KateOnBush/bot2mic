@@ -19,8 +19,15 @@ client.on('message', message => {
     if(command === "setprefix"){
     if (args[0] != undefined)
     {
-        message.guild.commandPrefix == args[0];
-        message.channel.send("**Server Prefix** has been set to : " + args[0]);
+        if (args[0].length = 1)
+        {
+            message.guild.commandPrefix == args[0];
+            message.channel.send("**Server Prefix** has been set to : " + args[0]);
+        }
+        else
+        {
+            message.channel.send(":x: Prefix should contain only *1* letter/symbol.")
+        }
     } else {
         message.channel.send(":x: **Please precise a symbol**")
     }
