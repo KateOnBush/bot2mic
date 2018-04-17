@@ -11,7 +11,6 @@ client.on('message', message => {
     if (message.channel.type !== "dm")
     {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
-    }
     if ((message.content.startsWith(message.guild.commandPrefix)) && (message.channel.type !== "dm"))
     {
     const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
@@ -43,14 +42,22 @@ client.on('message', message => {
         }
     } else if(command === "help")
     {
-        message.react("thumbsup");
+        message.delete();
         message.channel.send("Check your DM , <@" + message.author.id + ">");
         message.author.createDM();
         message.author.sendMessage("Hi there!");
+    } else if(command === "contact") {
+        if(args[0] != undefined)
+        {
+            
+            message.channel.send(message.content.replace(message.guild.commandPrefix + "say ",""));
+        } else {
+            message.channel.send("**Sorry** but your message is empty.")
+        }
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
-}});
+}}});
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
