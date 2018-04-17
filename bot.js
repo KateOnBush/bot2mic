@@ -59,6 +59,6 @@ client.on('message', message => {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
 }}});
-
+client.user.setGame("with Aouab's dick.")
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
