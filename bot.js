@@ -4,6 +4,7 @@ var commandPrefix = "_";
 
 client.on('ready', () => {
     console.log('I am ready!');
+    
 });
 
 client.on('message', message => {
@@ -20,23 +21,33 @@ client.on('message', message => {
     }   
 });
 client.on('message', message => {
-    if (message.toString().startsWith(commandPrefix + "setcommandprefix")) {
-        if (message.toString().length < 19)
+    if (message.content.startsWith(commandPrefix + "setcommandprefix")) {
+        if (message.content.length < 19)
         {
     	    message.channel.send("**Usage :**");
             message.channel.send(commandPrefix + "setcommandprefix <letter/symbol> : *Sets the bot's command prefix in this server.");
+            break;
         }
-        else if (message.toString().length >= 19)
+        if (message.content.length >= 19)
         {
-            commandPrefix = message.toString().charAt(19);
-            message.channel.send(":white_check_mark: Command Prefix Successfully set to : " + commandPrefix)
+            commandPrefix = message.content.charAt(19);
+            message.channel.send(":white_check_mark: Command Prefix Successfully set to : " + commandPrefix);
+            break;
         }
   	}
 });
 client.on('message', message => {
-    if (message.content === commandPrefix + 'bing') {
-    	message.reply('BONG!');
+    if (message.content === commandPrefix + 'ping') {
+    	message.reply(':ping_pong: Pong ! :ping_pong: ');
   	}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(commandPrefix + 'say') and (message.content !=== commandPrefix + "say" or message.content !=== commandPrefix + "say ")) {
+    	message.channel.send(message.content.replace(commandPrefix + "say"));
+  	} else {
+        message.channel.send("**LOL!** Want me to send an empty message? You stupid.");
+    }
 });
 
 // THIS  MUST  BE  THIS  WAY
