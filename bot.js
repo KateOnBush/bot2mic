@@ -42,6 +42,7 @@ client.on('message', message => {
     {
         message.react(":thumbsup:");
         message.channel.send("Check your DM , @" + message.author.tag);
+        message.author.createDM();
         message.author.dmChannel.send("Hi there!");
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
