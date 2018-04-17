@@ -46,7 +46,7 @@ client.on('message', message => {
         } else {
             if(message.guild.members.exists(args[0]))
             {
-                message.channel.send("Avatar of @" + message.guild.members.find(args[0]).user.tag + " : " + message.guild.members.find(args[0]).user.avatarURL);
+                message.channel.send("Avatar of @" + message.guild.members.find("name",args[0]).user.tag + " : " + message.guild.members.find("name",args[0]).user.avatarURL);
             } else {
                 message.channel.send("**Error :** Cannot find that user.")
             }
