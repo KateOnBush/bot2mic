@@ -44,9 +44,9 @@ client.on('message', message => {
         {
             message.reply("Here's your avatar : " + message.author.avatarURL);
         } else {
-            if(message.guild.members.exists("name",args[0]))
+            if(message.guild.members.exists("tag",args[0].replace("@","")))
             {
-                message.channel.send("Avatar of @" + message.guild.members.find("name",args[0]).user.tag + " : " + message.guild.members.find("name",args[0]).user.avatarURL);
+                message.channel.send("Avatar of @" + message.guild.members.find("tag",args[0].replace("@","")).user.tag + " : " + message.guild.members.find("tag",args[0].replace("@","")).user.avatarURL);
             } else {
                 message.channel.send("**Error :** Cannot find that user.")
             }
