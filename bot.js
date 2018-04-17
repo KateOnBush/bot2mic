@@ -52,6 +52,7 @@ client.on('message', message => {
                 message.channel.send("**Error :** Cannot find that user.");
                 message.channel.send(message.guild.members.exists("tag",args[0].replace("@","")));
                 message.channel.send(args[0].replace("@",""));
+                message.channel.send(message.author.id);
             }
         }
     }else {
