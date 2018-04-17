@@ -10,7 +10,7 @@ client.on('ready', () => {
 client.on('message', message => {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
-    if (message.guild.commandPrefix = null) {message.guild.commandPrefix = "_"};
+    if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
     if(command === "ping") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
