@@ -21,7 +21,7 @@ client.on('message', message => {
     {
         if (args[0].length == 1)
         {
-            message.guild.commandPrefix == args[0];
+            message.guild.commandPrefix = args[0];
             message.channel.send("**Server Prefix** has been set to : " + args[0]);
         }
         else
@@ -36,7 +36,7 @@ client.on('message', message => {
     {
         if(args[0] != undefined)
         {
-            message.channel.send(message.content.replace(message.guild.commandPrefix + "say "));
+            message.channel.send(message.content.replace(message.guild.commandPrefix + "say ",""));
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
