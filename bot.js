@@ -10,14 +10,13 @@ client.on('message', message => {
     if (message.content === commandPrefix + "avatar") {
     	message.reply("Here's your avatar ! " + message.author.avatarURL);
   	}
-    else if (message.content === commandPrefix + "avatar")
+    else if (message.content === commandPrefix + "help")
     {
-        var channel = message.channel;
-        channel.send("**Rayven Bot Commands :**");
-        channel.send("");
-        channel.send("Command Prefix set in server *" + message.channel.guild.name + "* : " + commandPrefix);
-        channel.send("");
-        channel.send("**" + commandPrefix + "help:** Show help about bot's commands.");
+        message.channel.send("**Rayven Bot Commands :**");
+        message.channel.send("");
+        message.channel.send("Command Prefix set in server *" + message.channel.guild.name + "* : " + commandPrefix);
+        message.channel.send("");
+        message.channel.send("**" + commandPrefix + "help:** Show help about bot's commands.");
     }   
 });
 client.on('message', message => {
@@ -27,7 +26,7 @@ client.on('message', message => {
     	    message.channel.send("**Usage :**");
             message.channel.send(commandPrefix + "setcommandprefix <letter/symbol> : *Sets the bot's command prefix in this server.");
         }
-        else
+        else if (message.toString().length >= 19)
         {
             commandPrefix = message.toString().charAt(19);
             message.channel.send(":white_check_mark: Command Prefix Successfully set to : " + commandPrefix)
