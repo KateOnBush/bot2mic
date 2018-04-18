@@ -1,6 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 var commandPrefix = "_";
+function globalVar()
+{
+    this.__enabled = true;    
+}
+var global = new globalVar();
 const config = require("./config.json");
 client.on('ready', () => {
     console.log('I am ready!');
@@ -51,8 +56,8 @@ client.on('message', message => {
         {
             var keys = "abcdefghijklmnopqrstuvwxyz1234567890_";
             var msgId = keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length))
-            eval("var msg_" + msgId + " = message.author;")
-            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[msg_" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
+            eval("global.msg_" + msgId + " = message.author;")
+            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
             message.channel.send("Successfully sent message to my developper.");
         } else {
             message.channel.send("**Sorry** but your message is empty.")
@@ -69,7 +74,7 @@ client.on('message', message => {
         {
             if((args[0] != null) && (args[1] != null))
             {
-                if (eval("(" + args[0] + " != null)"))
+                if (eval("(global.msg_" + args[0] + " != null)"))
                 {
                     eval(args[0]).lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
                 } 
