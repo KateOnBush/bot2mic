@@ -49,7 +49,25 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("Hi there!");
+        message.author.send("```
+Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "
+
+Bot commands :
+			    
+	setprefix : Sets the prefix of the commands
+		Syntax : setprefix <symbol>
+	help: Sends you a DM about specific server help.
+		Syntax : help
+	ttt: Command list for tic-tac-toe game.
+		Syntax : ttt <start/join/leave>
+			 ttt do <letter>
+	contact: Sends a message to bot's developper.
+		Syntax : contact <message>
+	say: Makes the bot say something.
+		Syntax : say <message>
+	ping: Info about bot's connection latency.
+		Syntax : ping
+```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -61,7 +79,7 @@ client.on('message', message => {
         } else {
             message.channel.send("**Sorry** but your message is empty.")
         }
-    }else if(command === "xogame")
+    }else if(command === "ttt")
     {
         if ((args[0] === "join") || (args[0] === "start") || (args[0] === "s") || (args[0] === "j")) {
             if((message.channel.xogameStarted == null) || (message.channel.xogameStarted == false))
@@ -93,7 +111,7 @@ client.on('message', message => {
             } else {
                 if ((message.channel.xogameP1 != message.author) && (message.channel.xogameP2 != message.author))
                 {
-                message.channel.send("A 'X O' game has already started in this channel.")
+                message.channel.send("A tic-tac-toe game has already started in this channel.")
                 } else {
                 message.channel.send("You're already in this channel's game.")   
                 }
