@@ -123,6 +123,8 @@ client.on('message', message => {
                                             message.channel.send("*Sorry <@" + message.channel.xogameP2.id + "> for loosing , next time maybe");
                                             message.channel.xogameStarted = false;
                                             message.channel.xogamePlayers = 0;
+					    message.channel.xogameP1 = null;
+				  	    message.channel.xogameP2 = null;
                                         } else {
                                             message.channel.xogameTurn = message.channel.xogameP2;
                                             message.channel.send("It's <@" + message.channel.xogameP2.id + "> 's turn now!")
@@ -144,6 +146,8 @@ client.on('message', message => {
                                             message.channel.send("*Sorry <@" + message.channel.xogameP1.id + "> for loosing , next time maybe");
                                             message.channel.xogameStarted = false;
                                             message.channel.xogamePlayers = 0;
+				            message.channel.xogameP1 = null;
+				  	    message.channel.xogameP2 = null;
                                         } else {
                                             message.channel.xogameTurn = message.channel.xogameP1;
                                             message.channel.send("It's <@" + message.channel.xogameP1.id + "> 's turn now!")
@@ -165,7 +169,7 @@ client.on('message', message => {
             } else {
                 message.channel.send("No game is running in this channel.")
             }
-        } else if ((command === "leave") || (command === "l") || (command === "quit") || (command === "q") || (command === "exit")){
+        } else if ((args[0] === "leave") || (args[0] === "l") || (args[0] === "quit") || (args[0] === "q") || (args[0] === "exit")){
 			if ((message.channel.xogameStarted != null) && (message.channel.xogameStarted != false) && ((message.channel.xogameP1 == message.author) || (message.channel.xogameP2 == message.author)))
 			{
 				if (message.channel.xogameP1 == message.author)
