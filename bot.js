@@ -12,8 +12,7 @@ client.on('ready', () => {
     console.log('Bot got ready , join now discord!')
 });
 client.on('message', message => {
-    if (message.channel.type !== "dm")
-    {
+    if (message.channel.type !== "dm") {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
     if ((message.content.startsWith(message.guild.commandPrefix)) && (message.channel.type !== "dm"))
     {
@@ -110,7 +109,7 @@ client.on('message', message => {
                         {
                             if (message.channel.xogameP1 == message.author)
                             {
-								if ((eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: ')) {
+								if (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: '))){
                                         eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) + " = ':x: '")
                                         message.channel.send("<@" + message.author.id + "> have checked a case !");
                                         message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3);
@@ -131,7 +130,7 @@ client.on('message', message => {
 								}
                             } else if (message.channel.xogameP2 == message.author)
 							{
-                                    if ((eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: ')) {
+                                    if ((eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: ')))) {
                                         eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) + " = ':o: '");
                                         message.channel.send("<@" + message.author.id + "> have checked a case !");
                                         message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3);
@@ -190,7 +189,8 @@ client.on('message', message => {
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
-}} else {
+}
+} else {
     if (message.author.id == client.guilds.find("name","NightFallerLegendsCommunity").owner.id)
     {
         const args = message.content.slice(commandPrefix.length).trim().split(/ +/g);
