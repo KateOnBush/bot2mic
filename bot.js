@@ -70,7 +70,7 @@ client.on('message', message => {
                 {
                     const user = client.guilds.array()[k].members.find("tag",args[0]);
                 }
-                if (user)
+                if (user != undefined)
                 {
                     user.lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
                 } 
