@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.sendMessage("Hi there!");
+        message.author.send("Hi there!");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -86,7 +86,7 @@ client.on('message', message => {
                     message.channel.send(message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
                     message.channel.xogameTurn = message.channel.xogameP1;
                 } else {
-                    message.channel.xogameStarted = 1;
+                    message.channel.xogamePlayers = 1;
                     message.channel.xogameP1 = message.author;
 		    message.channel.send("<@" + message.author.id +"> joined the game **(1/2)**");
                 }
