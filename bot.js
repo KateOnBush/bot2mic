@@ -49,7 +49,7 @@ client.on('message', message => {
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
-            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**" + message.author.tag + " told you : **"message.content.replace(message.guild.commandPrefix + "contact ",""));
+            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**" + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
             message.channel.send("Successfully sent message to my developper.");
         } else {
             message.channel.send("**Sorry** but your message is empty.")
