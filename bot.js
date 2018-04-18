@@ -5,7 +5,7 @@ const config = require("./config.json");
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
-    
+    client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
 client.on('message', message => {
     if (message.channel.type !== "dm")
@@ -62,4 +62,3 @@ client.on('message', message => {
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
-client.user.setActivity('you', { type: 'WATCHING' });
