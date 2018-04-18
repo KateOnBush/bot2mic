@@ -40,14 +40,20 @@ client.on('message', message => {
     {
         if(args[0] != undefined)
         {
+	    message.delete();
             message.channel.send(message.content.replace(message.guild.commandPrefix + "say ",""));
         } else {
             message.channel.send("**LOL!** You want me to send an empty message?! You such a stupid.")
         }
     } else if(command === "help")
     {
-        message.delete();
-        message.channel.send("Check your DM , <@" + message.author.id + ">");
+        .then(function (message) {
+              message.react("👍")
+              message.pin()
+              message.delete()
+            }).catch(function() {
+              //Something
+             });
         message.author.createDM();
         message.author.sendMessage("Hi there!");
     } else if(command === "contact") {
