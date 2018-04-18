@@ -47,13 +47,7 @@ client.on('message', message => {
         }
     } else if(command === "help")
     {
-        .then(function (message) {
-              message.react("👍")
-              message.pin()
-              message.delete()
-            }).catch(function() {
-              //Something
-             });
+	message.react("👍");
         message.author.createDM();
         message.author.sendMessage("Hi there!");
     } else if(command === "contact") {
