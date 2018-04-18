@@ -5,7 +5,7 @@ const config = require("./config.json");
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
-    client.user.setActivity(`Serving ${client.guilds.size} servers`);
+    client.user.setActivity('YouTube', { type: 'WATCHING' });
 });
 client.on('message', message => {
     if (message.channel.type !== "dm")
