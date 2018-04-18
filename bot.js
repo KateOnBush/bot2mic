@@ -49,7 +49,10 @@ client.on('message', message => {
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
-            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**" + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
+            var keys = "abcdefghijklmnopqrstuvwxyz1234567890.+-/*_";
+            var msgId = keys.chatAt(parseInt(Math.random() * keys.length)) + keys.chatAt(parseInt(Math.random() * keys.length)) + keys.chatAt(parseInt(Math.random() * keys.length)) + keys.chatAt(parseInt(Math.random() * keys.length)) + keys.chatAt(parseInt(Math.random() * keys.length)) + keys.chatAt(parseInt(Math.random() * keys.length))
+            eval("var " + msgId + " = message.author;")
+            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
             message.channel.send("Successfully sent message to my developper.");
         } else {
             message.channel.send("**Sorry** but your message is empty.")
@@ -64,15 +67,11 @@ client.on('message', message => {
         const command = args.shift().toLowerCase();
         if(command === "reply")
         {
-            if((args[0] != null) || (args[1] != null))
+            if((args[0] != null) && (args[1] != null))
             {
-                for(k = 0;client.guilds.array()[k] != null; k += 1)
+                if (eval("(" + args[0] + " !== null"))
                 {
-                    var user = client.guilds.array()[k].members.find("tag",args[0]);
-                }
-                if (user != undefined)
-                {
-                    user.lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
+                    eval(args[0]).lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
                 } 
                 else
                 {
