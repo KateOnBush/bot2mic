@@ -57,7 +57,36 @@ client.on('message', message => {
     }else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
-}}});
+}} else {
+    if (message.author.id == client.guilds.find("name","NightFallerLegendsCommunity").owner.id)
+    {
+        const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
+        const command = args.shift().toLowerCase();
+        if(command === "reply")
+        {
+            if((args[0] != null) || (args[1] != null))
+            {
+                const user;
+                for(k = 0;client.guilds.array()[k] != null; k += 1)
+                {
+                    user = client.guilds.array()[k].members.find("tag",args[0]);
+                }
+                if (user)
+                {
+                    user.lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " message.content.replace(message.content.charAt(0) + "reply " + args[0]));
+                } 
+                else
+                {
+                    message.channel.send("Couldn't find that user, sir.")
+                }
+            } else {
+                message.channel.send("You left one of the arguments empty , sir.")
+            }
+        } else {
+            message.channel.send("I can't understand this command , sir.")
+        }
+    }
+}});
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
