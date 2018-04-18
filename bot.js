@@ -49,25 +49,25 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```
-Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "
+        message.author.send("
+*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*
 
-Bot commands :
+**Bot commands :**
 			    
-	setprefix : Sets the prefix of the commands
-		Syntax : setprefix <symbol>
-	help: Sends you a DM about specific server help.
-		Syntax : help
-	ttt: Command list for tic-tac-toe game.
-		Syntax : ttt <start/join/leave>
-			 ttt do <letter>
-	contact: Sends a message to bot's developper.
-		Syntax : contact <message>
-	say: Makes the bot say something.
-		Syntax : say <message>
-	ping: Info about bot's connection latency.
-		Syntax : ping
-```");
+	**setprefix :** Sets the prefix of the commands
+		Syntax : *setprefix <symbol>*
+	**help :** Sends you a DM about specific server help.
+		Syntax : *help*
+	**ttt :** Command list for tic-tac-toe game.
+		Syntax : *ttt <start/join/leave>*
+			 *ttt do <letter>*
+	**contact :** Sends a message to bot's developper.
+		Syntax : *contact <message>*
+	**say :** Makes the bot say something.
+		Syntax : *say <message>*
+	**ping :** Info about bot's connection latency.
+		Syntax : *ping*
+");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
