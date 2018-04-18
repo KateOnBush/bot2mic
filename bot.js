@@ -76,7 +76,7 @@ client.on('message', message => {
             {
                 if (eval("(global.msg_" + args[0] + " != null)"))
                 {
-                    eval("global.msg_" + args[0]).lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
+                    eval("global.msg_" + args[0]).lastMessage.channel.send("**Developper replied to you, <@" + eval("global.msg_" + args[0]).id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
                 } 
                 else
                 {
