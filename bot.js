@@ -51,7 +51,7 @@ client.on('message', message => {
         {
             var keys = "abcdefghijklmnopqrstuvwxyz1234567890.+-/*_";
             var msgId = keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length))
-            eval("var " + msgId + " = message.author;")
+            eval("var msg_" + msgId + " = message.author;")
             client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
             message.channel.send("Successfully sent message to my developper.");
         } else {
