@@ -64,7 +64,7 @@ client.on('message', message => {
     }else if(command === "xogame")
     {
         if ((args[0] === "join") || (args[0] === "start") || (args[0] === "s") || (args[0] === "j")) {
-            if((message.channel.xogameStarted != null) && (message.channel.xogameStarted != false))
+            if((message.channel.xogameStarted == null) || (message.channel.xogameStarted == false))
             {
                 if ((message.channel.xogameP1 == message.author) || (message.channel.xogameP2 == message.author))
                 {
