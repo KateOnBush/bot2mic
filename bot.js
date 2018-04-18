@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n	**ping :** Info about bot's connection latency.\n		Syntax : *ping*");
+        message.author.send("*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	**ping :** Info about bot's connection latency.\n		Syntax : *ping*");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -81,9 +81,7 @@ client.on('message', message => {
                         eval("message.channel.xogameCoor" + x + " = ':regional_indicator_" + str.charAt(x-1) +": '");
                     }
                     message.channel.send("**Game has started !** <@" + message.channel.xogameP1.id + "> 's turn : ");
-                    message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3);
-                    message.channel.send(message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6);
-                    message.channel.send(message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
+                    message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3 + "\n" + message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6 + "\n" + message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
                     message.channel.xogameTurn = message.channel.xogameP1;
                 } else {
                     message.channel.xogamePlayers = 1;
@@ -114,9 +112,7 @@ client.on('message', message => {
 								if (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: '))){
                                         eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) + " = ':x: '")
                                         message.channel.send("<@" + message.author.id + "> have checked a case !");
-                                        message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3);
-                                        message.channel.send(message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6);
-                                        message.channel.send(message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
+                                        message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3 + "\n" + message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6 + "\n" + message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
                                         if (((message.channel.xogameCoor1 == ":x: ") && (message.channel.xogameCoor2 == ":x: ") && (message.channel.xogameCoor3 == ":x: ")) || ((message.channel.xogameCoor4 == ":x: ") && (message.channel.xogameCoor5 == ":x: ") && (message.channel.xogameCoor6 == ":x: ")) || ((message.channel.xogameCoor7 == ":x: ") && (message.channel.xogameCoor8 == ":x: ") && (message.channel.xogameCoor9 == ":x: ")) || ((message.channel.xogameCoor1 == ":x: ") && (message.channel.xogameCoor4 == ":x: ") && (message.channel.xogameCoor7 == ":x: ")) || ((message.channel.xogameCoor2 == ":x: ") && (message.channel.xogameCoor5 == ":x: ") && (message.channel.xogameCoor8 == ":x: ")) || ((message.channel.xogameCoor3 == ":x: ") && (message.channel.xogameCoor6 == ":x: ") && (message.channel.xogameCoor9 == ":x: ")) || ((message.channel.xogameCoor1 == ":x: ") && (message.channel.xogameCoor5 == ":x: ") && (message.channel.xogameCoor9 == ":x: ")) || ((message.channel.xogameCoor3 == ":x: ") && (message.channel.xogameCoor5 == ":x: ") && (message.channel.xogameCoor7 == ":x: ")))
                                         {
                                             message.channel.send("** <@" + message.author.id + "> has won the game! GG WP !**");
@@ -137,9 +133,7 @@ client.on('message', message => {
                                     if ((eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':x: ') || (eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) != ':o: ')))) {
                                         eval("message.channel.xogameCoor" + (str.indexOf(args[1].toLowerCase()) + 1) + " = ':o: '");
                                         message.channel.send("<@" + message.author.id + "> have checked a case !");
-                                        message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3);
-                                        message.channel.send(message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6);
-                                        message.channel.send(message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
+                                        message.channel.send(message.channel.xogameCoor1 + message.channel.xogameCoor2 + message.channel.xogameCoor3 + "\n" + message.channel.xogameCoor4 + message.channel.xogameCoor5 + message.channel.xogameCoor6 + "\n" + message.channel.xogameCoor7 + message.channel.xogameCoor8 + message.channel.xogameCoor9);
                                         if (((message.channel.xogameCoor1 == ":o: ") && (message.channel.xogameCoor2 == ":o: ") && (message.channel.xogameCoor3 == ":o: ")) || ((message.channel.xogameCoor4 == ":o: ") && (message.channel.xogameCoor5 == ":o: ") && (message.channel.xogameCoor6 == ":o: ")) || ((message.channel.xogameCoor7 == ":o: ") && (message.channel.xogameCoor8 == ":o: ") && (message.channel.xogameCoor9 == ":o: ")) || ((message.channel.xogameCoor1 == ":o: ") && (message.channel.xogameCoor4 == ":o: ") && (message.channel.xogameCoor7 == ":o: ")) || ((message.channel.xogameCoor2 == ":o: ") && (message.channel.xogameCoor5 == ":o: ") && (message.channel.xogameCoor8 == ":o: ")) || ((message.channel.xogameCoor3 == ":o: ") && (message.channel.xogameCoor6 == ":o: ") && (message.channel.xogameCoor9 == ":o: ")) || ((message.channel.xogameCoor1 == ":o: ") && (message.channel.xogameCoor5 == ":o: ") && (message.channel.xogameCoor9 == ":o: ")) || ((message.channel.xogameCoor3 == ":o: ") && (message.channel.xogameCoor5 == ":o: ") && (message.channel.xogameCoor7 == ":o: ")))
                                         {
                                             message.channel.send("** <@" + message.author.id + "> has won the game! GG WP !**");
