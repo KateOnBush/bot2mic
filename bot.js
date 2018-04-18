@@ -74,6 +74,7 @@ client.on('message', message => {
                 {
                     message.channel.xogameStarted = true;
                     message.channel.xogameP2 = message.author;
+		    message.channel.send("<@" + message.author.id +"> joined the game **(2/2)**")
                     for(x = 1;x <= 9;x++)
                     {
                         var str = "abcdefghi";
@@ -87,6 +88,7 @@ client.on('message', message => {
                 } else {
                     message.channel.xogameStarted = 1;
                     message.channel.xogameP1 = message.author;
+		    message.channel.send("<@" + message.author.id +"> joined the game **(1/2)**");
                 }
             } else {
                 if ((message.channel.xogameP1 != message.author) && (message.channel.xogameP2 != message.author))
