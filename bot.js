@@ -72,7 +72,7 @@ client.on('message', message => {
                 }
                 if (user)
                 {
-                    user.lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " message.content.replace(message.content.charAt(0) + "reply " + args[0]));
+                    user.lastMessage.channel.send("**My Dev. replied to you, <@" + user.id + "> :** " + message.content.replace(message.content.charAt(0) + "reply " + args[0]));
                 } 
                 else
                 {
