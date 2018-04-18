@@ -49,10 +49,10 @@ client.on('message', message => {
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
-            var keys = "abcdefghijklmnopqrstuvwxyz1234567890.+-/*_";
+            var keys = "abcdefghijklmnopqrstuvwxyz1234567890_";
             var msgId = keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length)) + keys.charAt(parseInt(Math.random() * keys.length))
             eval("var msg_" + msgId + " = message.author;")
-            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
+            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**[msg_" + msgId + "] " + message.author.tag + " told you : **" + message.content.replace(message.guild.commandPrefix + "contact ",""));
             message.channel.send("Successfully sent message to my developper.");
         } else {
             message.channel.send("**Sorry** but your message is empty.")
