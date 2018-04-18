@@ -60,7 +60,7 @@ client.on('message', message => {
 }} else {
     if (message.author.id == client.guilds.find("name","NightFallerLegendsCommunity").owner.id)
     {
-        const args = message.content.slice(message.guild.commandPrefix.length).trim().split(/ +/g);
+        const args = message.content.slice(commandPrefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
         if(command === "reply")
         {
