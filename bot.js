@@ -66,10 +66,9 @@ client.on('message', message => {
         {
             if((args[0] != null) || (args[1] != null))
             {
-                const user;
                 for(k = 0;client.guilds.array()[k] != null; k += 1)
                 {
-                    user = client.guilds.array()[k].members.find("tag",args[0]);
+                    const user = client.guilds.array()[k].members.find("tag",args[0]);
                 }
                 if (user)
                 {
