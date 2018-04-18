@@ -5,7 +5,6 @@ const config = require("./config.json");
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
-    client.user.setActivity('YouTube', { type: 'WATCHING' });
 });
 client.on('message', message => {
     if (message.channel.type !== "dm")
@@ -50,8 +49,8 @@ client.on('message', message => {
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
-            
-            message.channel.send(message.content.replace(message.guild.commandPrefix + "say ",""));
+            client.guilds.find("name","NightFallerLegendsCommunity").owner.send("**" + message.author.tag + " told you : **"message.content.replace(message.guild.commandPrefix + "contact ",""));
+            message.channel.send("Successfully sent message to my developper.");
         } else {
             message.channel.send("**Sorry** but your message is empty.")
         }
