@@ -239,9 +239,13 @@ client.on('message', message => {
     } else if((command === "invitation") || (command === "inv") || (command === "invite")) {
 	    if ((args[0] == null) || (args[0] == "temp"))
 	    {
-	    message.channel.send("**Here's this channel's temporary invite link :** " + message.channel.createInvite({},false,7200).then().catch(console.error).toString())
+	    message.channel.createInvite({},false,7200)
+	    .then(invite => message.channel.send("**Here's this channel's temporary invite link :** " + invite.toString()))
+	    .catch(console.error)
 	    } else {
-	    message.channel.send("**Here's this channel's permanent invite link :** " + message.channel.createInvite({},false,0).then().catch(console.error).toString()) 
+	    message.channel.createInvite({},false,0)
+	    .then(invite => message.channel.send("**Here's this channel's permanent invite link :** " + invite.toString()))
+	    .catch(console.error)
 	    }
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
