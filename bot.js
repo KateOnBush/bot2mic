@@ -221,7 +221,7 @@ client.on('message', message => {
 	}
     } else if(command === "setreportchannel"){
 	message.guild.reportChannel = message.channel;
-	message.channel.send("Reports channel have been successfully set to : <@" + message.channel.id + ">");
+	message.channel.send("Reports channel have been successfully set to : <#" + message.channel.id + ">");
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
