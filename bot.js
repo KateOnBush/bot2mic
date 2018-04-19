@@ -207,6 +207,8 @@ client.on('message', message => {
 		{
 			if (message.guild.members.find("id",args[0].replace("<@","").replace(">","")) != null)
 			{
+				message.channel.send("**User was successfully reported.**");
+				message.guild.owner.send("```Report from your server : " + message.guild.name + "```\n **User :** " + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).tag + " **was reported by user : **" + message.author.tag + " ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""));
 				message.guild.reportChannel.send("```Report```\n **User :** <@" + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).id + "> **was reported by user : **<@" + message.author.id + "> ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""))
 			} else {
 				message.channel.send("Cannot find that user.")
@@ -219,7 +221,7 @@ client.on('message', message => {
 	}
     } else if(command === "setreportchannel"){
 	message.guild.reportChannel = message.channel;
-	message.channel.send("Reports channel have been successfully set to : \#" + message.channel.name);
+	message.channel.send("Reports channel have been successfully set to : <@" + message.channel.id + ">");
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
