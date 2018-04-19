@@ -121,7 +121,14 @@ client.on('message', message => {
                                             message.channel.xogamePlayers = 0;
 					    message.channel.xogameP1 = null;
 				  	    message.channel.xogameP2 = null;
-                                        } else {
+                                        } else if ((message.channel.xogameCoor1.length < 6) && (message.channel.xogameCoor2.length < 6) && (message.channel.xogameCoor3.length < 6) && (message.channel.xogameCoor4.length < 6) && (message.channel.xogameCoor5.length < 6) && (message.channel.xogameCoor6.length < 6) && (message.channel.xogameCoor7.length < 6) && (message.channel.xogameCoor8.length < 6) && (message.channel.xogameCoor9.length < 6)){
+					    message.channel.send("**Match Tied!** All cases have been checked , game is done!")
+					    message.channel.send("**GG!** <@" + message.channel.xogameP1.id + "> and <@" + message.channel.xogameP2.id + "> !")
+					    message.channel.xogameStarted = false;
+                                            message.channel.xogamePlayers = 0;
+				            message.channel.xogameP1 = null;
+				  	    message.channel.xogameP2 = null;
+					} else {
                                             message.channel.xogameTurn = message.channel.xogameP2;
                                             message.channel.send("It's <@" + message.channel.xogameP2.id + "> 's turn now!")
                                         }
@@ -142,7 +149,14 @@ client.on('message', message => {
                                             message.channel.xogamePlayers = 0;
 				            message.channel.xogameP1 = null;
 				  	    message.channel.xogameP2 = null;
-                                        } else {
+                                        } else if ((message.channel.xogameCoor1.length < 6) && (message.channel.xogameCoor2.length < 6) && (message.channel.xogameCoor3.length < 6) && (message.channel.xogameCoor4.length < 6) && (message.channel.xogameCoor5.length < 6) && (message.channel.xogameCoor6.length < 6) && (message.channel.xogameCoor7.length < 6) && (message.channel.xogameCoor8.length < 6) && (message.channel.xogameCoor9.length < 6)){
+					    message.channel.send("**Match Tied!** All cases have been checked , game is done!")
+					    message.channel.send("**GG!** <@" + message.channel.xogameP1.id + "> and <@" + message.channel.xogameP2.id + "> !")
+					    message.channel.xogameStarted = false;
+                                            message.channel.xogamePlayers = 0;
+				            message.channel.xogameP1 = null;
+				  	    message.channel.xogameP2 = null;
+					} else {
                                             message.channel.xogameTurn = message.channel.xogameP1;
                                             message.channel.send("It's <@" + message.channel.xogameP1.id + "> 's turn now!")
                                         }
