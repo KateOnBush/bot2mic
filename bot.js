@@ -201,7 +201,25 @@ client.on('message', message => {
             message.channel.send("Possible sub-commands : join,start,do <letter>,leave");
         }
     } else if(command === "report") {
-	message.channel.send(args[0]);
+	if ((args[0]!=null) && (args[1]!=null))
+	{
+		if(message.guild.reportChannel != null)
+		{
+			if (message.guild.members.find("id",args[0].replace("<@","").replace(">","")) != null)
+			{
+				message.guild.reportChannel.send("```Report```\n **User :** <@" + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).id + "> **was reported by user : **<@" + message.author.id + "> ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""))
+			} else {
+				message.channel.send("Cannot find that user.")
+			}
+		} else {
+			message.channel.send("You should define a reporting channel first, use *" + message.guild.commandPrefix + "setreportchannel* in the channel you want to define as reporting channel.")
+		}
+	} else {
+		message.channel.send("Correct usage : " + message.guild.commandPrefix + "*report <user> <message>*");
+	}
+    } else if(command === "setreportchannel"){
+	message.guild.reportChannel = message.channel;
+	message.channel.send("Reports channel have been successfully set to : \#" + message.channel.name);
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
