@@ -200,6 +200,8 @@ client.on('message', message => {
 		} else {
             message.channel.send("Possible sub-commands : join,start,do <letter>,leave");
         }
+    } else if(command === "report") {
+	message.channel.send(args[0]);
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
