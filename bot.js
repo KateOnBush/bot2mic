@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*");
+        message.author.send("```Help commands ```*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n		**report** : Reports a use to moderators.\n			Syntax : *report <user> <reason>*>\n\n		**setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n			Syntax : *setreportchannel*\n\n``` ```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -208,7 +208,8 @@ client.on('message', message => {
 			if (message.guild.members.find("id",args[0].replace("<@","").replace(">","")) != null)
 			{
 				message.channel.send("**User was successfully reported.**");
-				message.guild.owner.send("```Report from your server : " + message.guild.name + "```\n **User :** " + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).tag + " **was reported by user : **" + message.author.tag + " ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""));
+				var us = message.guild.members.find("id",args[0].replace("<@","").replace(">","")).tag;
+				message.guild.owner.send("```Report from your server : " + message.guild.name + "```\n **User :** " + us + " **was reported by user : **" + message.author.tag + " ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""));
 				message.guild.reportChannel.send("```Report```\n **User :** <@" + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).id + "> **was reported by user : **<@" + message.author.id + "> ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""))
 			} else {
 				message.channel.send("Cannot find that user.")
