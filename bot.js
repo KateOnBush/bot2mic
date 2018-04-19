@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n		**report** : Reports a use to moderators.\n			Syntax : *report <user> <reason>*>\n\n		**setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n			Syntax : *setreportchannel*\n\n``` ```");
+        message.author.send("```Help commands ```*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation*\n                *invite*\n                *inv*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -223,6 +223,21 @@ client.on('message', message => {
     } else if(command === "setreportchannel"){
 	message.guild.reportChannel = message.channel;
 	message.channel.send("Reports channel have been successfully set to : <#" + message.channel.id + ">");
+    } else if(command === "calculate"){
+	    if(args[0] != null)
+	    {
+		    try {
+			    message.channel.send("**Result :** " + eval(message.content.replace(message.guild.commandPrefix + "calculate ","")));
+		    }
+		    catch(err)
+		    {
+			    message.channel.send("**Error :** There is an error in this operation.\n```Error : " + err + "```");
+		    }
+	    } else {
+		    message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "calculate <operation>")
+	    }
+    } else if((command === "invitation") || (command === "inv") || (command === "invite")) {
+	    message.channel.send("**Here's the server invite link :** https://discord.gg/HzMGtWx")
     } else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
