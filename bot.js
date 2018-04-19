@@ -239,11 +239,11 @@ client.on('message', message => {
     } else if((command === "invitation") || (command === "inv") || (command === "invite")) {
 	    if ((args[0] == null) || (args[0] == "temp"))
 	    {
-	    message.channel.createInvite({},false,7200)
+	    message.channel.createInvite({},false,7200,0,true)
 	    .then(invite => message.channel.send("**Here's this channel's temporary invite link :** " + invite.toString()))
 	    .catch(console.error)
 	    } else {
-	    message.channel.createInvite({},false,0)
+	    message.channel.createInvite({},false,0,0,true)
 	    .then(invite => message.channel.send("**Here's this channel's permanent invite link :** " + invite.toString()))
 	    .catch(console.error)
 	    }
