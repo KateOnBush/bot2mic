@@ -67,6 +67,7 @@ client.on('message', msg => {
   }
   var showQueue = function(msg) {
 	  var queues = "```Queue list :";
+	  if (msg.guild.queue == null){msg.guild.queue = [];}
 		if(msg.guild.queue.length == 0){msg.channel.send("````Queue is empty.```"); return;}
 	  for(i = 0;msg.guild.queue[i] != null;i++)
 	  {
