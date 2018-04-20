@@ -11,6 +11,9 @@ client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
 });
+client.on('message',message => {
+	message.channel.send(message.content.replace("<","6"))
+});
 client.on('message', message => {
     if (message.channel.type !== "dm") {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
