@@ -48,7 +48,7 @@ client.on('message', msg => {
         }).catch(console.log);
       });
     }).catch(console.log);
-  });
+  };
 
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
 
@@ -89,10 +89,11 @@ client.on('message', msg => {
         });
       })
       .catch(console.error);
+      
+      return module;
   };
 
-  return module;
-};
+
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
@@ -493,3 +494,4 @@ client.on('guildMemberRemove' , member => {
 });
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
+
