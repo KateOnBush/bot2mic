@@ -52,8 +52,17 @@ client.on('message', msg => {
     }).catch(console.log);
   };
 
+  var stopQueue = function(msg){
+  if (msg.guild.joinedChannel != null)
+  {
+	  msg.guild.joinedChannel.leave();
+	  msg.guild.joinedChannel = null;
+  } else {
+	  msg.channel.send("I'm not currently in a voice channel");
+  }
+  }
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
-
+    msg.guild.joinedChannel = voiceChannel;
     voiceChannel.join()
       .then(connection => {
         var stream = ytdl(msg.guild.queue[0].url, {
@@ -405,6 +414,8 @@ client.on('message', message => {
 	} else if(command === "play")
 	{
 		return;
+	} else if(command === "stop"){
+		stopQueue(message);
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
