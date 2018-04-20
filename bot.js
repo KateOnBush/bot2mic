@@ -19,6 +19,9 @@ client.on('message', msg => {
         case 'play':
           return play(msg, suffix);
 	  msg.delete();
+	case 'queue':
+	  return play(msg, suffix);
+	  msg.delete();
       }
 
 
@@ -27,7 +30,7 @@ client.on('message', msg => {
 
   var play = function(msg, suffix) {
     var voiceChannel = msg.member.voiceChannel;
-    msg.channel.send('Searching...').then(response => {
+    msg.channel.send('```Searching...```').then(response => {
       var searchstring = suffix;
 
       if (!suffix.toLowerCase().startsWith('http')) {
@@ -39,7 +42,7 @@ client.on('message', msg => {
           return response.edit('Invalid video!');
         }
 
-        response.edit('Queued: ' + info.title).then(() => {
+        response.edit('```Queued: ' + info.title + "```").then(() => {
 	  if (msg.guild.queue == null){msg.guild.queue = [];}
           msg.guild.queue.push({
             'name': info.title,
@@ -57,8 +60,32 @@ client.on('message', msg => {
   {
 	  msg.guild.joinedChannel.leave();
 	  msg.guild.joinedChannel = null;
+	  msg.channel.send("**Left all voice channels**")
   } else {
 	  msg.channel.send("I'm not currently in a voice channel");
+  }
+  var showQueue = function(msg) {
+	  var queues = "```Queue list :";
+		if(msg.guild.queue.length == 0){msg.channel.send("````Queue is empty.```"); return;}
+	  for(i = 0;msg.guild.queue[i] != null;i++)
+	  {
+			if(msg.guild.queue[i+1] != null){
+		  queues += i + " - " + msg.guild.queue[i].name + "\n";
+			} else {
+			queues += i + " - " + msg.guild.queue[i].name;
+			}
+	  }
+		queues += "```";
+		msg.channel.send(queues)
+  }
+  var joinChannel = function(msg){
+    if(msg.member.voiceChannel != null)
+    {
+	msg.member.voiceChannel.join()
+	msg.channel.send("**Joined : " + msg.member.voiceChannel.name + "**")
+    } else {
+	msg.channel.send("You're not currently on a voice channel.")    
+    }
   }
   }
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
@@ -151,7 +178,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n__**Members' commands**__\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n__**Admins' commands**__\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n    **setdefaultrole** : Sets the default role that should be assigned to new users.\n        Syntax : *setdefaultchannel <name of role>* | Case sensitive\n\n__**Music commands**__\n\n	**play :** Queues a song or plays it if the queue is empty.\n		Syntax : *play <URL/name>*\n\n```End of bot commands.```");
+        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n__**Members' commands**__\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n__**Admins' commands**__\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n    **setdefaultrole** : Sets the default role that should be assigned to new users.\n        Syntax : *setdefaultchannel <name of role>* | Case sensitive\n\n__**Music commands**__\n\n	**play :** Queues a song or plays it if the queue is empty.\n		Syntax : *play/queue <URL/name>*\n\n	**stop :** Stops music and bot leaves the channel.\n		Syntax : *stop/leave*\n\n	**join :** Joins the channel and continues playing if queue is not empty\n		Syntax : *join*\n\n	**showqueue :** Shows you all the queue\n		Syntax : *showqueue*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -414,8 +441,12 @@ client.on('message', message => {
 	} else if(command === "play")
 	{
 		return;
-	} else if(command === "stop"){
+	} else if((command === "stop") || (command === "leave")){
 		stopQueue(message);
+	} else if(command === "join"){
+		joinChannel(message);
+	} else if(command === "showqueue"){
+		showQueue(message);
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
