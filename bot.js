@@ -346,16 +346,16 @@ client.on('guildMemberRemove' , member => {
 		{
 		member.guild.greetingChannel.send("**The bot : <@" + member.id + "> was removed from : " + member.guild.name + " !**")
 		} else {
-		member.guild.channels.find("type","text").send("**The bot : <@" + member.id + "> was removed from : " + member.guild.name + " !**\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+		member.guild.channels.find("type","text").send("**The bot : <@" + member.id + "> was removed from : " + member.guild.name + " !**\n*If this message is sent in the wrong channel , please set the greeting channel using setgreetingchannel*")
 		}
 	}
 	else{
 		if (member.guild.greetingChannel == null){
 			if(member.guild.welcomeMessage == null)
 			{
-				member.guild.channels.find("type","text").send("**Goodbye** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+				member.guild.channels.find("type","text").send("**Goodbye** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using setgreetingchannel*")
 			} else {
-				member.guild.channels.find("type","text").send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+				member.guild.channels.find("type","text").send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using setgreetingchannel*")
 			}
 		} else {
 			if(member.guild.welcomeMessage == null)
