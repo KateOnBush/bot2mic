@@ -22,6 +22,7 @@ client.on('message', message => {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
     message.channel.send(":ping_pong: Bot Ping is about **" + client.ping + " ms** , hehe :ping_pong:")
 } else if(command === "setprefix"){
+	if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true){
     if (args[0] != undefined)
     {
         if (args[0].length == 1)
@@ -36,6 +37,9 @@ client.on('message', message => {
     } else {
         message.channel.send(":x: **Please precise a symbol**")
     }
+	} else {
+		message.channel.send("You should have permission to manage messages to do that.")
+	}
 } else if(command === "say")
     {
         if(args[0] != undefined)
@@ -49,7 +53,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Members' commands**\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n**Admins' commands**\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n```End of bot commands.```");
+        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n`Members' commands`\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n`Admins' commands`\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -221,8 +225,12 @@ client.on('message', message => {
 		message.channel.send("Correct usage : " + message.guild.commandPrefix + "*report <user> <message>*");
 	}
     } else if(command === "setreportchannel"){
+	if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true){
 	message.guild.reportChannel = message.channel;
 	message.channel.send("Reports channel have been successfully set to : <#" + message.channel.id + ">");
+	} else {
+		message.channel.send("You don't have permission to manage channels!");
+	}
     } else if(command === "calculate"){
 	    if(args[0] != null)
 	    {
@@ -248,6 +256,7 @@ client.on('message', message => {
 	    .catch(console.error)
 	    }
     } else if (command === "setwelcomemessage"){
+		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true){
 		if (args[0] != null)
 		{
 			if(message.guild.greetingChannel != null)
@@ -260,7 +269,11 @@ client.on('message', message => {
 		} else {
 			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setwelcomemessage <message> , include *%user%* in the message to specify the user.")
 		}
+	} else {
+		message.channel.send("You don't have permission to manage channels!");
+	}
 	} else if (command === "setgoodbyemessage"){
+		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true){
 		if (args[0] != null)
 		{
 			if(message.guild.greetingChannel != null)
@@ -273,9 +286,16 @@ client.on('message', message => {
 		} else {
 			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setgoodbyemessage <message> , include *%user%* in the message to specify the user.")
 		}
+	} else {
+		message.channel.send("You don't have permission to manage channels!")
+	}
 	} else if (command === "setgreetingchannel"){
+		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true){
 		message.guild.greetingChannel = message.channel;
 		message.channel.send("**Greetings Channel has been set to :** <#" + message.channel.id + ">");
+		} else {
+			message.channel.send("You don't have permission to manage channels.")
+		}
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
