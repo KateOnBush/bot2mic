@@ -1,1 +1,3 @@
-worker: node bot.js
+worker: npm install ffmpeg-binaries
+npm install node-opus
+node bot.js
