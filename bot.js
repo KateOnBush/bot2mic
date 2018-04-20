@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n```End of bot commands.```");
+        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message> | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message> | Include %user% in the message to specify the user.*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -208,8 +208,8 @@ client.on('message', message => {
 			if (message.guild.members.find("id",args[0].replace("<@","").replace(">","")) != null)
 			{
 				message.channel.send("**User was successfully reported.**");
-				var us = message.guild.members.find("id",args[0].replace("<@","").replace(">","")).tag;
-				message.guild.owner.send("```Report from your server : " + message.guild.name + "```\n **User :** " + us + " **was reported by user : **" + message.author.tag + " ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""));
+				var us = message.guild.members.find("id",args[0].replace("<@","").replace(">",""));
+				message.guild.owner.send("```Report from your server : " + message.guild.name + "```\n **User :** " + us.tag + " **was reported by user : **" + message.author.tag + " ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""));
 				message.guild.reportChannel.send("```Report```\n **User :** <@" + message.guild.members.find("id",args[0].replace("<@","").replace(">","")).id + "> **was reported by user : **<@" + message.author.id + "> ** for reason :** \n" + message.content.replace(message.guild.commandPrefix + "report " + args[0],""))
 			} else {
 				message.channel.send("Cannot find that user.")
@@ -247,7 +247,23 @@ client.on('message', message => {
 	    .then(invite => message.channel.send("**Here's this channel's permanent invite link :** " + invite.toString()))
 	    .catch(console.error)
 	    }
-    } else {
+    } else if (command === "setwelcomemessage"){
+		if (args[0] != null)
+		{
+			message.guild.welcomeMessage = message.content.replace(message.guild.commandPrefix + "setwelcomemessage ","");
+			message.channel.send("**Welcome message has been set to:** " + message.guild.welcomeMessage);
+		} else {
+			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setwelcomemessage <message> , include *%user%* in the message to specify the user.")
+		}
+	} else if (command === "setgoodbyemessage"){
+		if (args[0] != null)
+		{
+			message.guild.welcomeMessage = message.content.replace(message.guild.commandPrefix + "setwelcomemessage ","");
+			message.channel.send("**Goodbye message has been set to:** " + message.guild.welcomeMessage);
+		} else {
+			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setgoodbyemessage <message> , include *%user%* in the message to specify the user.")
+		}
+	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
 }
@@ -279,5 +295,36 @@ client.on('message', message => {
     }
 }});
 
+client.on('guildMemberAdd' , member => {
+
+	if(member.bot == true)
+	{
+		member.guild.defaultChannel.send("**Welcome the bot : <@" + member.id + "> to " + member.guild.name + " !")
+	}
+	else{
+		if(member.guild.welcomeMessage == null)
+		{
+			member.guild.defaultChannel.send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!")
+		} else {
+			member.guild.defaultChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+		}
+	}
+});
+
+client.on('guildMemberRemove' , member => {
+
+	if(member.bot == true)
+	{
+		member.guild.defaultChannel.send("**The bot : <@" + member.id + "> was removed from " + member.guild.name + " !")
+	}
+	else{
+		if(member.guild.welcomeMessage == null)
+		{
+			member.guild.defaultChannel.send("**Goodbye!** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!")
+		} else {
+			member.guild.defaultChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+		}
+	}
+});
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
