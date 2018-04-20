@@ -422,7 +422,7 @@ client.on('message', message => {
 		message.channel.send("You don't have permission to manage channels!")
 	}
 	} else if (command === "setgreetingchannel"){
-		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 		message.guild.greetingChannel = message.channel;
 		message.channel.send("**Greetings Channel has been set to :** <#" + message.channel.id + ">");
 		} else {
