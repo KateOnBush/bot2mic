@@ -357,7 +357,7 @@ client.on('message', message => {
 		message.channel.send("Correct usage : " + message.guild.commandPrefix + "*report <user> <message>*");
 	}
     } else if(command === "setreportchannel"){
-	if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true){
+	if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 	message.guild.reportChannel = message.channel;
 	message.channel.send("Reports channel have been successfully set to : <#" + message.channel.id + ">");
 	} else {
@@ -405,7 +405,7 @@ client.on('message', message => {
 		message.channel.send("You don't have permission to manage channels!");
 	}
 	} else if (command === "setgoodbyemessage"){
-		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 		if (args[0] != null)
 		{
 			if(message.guild.greetingChannel != null)
@@ -422,14 +422,14 @@ client.on('message', message => {
 		message.channel.send("You don't have permission to manage channels!")
 	}
 	} else if (command === "setgreetingchannel"){
-		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_CHANNELS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 		message.guild.greetingChannel = message.channel;
 		message.channel.send("**Greetings Channel has been set to :** <#" + message.channel.id + ">");
 		} else {
 			message.channel.send("You don't have permission to manage channels.")
 		}
 	} else if(command === "setdefaultrole") {
-		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_ROLES") == true || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id))
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_ROLES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id))
 		{
 			if(args[0]!=null)
 			{
