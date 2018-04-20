@@ -49,7 +49,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Bot commands :**\n			    \n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message> | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message> | Include %user% in the message to specify the user.*\n\n```End of bot commands.```");
+        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n**Members' commands**\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n**Admins' commands**\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -250,19 +250,32 @@ client.on('message', message => {
     } else if (command === "setwelcomemessage"){
 		if (args[0] != null)
 		{
+			if(message.guild.greetingChannel != null)
+			{
 			message.guild.welcomeMessage = message.content.replace(message.guild.commandPrefix + "setwelcomemessage ","");
 			message.channel.send("**Welcome message has been set to:** " + message.guild.welcomeMessage);
+			} else {
+			message.channel.send("Please set a greeting channel first , using " + message.guild.commandPrefix + "setgreetingchannel")
+			}
 		} else {
 			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setwelcomemessage <message> , include *%user%* in the message to specify the user.")
 		}
 	} else if (command === "setgoodbyemessage"){
 		if (args[0] != null)
 		{
-			message.guild.welcomeMessage = message.content.replace(message.guild.commandPrefix + "setwelcomemessage ","");
+			if(message.guild.greetingChannel != null)
+			{
+			message.guild.welcomeMessage = message.content.replace(message.guild.commandPrefix + "setgoodbyemessage ","");
 			message.channel.send("**Goodbye message has been set to:** " + message.guild.welcomeMessage);
+			} else {
+			message.channel.send("Please set a greeting channel first , using " + message.guild.commandPrefix + "setgreetingchannel")
+			}
 		} else {
 			message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "setgoodbyemessage <message> , include *%user%* in the message to specify the user.")
 		}
+	} else if (command === "setgreetingchannel"){
+		message.guild.greetingChannel = message.channel;
+		message.channel.send("**Greetings Channel has been set to :** <#" + message.channel.id + ">");
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
@@ -299,14 +312,28 @@ client.on('guildMemberAdd' , member => {
 
 	if(member.bot == true)
 	{
-		member.guild.defaultChannel.send("**Welcome the bot : <@" + member.id + "> to " + member.guild.name + " !")
+		if (member.guild.greetingChannel != null)
+		{
+		member.guild.greetingChannel.send("**Welcome the bot : <@" + member.id + "> to " + member.guild.name + " !")
+		} else {
+		member.guild.channels.first().send("**Welcome the bot : <@" + member.id + "> to " + member.guild.name + " !\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+		}
 	}
 	else{
-		if(member.guild.welcomeMessage == null)
-		{
-			member.guild.defaultChannel.send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!")
+		if (member.guild.greetingChannel == null){
+			if(member.guild.welcomeMessage == null)
+			{
+				member.guild.channels.first().send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+			} else {
+				member.guild.channels.first().send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+			}
 		} else {
-			member.guild.defaultChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+			if(member.guild.welcomeMessage == null)
+			{
+				member.guild.greetingChannel.send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!")
+			} else {
+				member.guild.greetingChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+			}
 		}
 	}
 });
@@ -315,14 +342,28 @@ client.on('guildMemberRemove' , member => {
 
 	if(member.bot == true)
 	{
-		member.guild.defaultChannel.send("**The bot : <@" + member.id + "> was removed from " + member.guild.name + " !")
+		if (member.guild.greetingChannel != null)
+		{
+		member.guild.greetingChannel.send("**The bot : <@" + member.id + "> was removed from : " + member.guild.name + " !**")
+		} else {
+		member.guild.channels.first().send("**The bot : <@" + member.id + "> was removed from : " + member.guild.name + " !**\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+		}
 	}
 	else{
-		if(member.guild.welcomeMessage == null)
-		{
-			member.guild.defaultChannel.send("**Goodbye!** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!")
+		if (member.guild.greetingChannel == null){
+			if(member.guild.welcomeMessage == null)
+			{
+				member.guild.channels.first().send("**Goodbye** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+			} else {
+				member.guild.channels.first().send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+			}
 		} else {
-			member.guild.defaultChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+			if(member.guild.welcomeMessage == null)
+			{
+				member.guild.greetingChannel.send("**Goodbye !** <@" + member.id + "> , we're gonna miss you in : " + member.guild.name + " !!!")
+			} else {
+				member.guild.greetingChannel.send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">"))
+			}
 		}
 	}
 });
