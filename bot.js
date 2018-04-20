@@ -39,8 +39,8 @@ client.on('message', msg => {
         }
 
         response.edit('Queued: ' + info.title).then(() => {
-	  if (queue == null){var queue = [];}
-          queue.push({
+	  if (msg.guild.queue == null){msg.guild.queue = [];}
+          msg.guild.queue.push({
             'name': info.title,
             'url': info.webpage_url,
             'requested_by': msg.author.id,
@@ -55,7 +55,7 @@ client.on('message', msg => {
 
     voiceChannel.join()
       .then(connection => {
-        var stream = ytdl(queue[0].url, {
+        var stream = ytdl(msg.guild.queue[0].url, {
           audioonly: true,
           quality: 'highestaudio'
         });
@@ -66,9 +66,9 @@ client.on('message', msg => {
       })
       .then(dispatcher => {
         dispatcher.on('error', error => {
-          queue.shift();
+          msg.guild.queue.shift();
 
-          if (queue.length === 0) {
+          if (msg.guild.queue.length === 0) {
             voiceChannel.leave();
             return;
           }
@@ -79,9 +79,9 @@ client.on('message', msg => {
         });
 
         dispatcher.on("end", end => {
-          queue.shift();
+          msg.guild.queue.shift();
 
-          if (queue.length === 0) {
+          if (msg.guild.queue.length === 0) {
             voiceChannel.leave();
             return;
           }
