@@ -9,9 +9,9 @@ function globalVar()
 var global = new globalVar();
 const config = require("./config.json");
 music(client, {
-	prefix: '-',        // Prefix of '-'.
-	global: false,      // Server-specific queues.
-	maxQueueSize: 10,   // Maximum queue size of 10.
+	prefix: '_',        // Prefix of '-'.
+	global: true,      // Server-specific queues.
+	maxQueueSize: 20,   // Maximum queue size of 10.
 	clearInvoker: true, // If permissions applicable, allow the bot to delete the messages that invoke it (start with prefix)
     channel: ''    // Name of voice channel to join. If omitted, will instead join user's voice channel.
 });
