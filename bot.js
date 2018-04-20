@@ -64,6 +64,7 @@ client.on('message', msg => {
   } else {
 	  msg.channel.send("I'm not currently in a voice channel");
   }
+  }
   var showQueue = function(msg) {
 	  var queues = "```Queue list :";
 		if(msg.guild.queue.length == 0){msg.channel.send("````Queue is empty.```"); return;}
@@ -86,7 +87,6 @@ client.on('message', msg => {
     } else {
 	msg.channel.send("You're not currently on a voice channel.")    
     }
-  }
   }
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
     msg.guild.joinedChannel = voiceChannel;
