@@ -11,9 +11,6 @@ client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
 });
-client.on('message',message => {
-	message.channel.send(message.content.replace("<","6"))
-});
 client.on('message', message => {
     if (message.channel.type !== "dm") {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
@@ -306,7 +303,7 @@ client.on('message', message => {
 			{
 				if(message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ","")) != null)				{
 				message.guild.defaultRole = message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ",""))
-				message.channel.send("**Server's default role was successfully set to :** <@" + message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ","")).id + ">");
+				message.channel.send("**Server's default role was successfully set to :** <@&" + message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ","")).id + ">");
 				} else {
 					message.channel.send("Couldn't find a role with that name.")
 				}
