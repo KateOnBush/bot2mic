@@ -48,7 +48,7 @@ client.on('message', msg => {
         }).catch(console.log);
       });
     }).catch(console.log);
-  };
+  });
 
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
 
