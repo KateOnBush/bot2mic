@@ -18,9 +18,10 @@ client.on('message', msg => {
       switch (command) {
         case 'play':
           return play(msg, suffix);
+	  msg.delete();
       }
 
-      msg.delete();
+
     }
   });
 
@@ -141,7 +142,7 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n`Members' commands`\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n`Admins' commands`\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n```End of bot commands.```");
+        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n__**Members' commands**__\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n__**Admins' commands**__\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n    **setdefaultrole** : Sets the default role that should be assigned to new users.\n        Syntax : *setdefaultchannel <name of role> | Case sensitive*n\n__**Music commands**__\n\n	**play :** Queues a song or plays it if the queue is empty.\n		Syntax : *play <URL/name>*\n\n```End of bot commands.```");
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -401,6 +402,9 @@ client.on('message', message => {
 		} else {
 			message.channel.send("You should have permission to manage roles to do that.")	
 		}
+	} else if(client.user.lastMessage.content === "Searching...")
+	{
+		return;
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
