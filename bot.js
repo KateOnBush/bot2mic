@@ -449,9 +449,9 @@ client.on('guildMemberAdd' , member => {
 		if (member.guild.greetingChannel == null){
 			if(member.guild.welcomeMessage == null)
 			{
-				member.guild.find("type","text").send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+				member.guild.channels.find("type","text").send("**Welcome !** <@" + member.id + "> to the server : " + member.guild.name + " !!!\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
 			} else {
-				member.guild.find("type","text").send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
+				member.guild.channels.find("type","text").send(member.guild.welcomeMessage.replace("%user%","<@" + member.id + ">") + "\n*If this message is sent in the wrong channel , please set the greeting channel using " + member.guild.commandPrefix + "setgreetingchannel*")
 			}
 		} else {
 			if(member.guild.welcomeMessage == null)
