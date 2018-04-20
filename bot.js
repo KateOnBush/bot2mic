@@ -1,12 +1,98 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const YoutubeDL = require('youtube-dl');
+const ytdl = require('ytdl-core');
 var commandPrefix = "_";
 function globalVar()
 {
     this.__enabled = true;    
 }
 var global = new globalVar();
-const config = require("./config.json");
+client.on('message', msg => {
+    message = msg.content.trim();
+
+    if (message.toLowerCase().startsWith(msg.guild.commandPrefix.toLowerCase())) {
+      const command = message.substring(msg.guild.commandPrefix.length).split(/[ \n]/)[0].toLowerCase().trim();
+      const suffix = message.substring(msg.guild.commandPrefix.length + command.length).trim();
+
+      switch (command) {
+        case 'play':
+          return play(msg, suffix);
+      }
+
+      msg.delete();
+    }
+  });
+
+  var play = function(msg, suffix) {
+    var voiceChannel = msg.member.voiceChannel;
+    msg.channel.send('Searching...').then(response => {
+      var searchstring = suffix;
+
+      if (!suffix.toLowerCase().startsWith('http')) {
+        searchstring = 'gvsearch1:' + suffix;
+      }
+
+      YoutubeDL.getInfo(searchstring, ['-q', '--no-warnings', '--force-ipv4'], (err, info) => {
+        if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
+          return response.edit('Invalid video!');
+        }
+
+        response.edit('Queued: ' + info.title).then(() => {
+          queue.push({
+            'name': info.title,
+            'url': info.webpage_url,
+            'requested_by': msg.author.id,
+          });
+          if (queue.length === 1) playQueue(msg, suffix);
+        }).catch(console.log);
+      });
+    }).catch(console.log);
+  };
+
+  var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
+
+    voiceChannel.join()
+      .then(connection => {
+        var stream = ytdl(queue[0].url, {
+          audioonly: true,
+          quality: 'highestaudio'
+        });
+        return connection.playStream(stream, {
+          seek: 0,
+          volume: 1
+        });
+      })
+      .then(dispatcher => {
+        dispatcher.on('error', error => {
+          queue.shift();
+
+          if (queue.length === 0) {
+            voiceChannel.leave();
+            return;
+          }
+
+          playQueue(msg, suffix);
+
+          console.error;
+        });
+
+        dispatcher.on("end", end => {
+          queue.shift();
+
+          if (queue.length === 0) {
+            voiceChannel.leave();
+            return;
+          }
+
+          playQueue(msg, suffix);
+        });
+      })
+      .catch(console.error);
+  };
+
+  return module;
+};
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
