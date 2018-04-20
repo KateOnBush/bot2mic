@@ -153,7 +153,7 @@ client.on('message', message => {
     message.channel.send(":ping_pong: Pong! :ping_pong:")
     message.channel.send(":ping_pong: Bot Ping is about **" + client.ping + " ms** , hehe :ping_pong:")
 } else if(command === "setprefix"){
-	if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true){
+	if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
     if (args[0] != undefined)
     {
         if (args[0].length == 1)
