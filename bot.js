@@ -84,6 +84,10 @@ client.on('message', msg => {
     {
 	msg.member.voiceChannel.join()
 	msg.channel.send("**Joined : " + msg.member.voiceChannel.name + "**")
+	    if(msg.guild.queue.length != 0)
+			{
+				playQueue(msg,"");
+			}
     } else {
 	msg.channel.send("You're not currently on a voice channel.")    
     }
