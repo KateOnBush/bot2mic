@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const Music = require('discord.js-musicbot-addon');
 var commandPrefix = "_";
 function globalVar()
 {
@@ -8,11 +7,6 @@ function globalVar()
 }
 var global = new globalVar();
 const config = require("./config.json");
-const music = new Music(client, {
-  youtubeKey: 'AIzaSyCx2O5mC38nVv45RGVhqHm4wwg0l-IXId8' ,
-  botPrefix: 'msc',
-	maxQueueSize: 10
-});
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
