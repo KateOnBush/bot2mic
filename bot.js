@@ -45,7 +45,7 @@ client.on('message', msg => {
             'url': info.webpage_url,
             'requested_by': msg.author.id,
           });
-          if (queue.length === 1) playQueue(msg, suffix);
+          if (msg.guild.queue.length === 1) playQueue(msg, suffix);
         }).catch(console.log);
       });
     }).catch(console.log);
