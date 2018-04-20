@@ -296,6 +296,23 @@ client.on('message', message => {
 		} else {
 			message.channel.send("You don't have permission to manage channels.")
 		}
+	} else if(command === "setdefaultrole") {
+		if(message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_ROLES") == true)
+		{
+			if(args[0]!=null)
+			{
+				if(message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ","")) != null)				{
+				message.guild.defaultRole = message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ",""))
+				message.channel.send("**Server's default role was successfully set to :** <@" + message.guild.roles.find("name",message.content.replace(message.guild.commandPrefix + "setdefaultrole ","")).id + ">");
+				} else {
+					message.channel.send("Couldn't find a role with that name.")
+				}
+			} else {
+				message.channel.send("**Correct usage :** " + message.guild.commandPrefix +"setdefaultrole <name of role>")	
+			}
+		} else {
+			message.channel.send("You should have permission to manage roles to do that.")	
+		}
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
@@ -340,6 +357,7 @@ client.on('guildMemberAdd' , member => {
 		}
 	}
 	else{
+		if (member.guild.defaultRole != null) { member.guild.members.find("id",member.id).addRole(member.guild.defaultRole) }
 		if (member.guild.greetingChannel == null){
 			if(member.guild.welcomeMessage == null)
 			{
