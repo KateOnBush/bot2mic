@@ -39,6 +39,7 @@ client.on('message', msg => {
         }
 
         response.edit('Queued: ' + info.title).then(() => {
+	  if (queue == null){var queue = [];}
           queue.push({
             'name': info.title,
             'url': info.webpage_url,
