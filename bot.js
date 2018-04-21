@@ -465,7 +465,7 @@ client.on('message', message => {
 		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 			if(args[0] != null)
 			{
-				var mut = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				var mut = message.guild.members.find("id",args[0].replace("<@","").replace(">",""))
 				if(mut != null)
 				{
 					mut.muted = true;
@@ -483,7 +483,7 @@ client.on('message', message => {
 		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 			if(args[0] != null)
 			{
-				var k = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				var k = message.guild.members.find("id",args[0].replace("<@","").replace(">",""))
 				if(k != null)
 				{
 					if(args[1]==null)
@@ -508,7 +508,7 @@ client.on('message', message => {
 		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("BAN_MEMBERS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 			if(args[0] != null)
 			{
-				var banu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				var banu = message.guild.members.find("id",args[0].replace("<@","").replace(">",""))
 				if(banu != null){
 					if ((args[1] == null) && (args[2] == null))
 					{
@@ -542,7 +542,7 @@ client.on('message', message => {
 	} else if(command === "warn"){
 			  if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("BAN_MEMBERS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
 				  if ((args[0] != null) || (args[1] != null)) {
-				  var wu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				  var wu = message.guild.members.find("id",args[0].replace("<@","").replace(">",""))
 				  if (wu != null)
 				  {
 					  if (wu.warns == null) {wu.warns = 0;}
@@ -560,7 +560,7 @@ client.on('message', message => {
 			  }
 	}else if(command === "warns"){
 				  if ((args[0] != null)) {
-				  var wu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				  var wu = message.guild.members.find("id",args[0].replace("<@","").replace(">",""))
 				  if (wu != null)
 				  {
 					  if (wu.warns == null) {wu.warns = 0;}
