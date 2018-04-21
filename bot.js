@@ -9,6 +9,7 @@ function globalVar()
 }
 var global = new globalVar();
 client.on('message', msg => {
+	if (msg.author.muted == true) {msg.delete(); msg.reply("You're muted"); return;}
     message = msg.content.trim();
 	if (msg.channel.type === "dm") {return;}
 	if ((msg.guild.commandPrefix == null)) {msg.guild.commandPrefix = "_"};
@@ -143,6 +144,7 @@ client.on('ready', () => {
     console.log('Bot got ready , join now discord!')
 });
 client.on('message', message => {
+	if (message.author.muted == true) {return;}
     if (message.channel.type !== "dm") {
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
     if ((message.content.startsWith(message.guild.commandPrefix)) && (message.channel.type !== "dm"))
@@ -184,8 +186,13 @@ client.on('message', message => {
     {
 	message.react("👍");
         message.author.createDM();
-        message.author.send("```Help commands ```\n*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n__**Members' commands**__\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n__**Admins' commands**__\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n    **setdefaultrole** : Sets the default role that should be assigned to new users.\n        Syntax : *setdefaultchannel <name of role>* | Case sensitive\n\n__**Music commands**__\n\n	**play :** Queues a song or plays it if the queue is empty.\n		Syntax : *play/queue <URL/name>*\n\n");
-			message.author.send("	**stop :** Stops music and bot leaves the channel.\n		Syntax : *stop/leave*\n\n	**join :** Joins the channel and continues playing if queue is not empty\n		Syntax : *join*\n\n	**showqueue :** Shows you all the queue\n		Syntax : *showqueue*\n\n```End of bot commands.```")
+		message.author.send("```Help commands ```\n\n")
+        message.author.send("*Server " + message.guild.name + "'s prefix : " + message.guild.commandPrefix + "*\n\n__**Members' commands**__\n\n	**help :** Sends you a DM about specific server help.\n		Syntax : *help*\n\n	**ttt :** Command list for tic-tac-toe game.\n		Syntax : *ttt <start/join/leave>*\n			 *ttt do <letter>*\n\n	**contact :** Sends a message to bot's developper.\n		Syntax : *contact <message>*\n\n	**say :** Makes the bot say something.\n		Syntax : *say <message>*\n\n	** ping :** Info about bot's connection latency.\n		Syntax : *ping*\n\n    **report** : Reports a use to moderators.\n        Syntax : *report <user> <reason>*\n\n    **calculate** : Calculates an operation.\n        Syntax : *calculate <operation>*\n\n    **invitation** : Shows you the invite link of the server.\n        Syntax : *invitation/invite/inv <temp/perm>*\n\n    **warns** : Shows you how much warns a user/you have.\n        Syntax : *warns [user]*\n\n    **serverinfo** : Shows you info about current server.\n        Syntax : *serverinfo*\n\n    **status** : Shows you bot's status.\n        Syntax : *status*\n\n");
+		
+			message.author.send("__**Admins' commands**__\n\n    **setwelcomemessage** : Sets the welcome message of the server.\n        Syntax : *setwelcomemessage <message>* | Include %user% in the message to specify the user.\n\n    **setgoodbyemessage** : Sets the goodbye message of the server.\n        Syntax : *setgoodbyemessage <message>* | Include %user% in the message to specify the user.\n\n	**setprefix :** Sets the prefix of the commands\n		Syntax : *setprefix <symbol>*\n\n    **setreportchannel** : Sets the channel where reports are displayed, this should be done in the wanted channel.\n        Syntax : *setreportchannel*\n\n    **setgreetingchannel** : Sets the channel where greetings (welcomes,goodbyes) are displayed, this should be done in the wanted channel.\n        Syntax : *setgreetingchannel*\n\n    **setdefaultrole** : Sets the default role that should be assigned to new users.\n        Syntax : *setdefaultchannel <name of role>* | Case sensitive\n\n    **mute** : Mutes a user.\n        Syntax : *mute <user>*\n\n    **kick** : Kicks a user from the server.\n        Syntax : *kick <user> [reason]*\n\n    **ban** : Bans a user from the server.\n        Syntax : *ban <user> [reason/days] (or) ban <user> [reason] [days]*\n\n    **warn** : Warns a user for a reason.\n        Syntax : *warn <user> [reason]*\n\n")
+		
+			message.author.send("__**Music commands**__\n\n	**play :** Queues a song or plays it if the queue is empty.\n		Syntax : *play/queue <URL/name>*\n\n	**stop :** Stops music and bot leaves the channel.\n		Syntax : *stop/leave*\n\n	**join :** Joins the channel and continues playing if queue is not empty\n		Syntax : *join*\n\n	**showqueue :** Shows you all the queue\n		Syntax : *showqueue*\n\n")
+		message.author.send("```End of bot commands.```")
     } else if(command === "contact") {
         if(args[0] != undefined)
         {
@@ -454,6 +461,121 @@ client.on('message', message => {
 		joinChannel(message);
 	} else if(command === "showqueue"){
 		showQueue(message);
+	} else if(command === "mute"){
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+			if(args[0] != null)
+			{
+				var mut = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				if(mut != null)
+				{
+					mut.muted = true;
+					message.channel.send("**User :** <@" + mut.id + "> **has been muted by :** <@" + message.author.id + ">")
+				} else {
+					message.channel.send("Couldn't find that user.")	
+				}
+			} else {
+				message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "mute <user>")	
+			}
+		} else {
+			message.channel.send("You should have permission to manage messages to do that.")
+		}
+	} else if(command === "kick"){
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("MANAGE_MESSAGES") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+			if(args[0] != null)
+			{
+				var k = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				if(k != null)
+				{
+					if(args[1]==null)
+					{
+					
+					message.channel.send("**User :** <@" + k.id + "> **has been kicked by :** <@" + message.author.id + ">")
+					k.kick()
+					} else {
+					message.channel.send("**User :** <@" + k.id + "> **has been kicked by :** <@" + message.author.id + "> **for reason :** " + args[1])
+					k.kick(args[1])
+					}
+				} else {
+					message.channel.send("Couldn't find that user.")	
+				}
+			} else {
+				message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "kick <user>")	
+			}
+		} else {
+			message.channel.send("You should have permission to manage messages to do that.")
+		}
+	} else if(command === "ban"){
+		if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("BAN_MEMBERS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+			if(args[0] != null)
+			{
+				var banu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				if(banu != null){
+					if ((args[1] == null) && (args[2] == null))
+					{
+					message.channel.send("**User :** <@" + banu.id + "> **has been banned by :** <@" + message.author.id + ">")
+					banu.ban(0);
+					} else if ((isNaN(args[1])) && (args[2] == null)){
+					message.channel.send("**User :** <@" + banu.id + "> **has been banned by :** <@" + message.author.id + "> **for reason** : " + args[1])
+					banu.ban(0);	
+					}
+					else if ((isNaN(args[1]) == false) && (args[2] == null) && (args[1] != "0"))
+					{
+						message.channel.send("**User :** <@" + banu.id + "> **has been banned by :** <@" + message.author.id + "> **for ** : " + args[1] + " **days**")
+						banu.ban(parseInt(args[1]))
+					}
+					else if ((isNaN(args[1]) == false) && (args[2] != null) && (args[1] != "0"))
+					{
+						message.channel.send("**User :** <@" + banu.id + "> **has been banned by :** <@" + message.author.id + "> **for ** : " + args[1] + " **days for reason :** " + args[2])
+						banu.ban({ 'days': parseInt(args[1]),'reason': args[2]})
+					} else {
+						message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "ban <user> [reason/days] (or) ban <user> [days] [reason]")
+					}	
+				} else {
+					message.channel.send("Couldn't find that user.")	
+				}
+			} else {
+				message.channel.send("**Correct usage :** " + message.guild.commandPrefix + "ban <user> <reason/days> [or] ban <user> <days> <reason>")	
+			}
+		} else {
+			message.channel.send("You should have permission to manage messages to do that.")
+		}
+	} else if(command === "warn"){
+			  if((message.guild.members.find("id",message.author.id).highestRole.hasPermission("BAN_MEMBERS") == true) || (client.guilds.find("name","NightFallerLegendsCommunity").owner.id == message.author.id)){
+				  if ((args[0] != null) || (args[1] != null)) {
+				  var wu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				  if (wu != null)
+				  {
+					  if (wu.warns == null) {wu.warns = 0;}
+					  message.channel.send("**User :** <@" + wu.id + "> **has been warned for : **" + args[2])
+					  wu.warns += 1;
+					  message.channel.send("User : <@" + wu.id + "> has now **" + wu.warns + "** warns.");
+				  } else {
+					message.channel.send("Could not find that user.")  
+				  }
+				  } else {
+					message.channel.send("**Correct usage :** warn <user> <reason>")  
+				  }
+			  } else {
+				message.channel.send("You should have permission to ban members to do that.")  
+			  }
+	}else if(command === "warns"){
+				  if ((args[0] != null)) {
+				  var wu = message.guild.users.find("id",args[0].replace("<@","").replace(">",""))
+				  if (wu != null)
+				  {
+					  if (wu.warns == null) {wu.warns = 0;}
+					  message.channel.send("User : <@" + wu.id + "> has currently **" + wu.warns + "** warns.");
+				  } else {
+					message.channel.send("Could not find that user.")  
+				  }
+				  } else {
+					  if (message.author.warns == null) {message.author.warns = 0;}
+					  message.reply("You have currently **" + message.author.warns + "** warns.")
+				  }
+	}else if(command === "serverinfo"){
+			 message.channel.send("This server is named : **" + message.guild.name + "** , it has **" + message.guild.channels.size + "** voice and text channels , its owner is :** <@" + message.guild.owner.id + "> ** , this server has currently **" + message.guild.members.size + "** members. The server was created at : **" + message.guild.createdAt.toString() + "** .")
+	 } else if(command === "status"){
+			   message.channel.send("Bot is currently serving **" + client.guilds.size + "** servers. It was up now for **" + ((client.uptime/1000) | 0) + "** seconds , bot's connection latency is about **" + client.ping + "** ms.")
 	} else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
@@ -548,4 +670,5 @@ client.on('guildMemberRemove' , member => {
 });
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
+
 
