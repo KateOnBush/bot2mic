@@ -67,15 +67,15 @@ client.on('message', msg => {
   }
   }
   var showQueue = function(msg) {
-	  var queues = "```Queue list :";
+	  var queues = "```Queue list :\n";
 	  if (msg.guild.queue == null){msg.guild.queue = [];}
 		if(msg.guild.queue.length == 0){msg.channel.send("````Queue is empty.```"); return;}
 	  for(i = 0;msg.guild.queue[i] != null;i++)
 	  {
 			if(msg.guild.queue[i+1] != null){
-		  queues += i + " - " + msg.guild.queue[i].name + "\n";
+		  queues += (i+1) + " - " + msg.guild.queue[i].name + "\n";
 			} else {
-			queues += i + " - " + msg.guild.queue[i].name;
+			queues += (i+1) + " - " + msg.guild.queue[i].name;
 			}
 	  }
 		queues += "```";
