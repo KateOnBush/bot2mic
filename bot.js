@@ -57,12 +57,28 @@ client.on('message', msg => {
     }).catch(console.log);
   };
 
+  var skipCurrentSong = function(msg){
+	if (msg.guild.queue == null){msg.guild.queue = [];}
+	if (msg.guild.queue.length != 0)
+	{
+		if (msg.guild.joinedChannel != null)
+		{
+			msg.channel.send("```Skipped : " + msg.guild.queue[0].title + "```")
+			msg.guild.queue.shift()
+		} else {
+			msg.channel.send("**I'm not in a voice channel**")
+		}
+	} else {
+		msg.channel.send("**Queue is already empty.**")
+	}
+  }
   var stopQueue = function(msg){
   if (msg.guild.joinedChannel != null)
   {
+	  msg.guild.queue = [];
 	  msg.guild.joinedChannel.leave();
 	  msg.guild.joinedChannel = null;
-	  msg.channel.send("**Left all voice channels**")
+	  msg.channel.send("**Cleared queue and left all voice channels**")
   } else {
 	  msg.channel.send("I'm not currently in a voice channel");
   }
@@ -114,6 +130,7 @@ client.on('message', msg => {
 
           if (msg.guild.queue.length === 0) {
             voiceChannel.leave();
+		msg.guild.joinedChannel = null;
             return;
           }
 
@@ -127,6 +144,7 @@ client.on('message', msg => {
 
           if (msg.guild.queue.length === 0) {
             voiceChannel.leave();
+		  msg.guild.joinedChannel = null;
             return;
           }
 
@@ -452,7 +470,7 @@ client.on('message', message => {
 		} else {
 			message.channel.send("You should have permission to manage roles to do that.")	
 		}
-	} else if(command === "play")
+	} else if((command === "play") || (command === "queue"))
 	{
 		return;
 	} else if((command === "stop") || (command === "leave")){
