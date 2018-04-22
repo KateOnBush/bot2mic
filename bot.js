@@ -59,12 +59,11 @@ client.on('message', msg => {
 
   var skipCurrentSong = function(msg){
 	if (msg.guild.queue == null){msg.guild.queue = [];}
-	if (msg.guild.queue.length != 0)
+	if (msg.guild.queue.length !== 0)
 	{
 		if (msg.guild.joinedChannel != null)
 		{
-			msg.channel.send("```Skipped : " + msg.guild.queue[0].name + "```")
-			msg.guild.queue.shift()
+			msg.channel.send("```Skipped : " + msg.guild.queue.shift().name + "```")
 			playQueue(msg,"");
 		} else {
 			msg.channel.send("**I'm not in a voice channel**")
@@ -74,7 +73,7 @@ client.on('message', msg => {
 	}
   }
   var stopQueue = function(msg){
-  if (msg.guild.joinedChannel != null)
+  if (msg.guild.joinedChannel !== null)
   {
 	  msg.guild.queue = [];
 	  msg.guild.joinedChannel.leave();
@@ -87,7 +86,7 @@ client.on('message', msg => {
   var showQueue = function(msg) {
 	  var queues = "```Queue list :\n";
 	  if (msg.guild.queue == null){msg.guild.queue = [];}
-		if(msg.guild.queue.length == 0){msg.channel.send("````Queue is empty.```"); return;}
+		if(msg.guild.queue.length == 0){msg.channel.send("```Queue is empty.```"); return;}
 	  for(i = 0;msg.guild.queue[i] != null;i++)
 	  {
 			if(msg.guild.queue[i+1] != null){
