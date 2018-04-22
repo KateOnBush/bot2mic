@@ -63,8 +63,9 @@ client.on('message', msg => {
 	{
 		if (msg.guild.joinedChannel != null)
 		{
-			msg.channel.send("```Skipped : " + msg.guild.queue[0].title + "```")
+			msg.channel.send("```Skipped : " + msg.guild.queue[0].name + "```")
 			msg.guild.queue.shift()
+			playQueue(msg,"");
 		} else {
 			msg.channel.send("**I'm not in a voice channel**")
 		}
