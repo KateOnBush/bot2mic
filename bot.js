@@ -600,12 +600,12 @@ client.on('message', message => {
 			   message.channel.send("Bot is currently serving **" + client.guilds.size + "** servers. It was up now for **" + ((client.uptime/1000) | 0) + "** seconds , bot's connection latency is about **" + client.ping + "** ms.")
 	} else if(command === "abilities"){
 		message.channel.send("```Champions' abilities :```")
-		message.channel.send("\n:rayvenavatar: **Here are rayven's abilities**")
-		message.channel.send(":fireball: :firearmor: :speedpotion: :rage~1::")
-		message.channel.send("\n:samavatar: **Here are samantha's ablities**")
-		message.channel.send(":powerup: :healingwave: :voidshoot: :thirsty:")
-		message.channel.send("\n:wuavatar: **Here are Wu's ablities**")
-		message.channel.send(":thornadu: :fastpass: :longitude: :fourleaf:")
+		message.channel.send("\n"+ message.guild.emojis.find("name","rayvenavatar").toString() + " **Here are rayven's abilities**")
+		message.channel.send(""+ message.guild.emojis.find("name","fireball").toString() + " "+ message.guild.emojis.find("name";"firearmor").toString() + " "+ message.guild.emojis.find("name","speedpotion").toString() + " "+ message.guild.emojis.find("name","firerage").toString() + "")
+		message.channel.send("\n"+ message.guild.emojis.find("name","samavatar").toString() + " **Here are samantha's ablities**")
+		message.channel.send(""+ message.guild.emojis.find("name","powerup").toString() + " "+ message.guild.emojis.find("name","healingwave").toString() + " "+ message.guild.emojis.find("name","voidshoot").toString() + " "+ message.guild.emojis.find("name","thirsty").toString() + "")
+		message.channel.send("\n"+ message.guild.emojis.find("name","wuavatar").toString() + " **Here are Wu's ablities**")
+		message.channel.send(""+ message.guild.emojis.find("name","thornadu").toString() + " "+ message.guild.emojis.find("name","fastpass").toString() + " "+ message.guild.emojis.find("name","longitude").toString() + " "+ message.guild.emojis.find("name","fourleaf").toString() + "")
 	}else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
