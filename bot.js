@@ -164,7 +164,7 @@ client.on('ready', () => {
     console.log('Bot got ready , join now discord!')
     for(o = 0; o <= client.guilds.size; o++)
     {
-	eval("jsonfile.readFile(file, function(err, client.guilds.array()[o]) {console.dir(obj)})") 
+	eval("jsonfile.readFile(file, function(err, obj) {console.dir(obj)})") 
     }
 });
 client.on('message', message => {
