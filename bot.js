@@ -598,7 +598,15 @@ client.on('message', message => {
 			 message.channel.send("This server is named : **" + message.guild.name + "** , it has **" + message.guild.channels.size + "** voice and text channels , its owner is :** <@" + message.guild.owner.id + "> ** , this server has currently **" + message.guild.members.size + "** members. The server was created at : **" + message.guild.createdAt.toString() + "** .")
 	 } else if(command === "status"){
 			   message.channel.send("Bot is currently serving **" + client.guilds.size + "** servers. It was up now for **" + ((client.uptime/1000) | 0) + "** seconds , bot's connection latency is about **" + client.ping + "** ms.")
-	} else {
+	} else if(command === "abilities"){
+		message.channel.send("```Champions' abilities :```")
+		message.channel.send("\n:rayvenavatar: **Here are rayven's abilities**")
+		message.channel.send(":fireball: :firearmor: :speedpotion: :rage~1::")
+		message.channel.send("\n:samavatar: **Here are samantha's ablities**")
+		message.channel.send(":powerup: :healingwave: :voidshoot: :thirsty:")
+		message.channel.send("\n:wuavatar: **Here are Wu's ablities**")
+		message.channel.send(":thornadu: :fastpass: :longitude: :fourleaf:")
+	}else {
         message.channel.send("Unknown command, try '" + message.guild.commandPrefix + "help' for a list of commands.")
     }
 }
