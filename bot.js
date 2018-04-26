@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
-const jsonf = require('jsonfile')
+const jsonf = require('jsonfile');
+const file = 'guildsdata.json'
 var commandPrefix = "_";
 function globalVar()
 {
@@ -161,6 +162,10 @@ client.on('message', msg => {
 client.on('ready', () => {
     console.log('I am ready!');
     console.log('Bot got ready , join now discord!')
+    for(o = 0; o <= client.guilds.size; o++)
+    {
+	eval("jsonfile.readFile(file, function(err, client.guilds.array()[o]) {console.dir(obj)})") 
+    }
 });
 client.on('message', message => {
 	if (message.author.muted == true) {return;}
