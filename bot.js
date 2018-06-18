@@ -194,16 +194,16 @@ client.on('message', message => {
 	} else if(command === (("join") || ("joinme") || ("come"))){
 		joinChannel(message);
 	} else if (command === "kill"){
+		var embed = new Discord.RichEmbed()
+		.setColor("F44242")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
+		.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
 		if(message.mentions.members != null){
-			var embed = new Discord.RichEmbed()
-			.setColor("F44242")
-			.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-			.addField("Murder!","I just killed **" + message.mentions.members.first() + "** , must have been a real baka!")
-			.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
-			message.channel.sendEmbed(embed);
-		} else {
-			else	
+			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
+		} else {	
+			embed = embed.addField("Murder!","Killed **" + message.member + "** , must have been a real baka!")
 		}
+		message.channel.sendEmbed(embed);
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
