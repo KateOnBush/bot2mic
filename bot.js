@@ -4,6 +4,13 @@ const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
 const prefix = "rayven "
 var answers = ["Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!","You should think about your question twice.","Nope , lol.","Ask yourself.","I guess so , yeah ^^.","Uh... I don't really know.","Yes , and I'm sure what I'm saying."]
+var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.gif",
+		"http://68.media.tumblr.com/c9340ffe7bd88258ec374a9cdf571ec3/tumblr_okxuc75yRi1w0ii2ho1_400.gif",
+		"http://38.media.tumblr.com/b3623de17160edc374a39393dd50e645/tumblr_nglsxnrwyD1rbrys3o1_500.gif",
+		"http://33.media.tumblr.com/40a731a1738c34d8b7533e080b72ba73/tumblr_ngls0ixVFl1rbrys3o1_500.gif",
+		"http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif-10.gif",
+		"https://media1.tenor.com/images/46051e203deaefc5642916c1eafa54a7/tenor.gif?itemid=3660367",
+		"http://reve-of-manga.r.e.pic.centerblog.net/f02b366e.gif"]
 function globalVar()
 {
     this.__enabled = true;    
@@ -162,7 +169,7 @@ client.on('message', message => {
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
-	} else if(command === "ask"){
+	} else if(command === "answer"){
 		if(args[0] == null){
 			message.channel.send(":no_entry: **Please specify a question.**");
 		} else {
@@ -180,12 +187,24 @@ client.on('message', message => {
 		}
 	} else if(command === ("showqueue" || "queue" || "songlist" || "nowplaying")){
 		showQueue(message);
-	} else if(command === ("skip" || "jump")){
+	} else if(command === (("skip") || ("jump"))){
 		skipCurrentSong(message);
-	} else if(command === ("stop" || "purge" || "clear")){
+	} else if(command === (("stop") || ("purge") || ("clear"))){
 		stopQueue(message);
-	} else if(command === ("join" || "joinme" || "come")){
+	} else if(command === (("join") || ("joinme") || ("come"))){
 		joinChannel(message);
+	} else if (command === "kill"){
+		if(message.mentions.members != null){
+			var embed = new Discord.RichEmbed()
+			.setColor("F44242")
+			.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
+			.addField("Murder!","I just killed **" + message.mentions.members.first() + "** , must have been a real baka!")
+			.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
+		} else {
+			else	
+		}
+	} else {
+		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
 	}catch(err){
 		showError(message,err);
