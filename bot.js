@@ -147,11 +147,10 @@ client.on('message', message => {
 	var args = message.content.replace(prefix + command + " ","").split(" ");
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
-		.setColor("00A2FF")
-		.setTitle("Pong!")
+		.setColor("42F46B")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.addField("My ping is currently ","**" + (client.ping|0) + "** ms.");
-	   	message.channel.sendEmbed(embed)
+		.addField("Pong!","My ping is currently **" + (client.ping|0) + "** ms.");
+	   	message.channel.send(embed)
 			.then()
 			.catch(err =>{
 				showError(message,err);
@@ -161,6 +160,17 @@ client.on('message', message => {
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
+		}
+	} else if(command === "ask"){
+		if(args[0] == null){
+			message.channel.send(":no_entry: **Please specify a question.**");
+		} else {
+			var answers = new Discord.Collection("Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!");
+			message.channel.send(answers.random())
+				.then()
+				.catch(err => {
+					showError(message,err);
+				});
 		}
 	}
 	}catch(err){
