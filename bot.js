@@ -146,7 +146,7 @@ client.on('message', message => {
 		.setColor("00A2FF")
 		.setTitle("Pong!")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**")
-		.addField("My ping is currently **" + (client.ping|0) + "** ms.");
+		.addField("My ping is currently ","**" + (client.ping|0) + "** ms.");
 	   	message.channel.send(embed);
 	} else if(command === "debug"){
 		try{
