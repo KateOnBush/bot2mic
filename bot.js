@@ -200,6 +200,7 @@ client.on('message', message => {
 			.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 			.addField("Murder!","I just killed **" + message.mentions.members.first() + "** , must have been a real baka!")
 			.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
+			message.channel.sendEmbed(embed);
 		} else {
 			else	
 		}
