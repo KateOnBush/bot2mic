@@ -139,24 +139,28 @@ client.on('ready', () => {
     console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
 });
 client.on('message', message => {
+	try{
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
 		.setColor("00A2FF")
 		.setTitle("Pong!")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("My ping is currently ","**" + (client.ping|0) + "** ms.");
 	   	message.channel.send(embed);
 	} else if(command === "debug"){
 		try{
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
 		}catch(err){
-			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Caught error:**\n```js\n'"+err+"'\n```");
+			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
 	}
-	   
+	}catch(err){
+		message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@458310531531669514> .\n```js\n"+err+"\n```")	
+	}
 });
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
 
