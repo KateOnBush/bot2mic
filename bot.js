@@ -210,7 +210,7 @@ client.on('message', message => {
 		try{
 			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
 		}catch(err){	
-			embed = embed.addField("Murder!","Killed **" + message.author.username + "** , must have been a real baka!")
+			embed = embed.addField("Murder!","Killed **" + message.member.displayName + "** , must have been a real baka!")
 		}
 		message.channel.sendEmbed(embed);
 	} else if(command === "help"){
