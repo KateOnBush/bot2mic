@@ -151,7 +151,7 @@ client.on('message', message => {
 		.setColor("42F46B")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Pong!","My ping is currently **" + (client.ping|0) + "** ms.");
-	   	message.channel.send(embed)
+	   	message.channel.sendEmbed(embed)
 			.then()
 			.catch(err =>{
 				showError(message,err);
