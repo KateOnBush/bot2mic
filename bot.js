@@ -134,6 +134,9 @@ var global = new globalVar();
       return module;
   };
 
+function showError(message,err){
+	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@458310531531669514> .\n```js\n"+err+"\n```")		
+}
 
 client.on('ready', () => {
     console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
@@ -148,7 +151,11 @@ client.on('message', message => {
 		.setTitle("Pong!")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("My ping is currently ","**" + (client.ping|0) + "** ms.");
-	   	message.channel.send(embed);
+	   	message.channel.sendEmbed(embed)
+			.then()
+			.catch(err =>{
+				showError(message,err);
+			});
 	} else if(command === "debug"){
 		try{
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
@@ -157,7 +164,7 @@ client.on('message', message => {
 		}
 	}
 	}catch(err){
-		message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@458310531531669514> .\n```js\n"+err+"\n```")	
+		showError(message,err);
 	}
 });
 
