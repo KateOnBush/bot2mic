@@ -148,11 +148,15 @@ function showError(message,err){
 
 client.on('ready', () => {
     console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
+	client.user.setPresence({ game: { name: 'NightFallerLegends' }, status: 'idle' })
+  	.then()
+  	.catch(err => { console.log(err)});
 });
 client.on('message', message => {
 	try{
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
+	if(!message.content.startsWith(prefix)) return;
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
 		.setColor("42F46B")
@@ -201,9 +205,14 @@ client.on('message', message => {
 		if(message.mentions.members != null){
 			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
 		} else {	
-			embed = embed.addField("Murder!","Killed **" + message.member + "** , must have been a real baka!")
+			embed = embed.addField("Murder!","Killed **<@!" + message.author.id + ">** , must have been a real baka!")
 		}
 		message.channel.sendEmbed(embed);
+	} else if(command === (("join") || ("joinme") || ("come"))){
+		var embed = new Discord.RichEmbed()
+		.setColor("D3F441")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
+		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n");
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
