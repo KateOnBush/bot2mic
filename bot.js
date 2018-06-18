@@ -10,7 +10,12 @@ var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.g
 		"http://33.media.tumblr.com/40a731a1738c34d8b7533e080b72ba73/tumblr_ngls0ixVFl1rbrys3o1_500.gif",
 		"http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif-10.gif",
 		"https://media1.tenor.com/images/46051e203deaefc5642916c1eafa54a7/tenor.gif?itemid=3660367",
-		"http://reve-of-manga.r.e.pic.centerblog.net/f02b366e.gif"]
+		"http://reve-of-manga.r.e.pic.centerblog.net/f02b366e.gif",
+		"https://media.giphy.com/media/9J3GfSohn0HRK/giphy.gif",
+		"http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif-9.gif",
+		"https://i.gifer.com/9hxn.gif",
+		"http://reve-of-manga.r.e.pic.centerblog.net/a8a9bf5e.gif",
+		"http://38.media.tumblr.com/3526f49bd5c2f57de0484c2913076fc1/tumblr_n919vrTuyV1rhtveio1_500.gif"]
 function globalVar()
 {
     this.__enabled = true;    
@@ -148,9 +153,9 @@ function showError(message,err){
 
 client.on('ready', () => {
     console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
-	client.user.setPresence({ game: { name: 'NightFallerLegends' }, status: 'idle' })
+	client.user.setPresence({ game: { name: 'against Samantha' }, status: 'idle' })
   	.then()
-  	.catch(err => { console.log(err)});
+  	.catch(err => { console.log(err);});
 });
 client.on('message', message => {
 	try{
@@ -202,17 +207,18 @@ client.on('message', message => {
 		.setColor("F44242")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
-		if(message.mentions.members != null){
+		try{
 			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
-		} else {	
-			embed = embed.addField("Murder!","Killed **<@!" + message.author.id + ">** , must have been a real baka!")
+		}catch(err){	
+			embed = embed.addField("Murder!","Killed **" + message.author.username + "** , must have been a real baka!")
 		}
 		message.channel.sendEmbed(embed);
-	} else if(command === (("join") || ("joinme") || ("come"))){
+	} else if(command === "help"){
 		var embed = new Discord.RichEmbed()
 		.setColor("D3F441")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n");
+		message.channel.sendEmbed(embed);
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
