@@ -166,7 +166,7 @@ client.on('message', message => {
 		if(args[0] == null){
 			message.channel.send(":no_entry: **Please specify a question.**");
 		} else {
-			message.channel.send(answers[Math.floor(Math.random()*items.answers)]);
+			message.channel.send(answers[Math.floor(Math.random()*items.answers)])
 				.then()
 				.catch(err => {
 					showError(message,err);
