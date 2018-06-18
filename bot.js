@@ -142,12 +142,18 @@ client.on('message', message => {
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
 	if(command === "ping"){
-		var embed = new Discord.RichEmbed;
-		embed.setColor("00A2FF");
-		embed.setTitle("Pong!");
-		embed.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**");
-		embed.addField("My ping is currently **" + (client.ping|0) + "** ms.");
+		var embed = new Discord.RichEmbed()
+		.setColor("00A2FF")
+		.setTitle("Pong!")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**")
+		.addField("My ping is currently **" + (client.ping|0) + "** ms.")
 	   	message.channel.send(embed);
+	} else if(command === "debug"){
+		try{
+			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
+		} catch(err){
+			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Caught error:**\n```js\n'"+eval(args.join(" "))+"'\n```");
+		}
 	}
 	   
 });
