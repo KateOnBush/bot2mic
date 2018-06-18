@@ -207,9 +207,9 @@ client.on('message', message => {
 		.setColor("F44242")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
-		try{
+		if(message.mentions.members.first() != undefined){
 			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
-		}catch(err){	
+		}else{	
 			embed = embed.addField("Murder!","Killed **" + message.member.displayName + "** , must have been a real baka!")
 		}
 		message.channel.sendEmbed(embed);
