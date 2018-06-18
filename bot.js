@@ -142,7 +142,7 @@ client.on('message', message => {
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
 	if(command === "ping"){
-	   	message.channel.send(new RichEmbed.setColor("00A2FF").setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**"))
+	   	message.channel.send(new Discord.RichEmbed.setColor("00A2FF").setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity").addField("Pinged : **"+client.ping+"**"))
 	}
 	   
 });
