@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
 const prefix = "rayven "
+var answers = ["Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!","You should think about your question twice.","Nope , lol.","Ask yourself.","I guess so , yeah ^^.","Uh... I don't really know.","Yes , and I'm sure what I'm saying."]
 function globalVar()
 {
     this.__enabled = true;    
@@ -135,7 +136,7 @@ var global = new globalVar();
   };
 
 function showError(message,err){
-	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@458310531531669514> .\n```js\n"+err+"\n```")		
+	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@!458310531531669514> .\n```js\n"+err+"\n```")		
 }
 
 client.on('ready', () => {
@@ -165,8 +166,7 @@ client.on('message', message => {
 		if(args[0] == null){
 			message.channel.send(":no_entry: **Please specify a question.**");
 		} else {
-			var answers = new Discord.Collection("Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!");
-			message.channel.send(answers.random())
+			message.channel.send(answers[Math.floor(Math.random()*items.answers)]);
 				.then()
 				.catch(err => {
 					showError(message,err);
