@@ -172,6 +172,20 @@ client.on('message', message => {
 					showError(message,err);
 				});
 		}
+	} else if(command === "play"){
+		if(args[0] != null){
+			play(message,args.join(" "));
+		} else {
+			message.channel.send(":no_entry: **Please specify a song/URL.**");	
+		}
+	} else if(command === ("showqueue" || "queue" || "songlist" || "nowplaying")){
+		showQueue(message);
+	} else if(command === ("skip" || "jump")){
+		skipCurrentSong(message);
+	} else if(command === ("stop" || "purge" || "clear")){
+		stopQueue(message);
+	} else if(command === ("join" || "joinme" || "come")){
+		joinChannel(message);
 	}
 	}catch(err){
 		showError(message,err);
