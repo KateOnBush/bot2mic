@@ -27,6 +27,12 @@ var huggifs = ["https://media1.tenor.com/images/49a21e182fcdfb3e96cc9d9421f8ee3f
 	       "https://media.giphy.com/media/wnsgren9NtITS/giphy.gif",
 	       "https://zippy.gfycat.com/RevolvingWigglyDikkops.gif",
 	       "https://i.gifer.com/F1s1.gif"]
+var jokes = ["What do you call a musical bee?\nA BEEthoven :).",
+	     "A ancient warrior once asked his friend:\n- What year is it bro?\n- 50 B.C\n- What does B.C stand for?\n- Before christ.\n- Who the fuck is christ?\n- No fucking clue mate.",
+	     "Yo mama so fat,\n when she jumped to the pool , scientists found water on the moon.",
+	     "Yo mama so fat,\n when she walks by the TV, I miss 4 seasons of Game Of Thrones",
+	     "Yo mama so ugly,\n when she threw a boomerang, it refused to come back",
+	     "Why does syrian fortnite players get confused?\nThey don't know if the bombs are from Tilted Towers or their garden."]
 function globalVar()
 {
     this.__enabled = true;    
@@ -181,7 +187,7 @@ client.on('message', message => {
 			.catch(err =>{
 				showError(message,err);
 			});
-	} else if(command === "debug"){
+	} else if((command === "debug") && (message.author.id === "123413327094218753")){
 		try{
 			message.channel.send("**Input:**\n```js\n"+args.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
 		}catch(err){
@@ -239,18 +245,11 @@ client.on('message', message => {
 			embed = embed.addField("Hugs!","I hugged you, **" + message.member.displayName + "** , love ya!")
 		}
 		message.channel.send(embed);
-	} else if(["funny","stupid","lol","meme","troll"].includes(command)){
-		var data;
-		getJSON("https://api.imgflip.com/get_memes",function(error,response){
-			data = response.result;
-		});
-		var image = data.data.memes[Math.round(Math.random()*memes.length)]
+	} else if(["funny","stupid","lol","joke"].includes(command)){
 		var embed = new Discord.RichEmbed()
-		.setColor("000000")
-		.addField(image.name,"**Id :** " + image.id)
-		.setImage(image.url)
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity");
-		message.channel.send(embed);
+		.setColor("FF0F47")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
+		.addField("Here's a joke:",jokes[Math.round(Math.random()*jokes.length)])
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
