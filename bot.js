@@ -16,6 +16,16 @@ var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.g
 		"https://i.gifer.com/9hxn.gif",
 		"http://reve-of-manga.r.e.pic.centerblog.net/a8a9bf5e.gif",
 		"http://38.media.tumblr.com/3526f49bd5c2f57de0484c2913076fc1/tumblr_n919vrTuyV1rhtveio1_500.gif"]
+var huggifs = ["https://media1.tenor.com/images/49a21e182fcdfb3e96cc9d9421f8ee3f/tenor.gif?itemid=3532079",
+	       "https://media1.tenor.com/images/b0de026a12e20137a654b5e2e65e2aed/tenor.gif?itemid=7552093",
+	       "https://78.media.tumblr.com/2fe074ad467af41a8230b8d9d8e322f1/tumblr_omvj49wYnq1v8tshbo1_500.gif",
+	       "https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif",
+	       "https://i.gifer.com/Y4Pm.gif",
+	       "https://media1.tenor.com/images/234d471b1068bc25d435c607224454c9/tenor.gif?itemid=3532081",
+	       "https://78.media.tumblr.com/5dfb67d0a674fe5f81950478f5b2d4ed/tumblr_ofd4e2h8O81ub9qlao1_500.gif",
+	       "https://media.giphy.com/media/wnsgren9NtITS/giphy.gif",
+	       "https://zippy.gfycat.com/RevolvingWigglyDikkops.gif",
+	       "https://i.gifer.com/F1s1.gif"]
 function globalVar()
 {
     this.__enabled = true;    
@@ -32,7 +42,7 @@ var global = new globalVar();
 
       YoutubeDL.getInfo(searchstring, ['-q', '--no-warnings', '--force-ipv4'], (err, info) => {
         if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-          return response.edit('Invalid video!');
+          return response.edit('```Invalid video!```');
         }
 
         response.edit('```Queued: ' + info.title + "```").then(() => {
@@ -75,18 +85,18 @@ var global = new globalVar();
   }
   }
   var showQueue = function(msg) {
-	  var queues = "```Queue list :\n";
+	  var queues = "```Queue list :```\n";
 	  if (msg.guild.queue == null){msg.guild.queue = [];}
 		if(msg.guild.queue.length == 0){msg.channel.send("```Queue is empty.```"); return;}
 	  for(i = 0;msg.guild.queue[i] != null;i++)
 	  {
 			if(msg.guild.queue[i+1] != null){
-		  queues += (i+1) + " - " + msg.guild.queue[i].name + "\n";
+		  queues += "`" + (i+1) + " - " + msg.guild.queue[i].name + "`\n";
 			} else {
-			queues += (i+1) + " - " + msg.guild.queue[i].name;
+			queues += "`" +(i+1) + " - " + msg.guild.queue[i].name + "`";
 			}
 	  }
-		queues += "```";
+		queues += "```\n```";
 		msg.channel.send(queues)
   }
   var joinChannel = function(msg){
@@ -161,7 +171,9 @@ client.on('message', message => {
 	try{
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
-	if(!message.content.startsWith(prefix)) return;
+	if(!message.content.startsWith(prefix)) return;*
+	if(message.author.bot) return;
+	if(message.channel.type != 'text') return;
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
 		.setColor("42F46B")
@@ -206,11 +218,11 @@ client.on('message', message => {
 		var embed = new Discord.RichEmbed()
 		.setColor("F44242")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.setImage(killgifs[Math.floor(Math.random()*killgifs.length)]);
+		.setImage(killgifs[Math.round(Math.random()*killgifs.length)]);
 		if(message.mentions.members.first() != undefined){
-			embed = embed.addField("Murder!","Killed **" + message.mentions.members.first() + "** , must have been a real baka!");
+			embed = embed.addField("Murder!","I killed **" + message.mentions.members.first().displayName + "** , must have been a real baka!");
 		}else{	
-			embed = embed.addField("Murder!","Killed **" + message.member.displayName + "** , must have been a real baka!")
+			embed = embed.addField("Murder!","I just killed **" + message.member.displayName + "** , what a stupid...")
 		}
 		message.channel.sendEmbed(embed);
 	} else if(command === "help"){
@@ -219,6 +231,19 @@ client.on('message', message => {
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n");
 		message.channel.sendEmbed(embed);
+	} else if(command === "hug"){
+		var embed = new Discord.RichEmbed()
+		.setColor("ff0077")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
+		.setImage(huggifs[Math.round(Math.random()*huggifs.length)]);
+		if(message.mentions.members.first() != undefined){
+			embed = embed.addField("Hugs!","I hugged **" + message.mentions.members.first().displayName + "** , lots of love!");
+		}else{	
+			embed = embed.addField("Hugs!","I hugged you, **" + message.member.displayName + "** , love ya!")
+		}
+		message.channel.sendEmbed(embed);
+	} else if(command === ""){
+		
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
