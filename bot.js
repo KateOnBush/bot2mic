@@ -90,11 +90,7 @@ var global = new globalVar();
 		if(msg.guild.queue.length == 0){msg.channel.send("```Queue is empty.```"); return;}
 	  for(i = 0;msg.guild.queue[i] != null;i++)
 	  {
-			if(msg.guild.queue[i+1] != null){
-		  queues += "`" + (i+1) + " - " + msg.guild.queue[i].name + "`\n";
-			} else {
-			queues += "`" +(i+1) + " - " + msg.guild.queue[i].name + "`";
-			}
+		queues += "`" +(i+1) + " - " + msg.guild.queue[i].name + "`\n";
 	  }
 		queues += "```\n```";
 		msg.channel.send(queues)
@@ -179,7 +175,7 @@ client.on('message', message => {
 		.setColor("42F46B")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Pong!","My ping is currently **" + (client.ping|0) + "** ms.");
-	   	message.channel.sendEmbed(embed)
+	   	message.channel.send(embed)
 			.then()
 			.catch(err =>{
 				showError(message,err);
@@ -230,7 +226,7 @@ client.on('message', message => {
 		.setColor("D3F441")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n");
-		message.channel.sendEmbed(embed);
+		message.channel.send(embed);
 	} else if(command === "hug"){
 		var embed = new Discord.RichEmbed()
 		.setColor("ff0077")
@@ -241,9 +237,14 @@ client.on('message', message => {
 		}else{	
 			embed = embed.addField("Hugs!","I hugged you, **" + message.member.displayName + "** , love ya!")
 		}
-		message.channel.sendEmbed(embed);
-	} else if(command === ""){
-		
+		message.channel.send(embed);
+	} else if(["funny","stupid","lol"].includes(command)){
+		var id = Math.round(Math.random()*999);
+		var embed = new Discord.RichEmbed()
+		.setColor("000000")
+		.addField("Funny image!","**Id :** " + id)
+		.setImage("https://memegenerator.net/img/images/"+id+".jpg")
+		message.channel.send(embed);
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
