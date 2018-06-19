@@ -244,6 +244,7 @@ client.on('message', message => {
 		.setColor("000000")
 		.addField("Funny image!","**Id :** " + id)
 		.setImage("https://memegenerator.net/img/images/"+id+".jpg")
+		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity");
 		message.channel.send(embed);
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
