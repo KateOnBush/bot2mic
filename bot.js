@@ -250,6 +250,7 @@ client.on('message', message => {
 		.setColor("FF0F47")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Here's a joke:",jokes[Math.round(Math.random()*jokes.length)])
+		message.channel.send(embed);
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
