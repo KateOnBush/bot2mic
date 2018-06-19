@@ -252,7 +252,7 @@ client.on('message', message => {
 		.addField("Here's a joke:",jokes[Math.round(Math.random()*jokes.length)])
 		message.channel.send(embed);
 	} else if(command === "add"){
-		if(!message.author.hasPermission("ADMINISTRATOR")){ message.channel.send("**Sorry,** I can't perform this for you."); return; }
+		if(!message.member.hasPermission("ADMINISTRATOR")){ message.channel.send("**Sorry,** I can't perform this for you."); return; }
 		if(message.mentions.members.first() == undefined){ message.channel.send("**Sorry,** You have to mention someone."); return; }
 		if(["contributors","devs"].includes(args[2])){
 			if(args[2] == "contributors"){
