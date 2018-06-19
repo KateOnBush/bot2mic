@@ -171,7 +171,7 @@ client.on('message', message => {
 	try{
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
-	if(!message.content.startsWith(prefix)) return;*
+	if(!message.content.startsWith(prefix)) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
 	if(command === "ping"){
@@ -206,13 +206,13 @@ client.on('message', message => {
 		} else {
 			message.channel.send(":no_entry: **Please specify a song/URL.**");	
 		}
-	} else if(command === ("showqueue" || "queue" || "songlist" || "nowplaying")){
+	} else if(["showqueue","queue","songlist","nowplaying"].includes(command)){
 		showQueue(message);
-	} else if(command === (("skip") || ("jump"))){
+	} else if(["skip","jump"].includes(command)){
 		skipCurrentSong(message);
-	} else if(command === (("stop") || ("purge") || ("clear"))){
+	} else if(["stop","purge","clear"].includes(command)){
 		stopQueue(message);
-	} else if(command === (("join") || ("joinme") || ("come"))){
+	} else if(["join","joinme","come"].includes(command)){
 		joinChannel(message);
 	} else if (command === "kill"){
 		var embed = new Discord.RichEmbed()
