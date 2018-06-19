@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
+const getJSON = require('get-json');
 const prefix = "rayven "
 var answers = ["Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!","You should think about your question twice.","Nope , lol.","Ask yourself.","I guess so , yeah ^^.","Uh... I don't really know.","Yes , and I'm sure what I'm saying."]
 var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.gif",
@@ -238,12 +239,17 @@ client.on('message', message => {
 			embed = embed.addField("Hugs!","I hugged you, **" + message.member.displayName + "** , love ya!")
 		}
 		message.channel.send(embed);
-	} else if(["funny","stupid","lol"].includes(command)){
-		var id = Math.round(Math.random()*999);
+	} else if(["funny","stupid","lol","meme","troll"].includes(command)){
+		getJSON("https://api.imgflip.com/get_memes",function(error,response){
+			var data = response.result;
+			if(!response.ok){ var data = ""}
+			
+		});
+		var image = data.data.memes[Math.round(Math.random()*memes.length)]
 		var embed = new Discord.RichEmbed()
 		.setColor("000000")
-		.addField("Funny image!","**Id :** " + id)
-		.setImage("https://memegenerator.net/img/images/"+id+".jpg")
+		.addField(image.name,"**Id :** " + image.id)
+		.setImage(image.url)
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity");
 		message.channel.send(embed);
 	} else {
