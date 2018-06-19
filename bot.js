@@ -107,7 +107,7 @@ var global = new globalVar();
     {
 	msg.member.voiceChannel.join()
 	msg.channel.send("**Joined : " + msg.member.voiceChannel.name + "**")
-	    if(msg.guild.queue.length != 0)
+	    if(msg.guild.queue != undefined)
 			{
 				playQueue(msg,"");
 			}
@@ -166,7 +166,7 @@ function showError(message,err){
 
 client.on('ready', () => {
     console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
-	client.user.setPresence({ game: { name: 'against Samantha' }, status: 'idle' })
+	client.user.setPresence({ game: { name: 'against Samantha' , streaming: true}, status: 'dnd' })
   	.then()
   	.catch(err => { console.log(err);});
 });
@@ -251,12 +251,33 @@ client.on('message', message => {
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Here's a joke:",jokes[Math.round(Math.random()*jokes.length)])
 		message.channel.send(embed);
+	} else if(command === "add"){
+		if(!message.author.hasRole("ADMINISTRATOR")){ message.channel.send("**Sorry,** I can't perform this for you."); return; }
+		if(message.mentions.members.first() == undefined){ message.channel.send("**Sorry,** You have to mention someone."); return; }
+		if(["contributors","devs"].includes(args[2])){
+			if(args[2] == "contributors"){
+				message.mentions.members.first().addRole(message.guild.roles.find("name","Contributor"));
+				message.channel.send(message.mentions.members.first() + " has been added to contributors!");
+				message.mentions.members.first().user.send("**You have been added to the contributors group of NightFallerLegends!**\n\nYou can now discuss privately with other contributors and participate to regular giveaways!\nThanks for your contribution.\n\n~ NightFallerLegends Team.")
+			} else if(args[2] == "devs"){
+				message.mentions.members.first().addRole(message.guild.roles.find("name","NightFallerDeveloper"));
+				message.channel.send(message.mentions.members.first() + " has been added to Developers.");
+				message.mentions.members.first().user.send("**You have been added to the developers group of NightFallerLegends!**\n\nYou can now fully participate to the indev of NightFallerLegends , and this means you are a very trustful person , you will be helping our team and be rewarded as soon as possible.\nGood luck in your developement!\n\n~ NightFallerLegends Team.")
+			}
+		} else {
+			message.channel.send("**Sorry,** Specify a group.")
+		}
 	} else {
 		message.reply("**Yes?** Say `rayven help` for a list of help.")	
 	}
 	}catch(err){
 		showError(message,err);
 	}
+});
+
+client.on("guildMemberAdd", member =>{
+	member.addRole(member.guild.roles.find("name","NightFallerMember"));
+	member.guild.channels.find("name","welcomes").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "** to NightFallerLegendsCommunity! Head over and talk to people , don't be shy!").setImage("https://images7.alphacoders.com/849/849675.png"));
 });
 
 // THIS  MUST  BE  THIS  WAY
