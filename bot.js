@@ -240,10 +240,9 @@ client.on('message', message => {
 		}
 		message.channel.send(embed);
 	} else if(["funny","stupid","lol","meme","troll"].includes(command)){
+		var data;
 		getJSON("https://api.imgflip.com/get_memes",function(error,response){
-			var data = response.result;
-			if(!response.ok){ var data = ""}
-			
+			data = response.result;
 		});
 		var image = data.data.memes[Math.round(Math.random()*memes.length)]
 		var embed = new Discord.RichEmbed()
