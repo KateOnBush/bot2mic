@@ -232,7 +232,7 @@ client.on('message', message => {
 		var embed = new Discord.RichEmbed()
 		.setColor("D3F441")
 		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n");
+		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n**hug :** Hugs a cutie.\n**joke :** Just to hear something funny.");
 		message.channel.send(embed);
 	} else if(command === "hug"){
 		var embed = new Discord.RichEmbed()
@@ -277,7 +277,7 @@ client.on('message', message => {
 
 client.on("guildMemberAdd", member =>{
 	member.addRole(member.guild.roles.find("name","NightFallerMember"));
-	member.guild.channels.find("name","welcomes").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "** to NightFallerLegendsCommunity! Head over and talk to people , don't be shy!").setImage("https://images7.alphacoders.com/849/849675.png"));
+	member.guild.channels.find("name","welcomes").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "** to NightFallerLegendsCommunity! Head over and talk to people , don't be shy!").setImage("https://images7.alphacoders.com/849/849675.png").setThumbnail(member.user.displayAvatarURL));
 });
 
 // THIS  MUST  BE  THIS  WAY
