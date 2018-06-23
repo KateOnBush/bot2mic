@@ -172,6 +172,7 @@ client.on('ready', () => {
 });
 client.on('message', message => {
 	try{
+	message.content = message.content.toLowerCase();
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.replace(prefix + command + " ","").split(" ");
 	if(!message.content.startsWith(prefix)) return;
