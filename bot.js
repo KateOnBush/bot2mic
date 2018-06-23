@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
-const getJSON = require('get-json');
 const prefix = "rayven "
 var answers = ["Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!","You should think about your question twice.","Nope , lol.","Ask yourself.","I guess so , yeah ^^.","Uh... I don't really know.","Yes , and I'm sure what I'm saying."]
 var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.gif",
