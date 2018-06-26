@@ -171,9 +171,10 @@ client.on('ready', () => {
 });
 client.on('message', message => {
 	try{
+	var command = message.content.replace(prefix,"").split(" ")[0];
 	var args_case = message.content.replace(prefix + command + " ","").split(" ");
-	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
 	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
+	command.toLowerCase();
 	if(!message.content.startsWith(prefix)) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
