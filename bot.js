@@ -172,9 +172,8 @@ client.on('ready', () => {
 client.on('message', message => {
 	try{
 	var args_case = message.content.replace(prefix + command + " ","").split(" ");
-	message.content = message.content.toLowerCase();
 	var command = message.content.replace(prefix,"").split(" ")[0].toLowerCase();
-	var args = message.content.replace(prefix + command + " ","").split(" ");
+	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
 	if(!message.content.startsWith(prefix)) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
@@ -190,7 +189,7 @@ client.on('message', message => {
 			});
 	} else if((command === "debug") && (message.author.id === "123413327094218753")){
 		try{
-			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args.join(" "))+"\n```");	
+			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Output:**\n```js\n"+eval(args_case.join(" "))+"\n```");	
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
