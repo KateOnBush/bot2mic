@@ -2,36 +2,14 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
-const prefix = "rayven "
-var answers = ["Well , maybe.","Not at all.","I can't understand.","Really, this question?","Probably.","I guess not.","Yeah!","You should think about your question twice.","Nope , lol.","Ask yourself.","I guess so , yeah ^^.","Uh... I don't really know.","Yes , and I'm sure what I'm saying."]
-var killgifs = ["http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif.gif",
-		"http://68.media.tumblr.com/c9340ffe7bd88258ec374a9cdf571ec3/tumblr_okxuc75yRi1w0ii2ho1_400.gif",
-		"http://38.media.tumblr.com/b3623de17160edc374a39393dd50e645/tumblr_nglsxnrwyD1rbrys3o1_500.gif",
-		"http://33.media.tumblr.com/40a731a1738c34d8b7533e080b72ba73/tumblr_ngls0ixVFl1rbrys3o1_500.gif",
-		"http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif-10.gif",
-		"https://media1.tenor.com/images/46051e203deaefc5642916c1eafa54a7/tenor.gif?itemid=3660367",
-		"http://reve-of-manga.r.e.pic.centerblog.net/f02b366e.gif",
-		"https://media.giphy.com/media/9J3GfSohn0HRK/giphy.gif",
-		"http://gifimage.net/wp-content/uploads/2017/09/anime-kill-gif-9.gif",
-		"https://i.gifer.com/9hxn.gif",
-		"http://reve-of-manga.r.e.pic.centerblog.net/a8a9bf5e.gif",
-		"http://38.media.tumblr.com/3526f49bd5c2f57de0484c2913076fc1/tumblr_n919vrTuyV1rhtveio1_500.gif"]
-var huggifs = ["https://media1.tenor.com/images/49a21e182fcdfb3e96cc9d9421f8ee3f/tenor.gif?itemid=3532079",
-	       "https://media1.tenor.com/images/b0de026a12e20137a654b5e2e65e2aed/tenor.gif?itemid=7552093",
-	       "https://78.media.tumblr.com/2fe074ad467af41a8230b8d9d8e322f1/tumblr_omvj49wYnq1v8tshbo1_500.gif",
-	       "https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif",
-	       "https://i.gifer.com/Y4Pm.gif",
-	       "https://media1.tenor.com/images/234d471b1068bc25d435c607224454c9/tenor.gif?itemid=3532081",
-	       "https://78.media.tumblr.com/5dfb67d0a674fe5f81950478f5b2d4ed/tumblr_ofd4e2h8O81ub9qlao1_500.gif",
-	       "https://media.giphy.com/media/wnsgren9NtITS/giphy.gif",
-	       "https://zippy.gfycat.com/RevolvingWigglyDikkops.gif",
-	       "https://i.gifer.com/F1s1.gif"]
-var jokes = ["What do you call a musical bee?\nA BEEthoven :).",
-	     "A ancient warrior once asked his friend:\n- What year is it bro?\n- 50 B.C\n- What does B.C stand for?\n- Before christ.\n- Who the fuck is christ?\n- No fucking clue mate.",
-	     "Yo mama so fat,\n when she jumped to the pool , scientists found water on the moon.",
-	     "Yo mama so fat,\n when she walks by the TV, I miss 4 seasons of Game Of Thrones",
-	     "Yo mama so ugly,\n when she threw a boomerang, it refused to come back",
-	     "Why does syrian fortnite players get confused?\nThey don't know if the bombs are from Tilted Towers or their garden."]
+const prefix = "please "
+var answers = ["That's obviously true... what did you think?","Yeah!","No , at all!","nope.","Of course... not.","Absolutely!","Probably not!","I think so.","Yeah , I believe.","That's a yes.","Yes.","No , no , no and no!","I have no fucking idea.","I don't know.","WTF? Ask google not me","Do you think im stupid? that's yes.","I don't wanna answer.","Ummm... yeah."];
+var welcomes = ["https://media.giphy.com/media/3o6Zt6zRQw8yStXfxe/giphy.gif",
+		"https://media.giphy.com/media/10a9ikXNvR9MXe/giphy.gif",
+		"https://media3.giphy.com/media/OF0yOAufcWLfi/giphy.gif",
+		"https://i.imgflip.com/1tlr1p.gif",
+		"https://thumbs.gfycat.com/ExcellentGrouchyBass-max-1mb.gif",
+		"https://66.media.tumblr.com/5ab0c2fde2312b3bcbf5a64bc222d6a6/tumblr_o4sdnnQ8DT1udh5n8o1_500.gif"];
 function globalVar()
 {
     this.__enabled = true;    
@@ -178,10 +156,10 @@ client.on('message', message => {
 	if(!message.content.startsWith(prefix)) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
+	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
 		.setColor("42F46B")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
 		.addField("Pong!","My ping is currently **" + (client.ping|0) + "** ms.");
 	   	message.channel.send(embed)
 			.then()
@@ -194,7 +172,7 @@ client.on('message', message => {
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
-	} else if(command === "answer"){
+	} else if((command === "answer") || (command === "tellme") || (command === "trueorfalse")){
 		if(args[0] == null){
 			message.channel.send(":no_entry: **Please specify a question.**");
 		} else {
@@ -218,58 +196,8 @@ client.on('message', message => {
 		stopQueue(message);
 	} else if(["join","joinme","come"].includes(command)){
 		joinChannel(message);
-	} else if (command === "kill"){
-		var embed = new Discord.RichEmbed()
-		.setColor("F44242")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.setImage(killgifs[Math.round(Math.random()*killgifs.length)]);
-		if(message.mentions.members.first() != undefined){
-			embed = embed.addField("Murder!","I killed **" + message.mentions.members.first().displayName + "** , must have been a real baka!");
-		}else{	
-			embed = embed.addField("Murder!","I just killed **" + message.member.displayName + "** , what a stupid...")
-		}
-		message.channel.sendEmbed(embed);
-	} else if(command === "help"){
-		var embed = new Discord.RichEmbed()
-		.setColor("D3F441")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.addField("Help?!","**help :** Shows the help menu.\n**ping :** Info about bot's latency.\n**play :** Queues/plays a song.\n**stop :** Stops the queue.\n**showqueue :** Shows the queue list.\n**join :** Joins your voice channel.\n**kill :** Kills a baka.\n**hug :** Hugs a cutie.\n**joke :** Just to hear something funny.");
-		message.channel.send(embed);
-	} else if(command === "hug"){
-		var embed = new Discord.RichEmbed()
-		.setColor("ff0077")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.setImage(huggifs[Math.round(Math.random()*huggifs.length)]);
-		if(message.mentions.members.first() != undefined){
-			embed = embed.addField("Hugs!","I hugged **" + message.mentions.members.first().displayName + "** , lots of love!");
-		}else{	
-			embed = embed.addField("Hugs!","I hugged you, **" + message.member.displayName + "** , love ya!")
-		}
-		message.channel.send(embed);
-	} else if(["funny","stupid","lol","joke"].includes(command)){
-		var embed = new Discord.RichEmbed()
-		.setColor("FF0F47")
-		.setFooter("Rayven Bot by Aouab | NightFallerLegendsCommunity")
-		.addField("Here's a joke:",jokes[Math.round(Math.random()*jokes.length)])
-		message.channel.send(embed);
-	} else if(command === "add"){
-		if(!message.member.hasPermission("ADMINISTRATOR")){ message.channel.send("**Sorry,** I can't perform this for you."); return; }
-		if(message.mentions.members.first() == undefined){ message.channel.send("**Sorry,** You have to mention someone."); return; }
-		if(["contributors","devs"].includes(args[2])){
-			if(args[2] == "contributors"){
-				message.mentions.members.first().addRole(message.guild.roles.find("name","Contributor"));
-				message.channel.send(message.mentions.members.first() + " has been added to contributors!");
-				message.mentions.members.first().user.send("**You have been added to the contributors group of NightFallerLegends!**\n\nYou can now discuss privately with other contributors and participate to regular giveaways!\nThanks for your contribution.\n\n~ NightFallerLegends Team.")
-			} else if(args[2] == "devs"){
-				message.mentions.members.first().addRole(message.guild.roles.find("name","NightFallerDeveloper"));
-				message.channel.send(message.mentions.members.first() + " has been added to Developers.");
-				message.mentions.members.first().user.send("**You have been added to the developers group of NightFallerLegends!**\n\nYou can now fully participate to the indev of NightFallerLegends , and this means you are a very trustful person , you will be helping our team and be rewarded as soon as possible.\nGood luck in your developement!\n\n~ NightFallerLegends Team.")
-			}
-		} else {
-			message.channel.send("**Sorry,** Specify a group.")
-		}
 	} else {
-		message.reply("**Yes?** Say `rayven help` for a list of help.")	
+		message.reply("**Yes?** Say `please help` for a list of help.")	
 	}
 	}catch(err){
 		showError(message,err);
@@ -277,8 +205,8 @@ client.on('message', message => {
 });
 
 client.on("guildMemberAdd", member =>{
-	member.addRole(member.guild.roles.find("name","NightFallerMember"));
-	member.guild.channels.find("name","welcomes").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "** to NightFallerLegendsCommunity! Head over and talk to people , don't be shy!").setImage("https://images7.alphacoders.com/849/849675.png").setThumbnail(member.user.displayAvatarURL));
+	member.addRole(member.guild.roles.find("name","dudes"));
+	member.guild.channels.find("name","welcome").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "**! i don't know the fuck you got here , but have fun!").setThumbnail(member.user.displayAvatarURL));
 });
 
 // THIS  MUST  BE  THIS  WAY
