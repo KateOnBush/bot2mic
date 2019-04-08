@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.music = require('discord.js-musicbot-addon');
 client.music.start(client, {
-  youtubeKey: "AIzaSyCx2O5mC38nVv45RGVhqHm4wwg0l-IXId8"
+  youtubeKey: "AIzaSyA2Cusn7ElAHsbatWlgX1yX0jMWiGpawz4"
 });
 const prefix = "please "
 var answers = ["That's obviously true... what did you think?","Yeah!","No , at all!","nope.","Of course... not.","Absolutely!","Probably not!","I think so.","Yeah , I believe.","That's a yes.","Yes.","No , no , no and no!","I have no fucking idea.","I don't know.","WTF? Ask google not me","Do you think im stupid? that's yes.","I don't wanna answer.","Ummm... yeah."];
