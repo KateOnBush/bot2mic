@@ -77,8 +77,9 @@ client.on('message', message => {
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
 				}
-			} else if (args[0].toLowerCase().startsWith("how")) {
-				reply = answershow[Math.floor(Math.random()*answershow.length)];
+			} else if ((args[0].toLowerCase().startsWith("how")) || 
+(args[1].toLowerCase().startsWith("old")))  {
+				reply = Math.floor(Math.random()*100) + " years old.";
 			} else if (args[0].toLowerCase().startsWith("when")) {
 				reply = answerswhen[Math.floor(Math.random()*answerswhen.length)];
 			} else if (args[0].toLowerCase().startsWith("where")) {
@@ -89,9 +90,8 @@ client.on('message', message => {
 				reply = answerswhich[Math.floor(Math.random()*answerswhich.length)];
 			} else if (args[0].toLowerCase().startsWith("what")) {
 				reply = answerswhat[Math.floor(Math.random()*answerswhat.length)];
-			} else if ((args[0].toLowerCase().startsWith("how")) || 
-(args[1].toLowerCase().startsWith("old")))  {
-				reply = Math.floor(Math.random()*100) + " years old.";
+			} else if (args[0].toLowerCase().startsWith("how")) {
+				reply = answershow[Math.floor(Math.random()*answershow.length)];
 			} else {
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];
 			}
