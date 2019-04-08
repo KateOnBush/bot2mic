@@ -17,7 +17,7 @@ function globalVar()
 var global = new globalVar();
   var play = function(msg, suffix) {
     var voiceChannel = msg.member.voiceChannel;
-    msg.channel.send('```Searching...```').then(response => {
+    msg.channel.send('Hold up a second...').then(response => {
       var searchstring = suffix;
 
       if (!suffix.toLowerCase().startsWith('http')) {
@@ -26,7 +26,7 @@ var global = new globalVar();
 
       YoutubeDL.getInfo(searchstring, ['-q', '--no-warnings', '--force-ipv4'], (err, info) => {
         if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-          return response.edit('```Invalid video!```');
+          return response.edit('lol your video is invalid');
         }
 
         response.edit('```Queued: ' + info.title + "```").then(() => {
@@ -65,7 +65,7 @@ var global = new globalVar();
 	  msg.guild.joinedChannel = null;
 	  msg.channel.send("**Cleared queue and left all voice channels**")
   } else {
-	  msg.channel.send("I'm not currently in a voice channel");
+	  msg.channel.send("Do u think i'm stupid? im not in a voice channel");
   }
   }
   var showQueue = function(msg) {
@@ -89,7 +89,7 @@ var global = new globalVar();
 				playQueue(msg,"");
 			}
     } else {
-	msg.channel.send("You're not currently on a voice channel.")    
+	msg.channel.send("Do i look like a fool? you're not on a voice channel !")    
     }
   }
   var playQueue = function(msg, suffix, voiceChannel = msg.member.voiceChannel) {
@@ -142,8 +142,8 @@ function showError(message,err){
 }
 
 client.on('ready', () => {
-    console.log('Rayven is ready , connected to '+client.guilds.size+' guilds !');
-	client.user.setPresence({ game: { name: 'against Samantha' , streaming: true}, status: 'dnd' })
+    console.log('Human is ready , connected to '+client.guilds.size+' guilds !');
+	client.user.setPresence({ game: { name: 'with babies' , streaming: true}, status: 'dnd' })
   	.then()
   	.catch(err => { console.log(err);});
 });
@@ -160,7 +160,7 @@ client.on('message', message => {
 	if(command === "ping"){
 		var embed = new Discord.RichEmbed()
 		.setColor("42F46B")
-		.addField("Pong!","My ping is currently **" + (client.ping|0) + "** ms.");
+		.addField("Pong!","My latency is **" + (client.ping|0) + "** ms.");
 	   	message.channel.send(embed)
 			.then()
 			.catch(err =>{
@@ -197,7 +197,7 @@ client.on('message', message => {
 	} else if(["join","joinme","come"].includes(command)){
 		joinChannel(message);
 	} else {
-		message.reply("**Yes?** Say `please help` for a list of help.")	
+		message.reply("say `please help` for a list of help.")	
 	}
 	}catch(err){
 		showError(message,err);
@@ -206,7 +206,7 @@ client.on('message', message => {
 
 client.on("guildMemberAdd", member =>{
 	member.addRole(member.guild.roles.find("name","dudes"));
-	member.guild.channels.find("name","welcome").send(new Discord.RichEmbed().setColor("FFFFFF").addField("Welcome!","Welcome **" + member.displayName + "**! i don't know the fuck you got here , but have fun!").setThumbnail(member.user.displayAvatarURL));
+	member.guild.channels.find("name","welcome").send(new Discord.RichEmbed().setColor("FFFFFF").setImage(welcomes[Math.floor(Math.random()*welcomes.length)]).addField("Welcome!","Welcome **" + member.displayName + "**! i don't know the fuck you got here , but have fun!").setThumbnail(member.user.displayAvatarURL));
 });
 
 // THIS  MUST  BE  THIS  WAY
