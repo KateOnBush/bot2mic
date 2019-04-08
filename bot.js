@@ -69,7 +69,8 @@ client.on('message', message => {
 		} else {
 			var reply;
 			if (args[0].toLowerCase() === "why") {
-				if (Math.floor(Math.random()*2) = 0) {
+				var x = Math.floor(Math.random()*2);
+				if (x = 0) {
 					reply = answerswhy[Math.floor(Math.random()*answerswhy.length)];
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
