@@ -8,7 +8,14 @@ client.music.start(client, {
   bigPicture: true
 });
 const prefix = "please "
-var answers = ["That's obviously true... what did you think?","Yeah!","No , at all!","nope.","Of course... not.","Absolutely!","Probably not!","I think so.","Yeah , I believe.","That's a yes.","Yes.","No , no , no and no!","I have no fucking idea.","I don't know.","WTF? Ask google not me","Do you think im stupid? that's yes.","I don't wanna answer.","Ummm... yeah."];
+var answersyesorno = ["That's obviously true... what did you think?","Yeah!","No , at all!","nope.","Of course... not.","Absolutely!","Probably not!","I think so.","Yeah , I believe.","That's a yes.","Yes.","No , no , no and no!","I have no fucking idea.","I don't know.","WTF? Ask google not me","Do you think im stupid? that's yes.","I don't wanna answer.","Ummm... yeah."];
+var answerswhy = ["Do I look like I know why?","lol.... for no reason.","because god made it like that.","because I want it like that","Because donald trump is drunk","obviously because .... idk","I don't wanna answer.","My name is not google","because i like it like that."]
+var answerswhere = ["In miami.","Behind you.","Under a fridge.","In florida.","In morocco.","In india.","Under a shower.","Algeria","I don't know , maybe next to you.","I don't wanna answer","In a car.","In your car.","In my car.","Somewhere under a rainbow.","In the sky.","In the Andromeda Galaxy","In pluto","In ur anus .... no I mean the planet"]
+var answerswho = ["Elon Musk","Donald trump","Your mom.","Nick","Someone","Your dad","Your dad's mom","Obama","Aaron","Aouab","A pet named Steve","A russian girl living in Italy","An irish dog in a british hospital"]
+var answerswhen = ["At 5 o'clock","Last century","Tomorrow.","I don't know.","Do I like like a clock?","Yesterday morning.","In 2074","The day you'll die.","On my birthday!","I don't want to answer you because you are stupid.","Maybe last week.","About two days ago.","When you were born","Whenever you want.","Whenever I want.","Whenever god wants.","Don't talk to me about that.","Let me think,.... maybe next month."]
+var answershow = ["I don't know.","Are you seriously asking me this?","I don't wanna answer.","With a knife.","On a car.","With his hands.","With a computer","With a pet named Steve","With a software.","With coding.","With an adidas shoes.","With a Yamaha T-Max.","with a chicken."]
+var people = ["elon musk","obama","my son","your father","your mom","justin bieber","alan walker","marshmello","david guetta","someone","everyone","noone","one of the people that live in islands","he","she","anne-marie","ed sheeran","aouab","aaron","a guy","a dude","a bot","a human","a chicken","a sick grandmother"]
+var activity = ["in america","riding a horse","in the living room","happy","sad","mad","bad at sex","in a car","in discord","making music","slapping something","probably dead","sleeping","confused","homesick","under a fridge","a pet named Steve","listening to justin bieber"]
 var welcomes = ["https://media.giphy.com/media/3o6Zt6zRQw8yStXfxe/giphy.gif",
 		"https://media.giphy.com/media/10a9ikXNvR9MXe/giphy.gif",
 		"https://media3.giphy.com/media/OF0yOAufcWLfi/giphy.gif",
@@ -56,11 +63,29 @@ client.on('message', message => {
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
-	} else if((command === "answer") || (command === "tellme") || (command === "trueorfalse")){
+	} else if((command === "answer") || (command === "tellme") || (command === "reply") || (command === "say")){
 		if(args[0] == null){
-			message.channel.send(":no_entry: **Please specify a question.**");
+			message.channel.send("U didn't ask anything '-'");
 		} else {
-			message.channel.send(answers[Math.floor(Math.random()*answers.length)])
+			var reply;
+			if (args[0].toLowerCase() === "why") {
+				if (Math.floor(Math.random()*2) = 0) {
+					reply = answerswhy[Math.floor(Math.random()*answerswhy.length)];
+				} else {
+					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
+				}
+			} else if (args[0].toLowerCase() === "how") {
+				reply = answershow[Math.floor(Math.random()*answershow.length)];
+			} else if (args[0].toLowerCase() === "when") {
+				reply = answerswhen[Math.floor(Math.random()*answerswhen.length)];
+			} else if (args[0].toLowerCase() === "where") {
+				reply = answerswhere[Math.floor(Math.random()*answerswhere.length)];
+			} else if (args[0].toLowerCase() === "who") {
+				reply = answerwho[Math.floor(Math.random()*answerswho.length)];
+			} else {
+				reply = answeryesorno[Math.floor(Math.random()*answersyesorno.length)];
+			}
+			message.channel.send(reply)
 				.then()
 				.catch(err => {
 					showError(message,err);
