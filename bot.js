@@ -14,6 +14,8 @@ var answerswhere = ["In miami.","Behind you.","Under a fridge.","In florida.","I
 var answerswho = ["Elon Musk","Donald trump","Your mom.","Nick","Someone","Your dad","Your dad's mom","Obama","Aaron","Aouab","A pet named Steve","A russian girl living in Italy","An irish dog in a british hospital"]
 var answerswhen = ["At 5 o'clock","Last century","Tomorrow.","I don't know.","Do I like like a clock?","Yesterday morning.","In 2074","The day you'll die.","On my birthday!","I don't want to answer you because you are stupid.","Maybe last week.","About two days ago.","When you were born","Whenever you want.","Whenever I want.","Whenever god wants.","Don't talk to me about that.","Let me think,.... maybe next month."]
 var answershow = ["I don't know.","Are you seriously asking me this?","I don't wanna answer.","With a knife.","On a car.","With his hands.","With a computer","With a pet named Steve","With a software.","With coding.","With an adidas shoes.","With a Yamaha T-Max.","with a chicken."]
+var answerswhat = ["A cake","A pie","A chicken","A pet named Steve","6","89","984","69","A knife","Something","Something obvious.","Something not obvious","Something i probably don't know.","Something I don't wanna know","A cat","A dog","A ghost","A card","A chair","5 dollars","A table","A software","A bot","Bunch of maths, i don't know","I don't know","I don't wanna know","I don't wanna answer","A blue orange"]
+var answerswhich = ["This one","That one","The first one","The last one","The second one","One of them","The one that is ordering a pizza","The one that is eating a burrito","The one right there","The one right here","I don't know","Ask yourself","Ask google."]
 var people = ["elon musk","obama","my son","your father","your mom","justin bieber","alan walker","marshmello","david guetta","someone","everyone","noone","one of the people that live in islands","he","she","anne-marie","ed sheeran","aouab","aaron","a guy","a dude","a bot","a human","a chicken","a sick grandmother"]
 var activity = ["in america","riding a horse","in the living room","happy","sad","mad","bad at sex","in a car","in discord","making music","slapping something","probably dead","sleeping","confused","homesick","under a fridge","a pet named Steve","listening to justin bieber"]
 var welcomes = ["https://media.giphy.com/media/3o6Zt6zRQw8yStXfxe/giphy.gif",
@@ -75,14 +77,18 @@ client.on('message', message => {
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
 				}
-			} else if (args[0].toLowerCase() === "how") {
+			} else if (args[0].toLowerCase().startsWith("how")) {
 				reply = answershow[Math.floor(Math.random()*answershow.length)];
-			} else if (args[0].toLowerCase() === "when") {
+			} else if (args[0].toLowerCase().startsWith("when")) {
 				reply = answerswhen[Math.floor(Math.random()*answerswhen.length)];
-			} else if (args[0].toLowerCase() === "where") {
+			} else if (args[0].toLowerCase().startsWith("where")) {
 				reply = answerswhere[Math.floor(Math.random()*answerswhere.length)];
-			} else if (args[0].toLowerCase() === "who") {
+			} else if (args[0].toLowerCase().startsWith("who")) {
 				reply = answerswho[Math.floor(Math.random()*answerswho.length)];
+			} else if (args[0].toLowerCase().startsWith("which")) {
+				reply = answerswhich[Math.floor(Math.random()*answerswhich.length)];
+			} else if (args[0].toLowerCase().startsWith("what")) {
+				reply = answerswhat[Math.floor(Math.random()*answerswhat.length)];
 			} else {
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];
 			}
