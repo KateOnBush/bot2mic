@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const Music = require('discord.js-musicbot-addon');
-const music = new Music(client, {
+client.music = require('discord.js-musicbot-addon');
+client.music.start(client, {
   youtubeKey: 'AIzaSyAYP5t2p-qC_vO7lfr06bZr5zzRwDo4a_k' ,
   botPrefix: 'please ',
   help: { name: 'music' },
