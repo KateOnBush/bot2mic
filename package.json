@@ -11,6 +11,6 @@
     "request": "2.81.0" ,
     "ffmpeg-binaries": "3.2.2-3" ,
     "node-opus": "0.2.7",
-    "discord.js-musicbot-addon-v2": "1.10.4"
+    "discord.js-musicbot-addon": "13.5.1"
   }
 }
