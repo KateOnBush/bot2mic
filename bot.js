@@ -5,7 +5,8 @@ const music = new Music(client, {
   youtubeKey: 'AIzaSyAYP5t2p-qC_vO7lfr06bZr5zzRwDo4a_k' ,
   botPrefix: 'please ',
   djRole: 'me',
-  helpCmd: 'music'
+  helpCmd: 'music',
+  enableQueueStat: true
 });
 const prefix = "please "
 var answers = ["That's obviously true... what did you think?","Yeah!","No , at all!","nope.","Of course... not.","Absolutely!","Probably not!","I think so.","Yeah , I believe.","That's a yes.","Yes.","No , no , no and no!","I have no fucking idea.","I don't know.","WTF? Ask google not me","Do you think im stupid? that's yes.","I don't wanna answer.","Ummm... yeah."];
