@@ -81,9 +81,9 @@ client.on('message', message => {
 			} else if (args[0].toLowerCase() === "where") {
 				reply = answerswhere[Math.floor(Math.random()*answerswhere.length)];
 			} else if (args[0].toLowerCase() === "who") {
-				reply = answerwho[Math.floor(Math.random()*answerswho.length)];
+				reply = answerswho[Math.floor(Math.random()*answerswho.length)];
 			} else {
-				reply = answeryesorno[Math.floor(Math.random()*answersyesorno.length)];
+				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];
 			}
 			message.channel.send(reply)
 				.then()
