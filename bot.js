@@ -89,6 +89,9 @@ client.on('message', message => {
 				reply = answerswhich[Math.floor(Math.random()*answerswhich.length)];
 			} else if (args[0].toLowerCase().startsWith("what")) {
 				reply = answerswhat[Math.floor(Math.random()*answerswhat.length)];
+			} else if ((args[0].toLowerCase().startsWith("how")) || 
+(args[1].toLowerCase().startsWith("old")))  {
+				reply = Math.floor(Math.random()*100 + " years old.";
 			} else {
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];
 			}
