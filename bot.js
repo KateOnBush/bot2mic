@@ -69,7 +69,7 @@ client.on('message', message => {
 				});
 		}
 	} else {
-		message.reply("say `please help` for a list of help.")	
+		message.channel.send("Say `please help` for help.")	
 	}
 	}catch(err){
 		showError(message,err);
@@ -78,7 +78,7 @@ client.on('message', message => {
 
 client.on("guildMemberAdd", member =>{
 	member.addRole(member.guild.roles.find("name","dudes"));
-	member.guild.channels.find("name","welcome").send(new Discord.RichEmbed().setColor("FFFFFF").setImage(welcomes[Math.floor(Math.random()*welcomes.length)]).addField("Welcome!","Welcome **" + member.displayName + "**! i don't know the fuck you got here , but have fun!").setThumbnail(member.user.displayAvatarURL));
+	member.guild.channels.find("name","welcome").send(new Discord.RichEmbed().setColor("FFFFFF").setImage(welcomes[Math.floor(Math.random()*welcomes.length)]).addField("Welcome!","Welcome **" + member.displayName + "**! i don't know how the fuck you got here , but have fun!").setThumbnail(member.user.displayAvatarURL));
 });
 
 // THIS  MUST  BE  THIS  WAY
