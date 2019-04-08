@@ -4,7 +4,7 @@ client.music = require('discord.js-musicbot-addon');
 client.music.start(client, {
   youtubeKey: 'AIzaSyAYP5t2p-qC_vO7lfr06bZr5zzRwDo4a_k' ,
   botPrefix: 'please ',
-  help: { name: 'music' },
+  help: { name: 'musichelp' },
   bigPicture: true
 });
 const prefix = "please "
@@ -12,7 +12,7 @@ var answers = ["That's obviously true... what did you think?","Yeah!","No , at a
 var welcomes = ["https://media.giphy.com/media/3o6Zt6zRQw8yStXfxe/giphy.gif",
 		"https://media.giphy.com/media/10a9ikXNvR9MXe/giphy.gif",
 		"https://media3.giphy.com/media/OF0yOAufcWLfi/giphy.gif",
-		"https://i.imgflip.com/1tlr1p.gif",
+		"https://i.imgflip.com/1thlr1p.gif",
 		"https://thumbs.gfycat.com/ExcellentGrouchyBass-max-1mb.gif",
 		"https://66.media.tumblr.com/5ab0c2fde2312b3bcbf5a64bc222d6a6/tumblr_o4sdnnQ8DT1udh5n8o1_500.gif"];
 function globalVar()
@@ -27,7 +27,7 @@ function showError(message,err){
 
 client.on('ready', () => {
     console.log('Human is ready , connected to '+client.guilds.size+' guilds !');
-	client.user.setPresence({ game: { name: 'with babies' , streaming: true}, status: 'dnd' })
+	client.user.setPresence({ game: { name: 'with babies' , streaming: true}, status: 'online' })
   	.then()
   	.catch(err => { console.log(err);});
 });
@@ -66,8 +66,6 @@ client.on('message', message => {
 					showError(message,err);
 				});
 		}
-	} else {
-		message.channel.send("Say `please help` for help.")	
 	}
 	}catch(err){
 		showError(message,err);
