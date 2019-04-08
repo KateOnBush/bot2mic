@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const Music = require('discord.js-musicbot-addon-v2');
 const music = new Music(client, {
-  youtubeKey: 'AIzaSyDnYPB0b_iReJcxMznwhc82ykJYra9u7og' ,
+  youtubeKey: 'AIzaSyAYP5t2p-qC_vO7lfr06bZr5zzRwDo4a_k' ,
   djRole: 'me'
 });
 const prefix = "please "
