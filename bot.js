@@ -75,7 +75,6 @@ if(message.content.startsWith(prefix)){
 	var args = message.content.toLowerCase().replace("q ","").split(" ");
 
    var sf = message.content.toLowerCase().replace("q ","");
-	command.toLowerCase();
 	if(!message.content.startsWith("q")) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
