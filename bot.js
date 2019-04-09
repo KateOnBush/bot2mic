@@ -70,7 +70,7 @@ if(message.content.startsWith(prefix)){
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
 	}
-}else if if(message.content.startsWith("q ")){
+}else if(message.content.startsWith("q ")){
 	var args_case = message.content.replace("q ","").split(" ");
 	var args = message.content.toLowerCase().replace("q ","").split(" ");
 
