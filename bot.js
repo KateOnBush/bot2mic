@@ -74,12 +74,12 @@ client.on('message', message => {
 });
 client.on('message', message => {
 	try{
-	var args_case = message.content.replace(prefix + command + " ","").split(" ");
-	var args = message.content.toLowerCase().replace(prefix + " ","").split(" ");
+	var args_case = message.content.replace("q ","").split(" ");
+	var args = message.content.toLowerCase().replace("q ","").split(" ");
 
    var sf = message.content.toLowerCase().replace(prefix + " ","");
 	command.toLowerCase();
-	if(!message.content.startsWith(q)) return;
+	if(!message.content.startsWith("q")) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
