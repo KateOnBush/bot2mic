@@ -45,6 +45,8 @@ client.on('message', message => {
 	var command = message.content.replace(prefix,"").split(" ")[0];
 	var args_case = message.content.replace(prefix + command + " ","").split(" ");
 	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
+
+   var sf = message.content.toLowerCase().replace(prefix + command + " ","");
 	command.toLowerCase();
 	if(!message.content.startsWith(prefix)) return;
 	if(message.author.bot) return;
@@ -66,31 +68,32 @@ client.on('message', message => {
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
 	} else if((command === "answer") || (command === "tellme") || (command === "reply") || (command === "say")){
-		if(args[0] == null){
+		if(sf === ""){
 			message.channel.send("U didn't ask anything '-'");
 		} else {
 			var reply;
-			if (args[0].toLowerCase() === "why") {
+			if (sf.includes("why")) {
 				var x = Math.floor(Math.random()*2);
 				if (x = 0) {
 					reply = answerswhy[Math.floor(Math.random()*answerswhy.length)];
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
 				}
-			} else if ((args[0].toLowerCase().startsWith("how")) || 
-(args[1].toLowerCase().startsWith("old")))  {
+			} else if (sf.includes("what time")) {
+reply = Math.floor(Math.random()*24) + " o’clock.";
+} else if (sf.includes("how old"))  {
 				reply = Math.floor(Math.random()*100) + " years old.";
-			} else if (args[0].toLowerCase().startsWith("when")) {
+			} else if (sf.includes("when")) {
 				reply = answerswhen[Math.floor(Math.random()*answerswhen.length)];
-			} else if (args[0].toLowerCase().startsWith("where")) {
+			} else if (sf.includes("where")) {
 				reply = answerswhere[Math.floor(Math.random()*answerswhere.length)];
-			} else if (args[0].toLowerCase().startsWith("who")) {
+			} else if (sf.includes("who")) {
 				reply = answerswho[Math.floor(Math.random()*answerswho.length)];
-			} else if (args[0].toLowerCase().startsWith("which")) {
+			} else if (sf.includes("which")) {
 				reply = answerswhich[Math.floor(Math.random()*answerswhich.length)];
-			} else if (args[0].toLowerCase().startsWith("what")) {
+			} else if (sf.includes("what")) {
 				reply = answerswhat[Math.floor(Math.random()*answerswhat.length)];
-			} else if (args[0].toLowerCase().startsWith("how")) {
+			} else if (sf.includes("how")) {
 				reply = answershow[Math.floor(Math.random()*answershow.length)];
 			} else {
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];
