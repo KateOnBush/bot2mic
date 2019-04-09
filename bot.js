@@ -67,7 +67,24 @@ client.on('message', message => {
 		}catch(err){
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
-	} else if((command === "answer") || (command === "tellme") || (command === "reply") || (command === "say")){
+	}
+   }catch(err){
+		showError(message,err);
+	}
+});
+client.on('message', message => {
+	try{
+	var command = message.content.replace(prefix,"").split(" ")[0];
+	var args_case = message.content.replace(prefix + command + " ","").split(" ");
+	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
+
+   var sf = message.content.toLowerCase().replace(prefix + command + " ","");
+	command.toLowerCase();
+	if(!message.content.startsWith(prefix)) return;
+	if(message.author.bot) return;
+	if(message.channel.type != 'text') return;
+	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
+if((command === "answer") || (command === "tellme") || (command === "reply") || (command === "say")){
 		if(sf === ""){
 			message.channel.send("U didn't ask anything '-'");
 		} else {
