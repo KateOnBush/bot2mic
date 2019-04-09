@@ -42,13 +42,15 @@ client.on('ready', () => {
 });
 client.on('message', message => {
 	try{
+if(message.content.startsWith(prefix)){
 	var command = message.content.replace(prefix,"").split(" ")[0];
+    if (!command) return;
 	var args_case = message.content.replace(prefix + command + " ","").split(" ");
 	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
 
    var sf = message.content.toLowerCase().replace(prefix + command + " ","");
 	command.toLowerCase();
-	if(!message.content.startsWith(prefix)) return;
+
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
@@ -68,12 +70,7 @@ client.on('message', message => {
 			message.channel.send("**Input:**\n```js\n"+args_case.join(" ")+"\n```\n**Caught error:**\n```js\n"+err+"\n```");
 		}
 	}
-   }catch(err){
-		showError(message,err);
-	}
-});
-client.on('message', message => {
-	try{
+}else if if(message.content.startsWith("q ")){
 	var args_case = message.content.replace("q ","").split(" ");
 	var args = message.content.toLowerCase().replace("q ","").split(" ");
 
@@ -117,7 +114,7 @@ reply = Math.floor(Math.random()*24) + " o’clock.";
 				.then()
 				.catch(err => {
 					showError(message,err);
-				});
+				});}
 		
 	}
 	}catch(err){
