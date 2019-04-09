@@ -74,17 +74,15 @@ client.on('message', message => {
 });
 client.on('message', message => {
 	try{
-	var command = message.content.replace(prefix,"").split(" ")[0];
 	var args_case = message.content.replace(prefix + command + " ","").split(" ");
-	var args = message.content.toLowerCase().replace(prefix + command + " ","").split(" ");
+	var args = message.content.toLowerCase().replace(prefix + " ","").split(" ");
 
-   var sf = message.content.toLowerCase().replace(prefix + command + " ","");
+   var sf = message.content.toLowerCase().replace(prefix + " ","");
 	command.toLowerCase();
-	if(!message.content.startsWith(prefix)) return;
+	if(!message.content.startsWith(q)) return;
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
-if((command === "answer") || (command === "tellme") || (command === "reply") || (command === "say")){
 		if(sf === ""){
 			message.channel.send("U didn't ask anything '-'");
 		} else {
@@ -120,7 +118,7 @@ reply = Math.floor(Math.random()*24) + " o’clock.";
 				.catch(err => {
 					showError(message,err);
 				});
-		}
+		
 	}
 	}catch(err){
 		showError(message,err);
