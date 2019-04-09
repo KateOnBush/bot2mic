@@ -77,7 +77,7 @@ client.on('message', message => {
 	var args_case = message.content.replace("q ","").split(" ");
 	var args = message.content.toLowerCase().replace("q ","").split(" ");
 
-   var sf = message.content.toLowerCase().replace(prefix + " ","");
+   var sf = message.content.toLowerCase().replace("q ","");
 	command.toLowerCase();
 	if(!message.content.startsWith("q")) return;
 	if(message.author.bot) return;
