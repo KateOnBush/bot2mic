@@ -39,13 +39,16 @@ client.on('message', message => {
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
 				}
+			} else if ((sf.startsWith("hi")) || (sf.startsWith("hello")) || (sf.startsWith("hey"))){
+				var z = ["Hello!","Hey friend!","Hi.","Hello,howdy?","Hiiii :).","don't wanna talk.","Yo ! How's going!","Greetings.","Hellow."]
+				reply = z[Math.floor(Math.random()*z.length)];	
 			} else if ((sf.startsWith("do")) || (sf.startsWith("is")) || (sf.startsWith("are"))){
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];	
 			} else if ((sf.startsWith("how much")) || (sf.startsWith("how many"))){
 				reply = Math.floor(Math.random()*1000);	
-			} else if ((sf.startsWith("how are"))){
+			} else if (sf.includes("how are you")){
 				var z = ["Fine.","I don't know.","Bad","Good","I don't wanna answer","Very good.","Good.","Pretty fine.","Pretty good.","Mind your business.","Kinda bad."]
-				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];	
+				reply = z[Math.floor(Math.random()*z.length)];	
 			} else if (sf.includes("what time")) {
 				reply = Math.floor(Math.random()*24) + " o’clock.";
 			} else if (sf.includes("how old"))  {
