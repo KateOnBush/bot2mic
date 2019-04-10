@@ -31,10 +31,10 @@ client.on('message', message => {
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
 		if((sf === "q") || (sf == null) || (sf === "")){
-			message.channel.send(nothing[Math.floor(Math.random()*nothing.length)];);
+			message.channel.send(nothing[Math.floor(Math.random()*nothing.length)]);
 		} else {
 			var reply;
-			if (!(sf.includes("?"))) {
+			if (!sf.includes("?")) {
 				reply = responses[Math.floor(Math.random()*responses.length)];
 			} else if (sf.includes("why")) {
 				var x = Math.floor(Math.random()*2);
