@@ -8,8 +8,8 @@ var answerswhen = ["At 5 o'clock","Last century","Tomorrow.","I don't know.","Do
 var answershow = ["I don't know.","Are you seriously asking me this?","I don't wanna answer.","With a knife.","On a car.","With his hands.","With a computer","With a pet named Steve","With a software.","With coding.","With an adidas shoes.","With a Yamaha T-Max.","with a chicken."]
 var answerswhat = ["A cake","A pie","A chicken","A pet named Steve","6","89","984","69","A knife","Something","Something obvious.","Something not obvious","Something i probably don't know.","Something I don't wanna know","A cat","A dog","A ghost","A card","A chair","5 dollars","A table","A software","A bot","Bunch of maths, i don't know","I don't know","I don't wanna know","I don't wanna answer","A blue orange"]
 var answerswhich = ["This one","That one","The first one","The last one","The second one","One of them","The one that is ordering a pizza","The one that is eating a burrito","The one right there","The one right here","I don't know","Ask yourself","Ask google."]
-var people = ["elon musk","obama","my son","your father","your mom","justin bieber","alan walker","marshmello","david guetta","someone","everyone","noone","one of the people that live in islands","he","she","anne-marie","ed sheeran","aouab","aaron","a guy","a dude","a bot","a human","a chicken","a sick grandmother"]
-var activity = ["in america","riding a horse","in the living room","happy","sad","mad","bad at sex","in a car","in discord","making music","slapping something","probably dead","sleeping","confused","homesick","under a fridge","a pet named Steve","listening to justin bieber","I don't fucking want to know"]
+var people = ["elon musk","obama","my son","your father","your mom","justin bieber","alan walker","marshmello","david guetta","someone","everyone","noone","one of the people that live in islands","he","she","anne-marie","ed sheeran","aouab","aaron","a guy","a dude","a bot","a human","a chicken","a sick grandmother","Carlos","Dave","Samuel","Dojo","Shen","one of Obama's friends"]
+var activity = ["in america","riding a horse","in the living room","happy","sad","mad","bad at sex","in a car","in discord","making music","slapping something","probably dead","sleeping","confused","homesick","under a fridge","a pet named Steve","listening to justin bieber","depressed","making a pizza","having lunch","in SpaceX","in an apple store","watching Netflix."]
 function showError(message,err){
 	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@123413327094218753> .\n```js\n"+err+"\n```")		
 }
@@ -28,7 +28,7 @@ client.on('message', message => {
 	if(message.author.bot) return;
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
-		if(sf === ""){
+		if((sf === "q") || (sf == null) || (sf === "")){
 			message.channel.send("U didn't ask anything '-'");
 		} else {
 			var reply;
