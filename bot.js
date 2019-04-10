@@ -34,7 +34,7 @@ client.on('message', message => {
 			message.channel.send(nothing[Math.floor(Math.random()*nothing.length)];);
 		} else {
 			var reply;
-			if (!sf.includes("?")) {
+			if (!(sf.includes("?"))) {
 				reply = responses[Math.floor(Math.random()*responses.length)];
 			} else if (sf.includes("why")) {
 				var x = Math.floor(Math.random()*2);
