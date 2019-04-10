@@ -9,6 +9,8 @@ var answershow = ["I don't know.","Are you seriously asking me this?","I don't w
 var answerswhat = ["A cake","A pie","A chicken","A pet named Steve","6","89","984","69","A knife","Something","Something obvious.","Something not obvious","Something i probably don't know.","Something I don't wanna know","A cat","A dog","A ghost","A card","A chair","5 dollars","A table","A software","A bot","Bunch of maths, i don't know","I don't know","I don't wanna know","I don't wanna answer","A blue orange"]
 var answerswhich = ["This one","That one","The first one","The last one","The second one","One of them","The one that is ordering a pizza","The one that is eating a burrito","The one right there","The one right here","I don't know","Ask yourself","Ask google."]
 var people = ["elon musk","obama","my son","your father","your mom","justin bieber","alan walker","marshmello","david guetta","someone","everyone","noone","one of the people that live in islands","he","she","anne-marie","ed sheeran","aouab","aaron","a guy","a dude","a bot","a human","a chicken","a sick grandmother","Carlos","Dave","Samuel","Dojo","Shen","one of Obama's friends"]
+var responses = ["Okay then.","Okay","K.","Really?","Ok.","lol.","lmao","hahahah","for real?","hmmm..","xD.",":Moooore:",":huh:",":evilpatrick:"]
+var nothing = ["Can u repeat ? I didn't hear you.","You didn't say anything '-'","U didn't say anything.","what are u saying :huh:","lol i can't reply to nothing xD",":evilpatrick: :evilpatrick: :evilpatrick: say smtg wtf","are u seriously expecting me to reply to nothing?",":Bullshit: stop writing nothing."]
 var activity = ["in america","riding a horse","in the living room","happy","sad","mad","bad at sex","in a car","in discord","making music","slapping something","probably dead","sleeping","confused","homesick","under a fridge","a pet named Steve","listening to justin bieber","depressed","making a pizza","having lunch","in SpaceX","in an apple store","watching Netflix."]
 function showError(message,err){
 	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@123413327094218753> .\n```js\n"+err+"\n```")		
@@ -29,10 +31,12 @@ client.on('message', message => {
 	if(message.channel.type != 'text') return;
 	if(message.channel != message.guild.channels.find("name","talk-to-the-human")) return;
 		if((sf === "q") || (sf == null) || (sf === "")){
-			message.channel.send("U didn't ask anything '-'");
+			message.channel.send(nothing[Math.floor(Math.random()*nothing.length)];);
 		} else {
 			var reply;
-			if (sf.includes("why")) {
+			if (!sf.includes("?")) {
+				reply = responses[Math.floor(Math.random()*responses.length)];
+			} else if (sf.includes("why")) {
 				var x = Math.floor(Math.random()*2);
 				if (x = 0) {
 					reply = answerswhy[Math.floor(Math.random()*answerswhy.length)];
