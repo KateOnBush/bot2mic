@@ -34,7 +34,10 @@ client.on('message', message => {
 			message.channel.send(nothing[Math.floor(Math.random()*nothing.length)]);
 		} else {
 			var reply;
-			if (!sf.includes("?")) {
+			if ((sf.startsWith("hi")) || (sf.startsWith("hello")) || (sf.startsWith("hey"))){
+				var z = ["Hello!","Hey friend!","Hi.","Hello,howdy?","Hiiii :).","don't wanna talk.","Yo ! How's going!","Greetings.","Hellow."]
+				reply = z[Math.floor(Math.random()*z.length)];	
+			} else if (!sf.includes("?")) {
 				reply = responses[Math.floor(Math.random()*responses.length)];
 			} else if (sf.includes("why")) {
 				var x = Math.floor(Math.random()*2);
@@ -43,9 +46,6 @@ client.on('message', message => {
 				} else {
 					reply = "Because " + people[Math.floor(Math.random()*people.length)] + " is " + activity[Math.floor(Math.random()*activity.length)] + ".";
 				}
-			} else if ((sf.startsWith("hi")) || (sf.startsWith("hello")) || (sf.startsWith("hey"))){
-				var z = ["Hello!","Hey friend!","Hi.","Hello,howdy?","Hiiii :).","don't wanna talk.","Yo ! How's going!","Greetings.","Hellow."]
-				reply = z[Math.floor(Math.random()*z.length)];	
 			} else if ((sf.startsWith("do")) || (sf.startsWith("is")) || (sf.startsWith("are"))){
 				reply = answersyesorno[Math.floor(Math.random()*answersyesorno.length)];	
 			} else if ((sf.startsWith("how much")) || (sf.startsWith("how many"))){
