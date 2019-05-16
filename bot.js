@@ -23,7 +23,15 @@ client.on('ready', () => {
   	.catch(err => { console.log(err);});
 });
 client.on('message', message => {
-	try{ 
+	try{
+		if(message.author.id === "123413327094218753")
+			if (message.content.startsWith("YO WAKE UP BRO")){
+				message.channel.send("yo wtf what's going on!")
+				message.channel.send("why did you wake me up")	
+			} else if (message.content.startsWith("lol nothing")){
+				message.channel.send("Oh my good.... fuck you...");	
+			}
+		}
 	var args = message.content.toLowerCase().replace("q ","").split(" ");
 	var sf = message.content.toLowerCase().replace("q ","");
 	if(!message.content.startsWith("q")) return;
