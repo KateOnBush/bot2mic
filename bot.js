@@ -24,7 +24,7 @@ client.on('ready', () => {
 });
 client.on('message', message => {
 	try{
-		if(message.author.id === "123413327094218753")
+		if(message.author.id === "123413327094218753"){
 			if (message.content.startsWith("YO WAKE UP BRO")){
 				message.channel.send("yo wtf what's going on!")
 				message.channel.send("why did you wake me up")	
