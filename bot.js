@@ -27,9 +27,9 @@ client.on('message', message => {
 	var input = message.content.toLowerCase();
 	var kindOfMessage=0; // 1: greeting
 	knowledge.greetings.forEach(g=>{
-		if(input.startsWith(g)){
+		if(input.startsWith(g) && kindOfMessage==0){
 			kindOfMessage=1;
-			console.log("it's a greeting!")
+			console.log("it's a greeting!");
 		}
 	});
 	if (kindOfMessage==1){
