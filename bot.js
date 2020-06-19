@@ -4,13 +4,17 @@ const client = new Discord.Client();
 	//Knowledge
 	var knowledge = {
 		greetings: ["hey","yo","hello","hi","wassup","what's up","whatsup","hola","greetings"],
-		wishes: ["good morning","good evening","good night","good afternoon"]
+		wishes: ["good morning","good evening","good night","good afternoon"],
+		verbs: {
+			defining: ["is","are","am"]
+		}
 	};
 
 	//Replies
 	var replies = {
 		greetings: ["Hey there","Hey","Hi","Oh hey","What's up","Yo"]
 	};
+
 
 function showError(message,err){
 	message.channel.send(":no_entry: **A error has occured while performing this execution.** Please report this to <@123413327094218753> .\n```js\n"+err+"\n```")		
@@ -35,7 +39,7 @@ client.on('message', message => {
 		}
 	});
 	if (kindOfMessage==1){
-		message.channel.send(replies.greetings[Math.round(Math.random()*(replies.greetings.length-1))]);
+		message.channel.send(replies.greetings[Math.round(Math.random()*(replies.greetings.length-1))] + "!");
 	}
 	
 	
