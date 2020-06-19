@@ -24,6 +24,8 @@ client.on('ready', () => {
 });
 client.on('message', message => {
 	
+	if (message.author.bot) return;
+	
 	var input = message.content.toLowerCase();
 	var kindOfMessage=0; // 1: greeting
 	knowledge.greetings.forEach(g=>{
@@ -33,7 +35,7 @@ client.on('message', message => {
 		}
 	});
 	if (kindOfMessage==1){
-		message.channel.send(replies.greetings[Math.round(Math.random()*(replies.greetings.length-1))]);	
+		message.channel.send(replies.greetings[Math.round(Math.random()*(replies.greetings.length-1))]);
 	}
 	
 	
