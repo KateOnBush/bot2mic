@@ -25,9 +25,9 @@ client.on('ready', () => {
 client.on('message', message => {
 	
 	var input = message.content.toLowerCase();
-	if knowledge.greetings.forEach(g=>{
+	if (knowledge.greetings.forEach(g=>{
 		if(input.startsWith(g)) return true;
-	}){
+	})){
 		message.channel.send(replies.greetings[Math.round(Math.random()*(replies.greetings.length-1))]);	
 	}
 	
