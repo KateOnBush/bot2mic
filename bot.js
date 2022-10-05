@@ -6,7 +6,7 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new Disocrd.REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
+const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
 (async ()=>{
 
