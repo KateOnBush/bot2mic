@@ -16,7 +16,7 @@ const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 		
 	} catch(err){
 	
-		console.log("Erreur de sa mere " + error);
+		console.log("Erreur de sa mere " + err);
 		
 	}
 
