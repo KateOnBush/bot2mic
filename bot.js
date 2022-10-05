@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({intents: [Discord.GatewayIntentBits.Guilds]});
 
 const commands = [
-	new SlashCommandBuilder().setName('salut').setDescription('Bonsoir!')
+	new Discord.SlashCommandBuilder().setName('salut').setDescription('Bonsoir!')
 ]
 	.map(command => command.toJSON());
 
