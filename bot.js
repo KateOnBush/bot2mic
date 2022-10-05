@@ -14,6 +14,8 @@ const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 		
 	await rest.put(Routes.applicationGuildCommands("1027321324714070106"), { body: commands });
 		
+		console.log("OK!")
+		
 	} catch(err){
 	
 		console.log("Erreur de sa mere " + err);
