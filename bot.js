@@ -12,7 +12,7 @@ const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 
 	try {
 		
-	await rest.put(Routes.applicationGuildCommands("1027321324714070106"), { body: commands });
+	await rest.put(Discord.Routes.applicationGuildCommands("1027321324714070106"), { body: commands });
 		
 		console.log("OK!")
 		
