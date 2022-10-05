@@ -6,7 +6,7 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new Disocrd.REST({ version: '10' }).setToken(token);
 
 (async ()=>{
 
