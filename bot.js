@@ -12,7 +12,7 @@ const rest = new Disocrd.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 
 	try {
 		
-	await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+	await rest.put(Routes.applicationGuildCommands("1027321324714070106"), { body: commands });
 		
 	} catch(err){
 	
