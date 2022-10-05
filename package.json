@@ -1,13 +1,13 @@
 {
-  "name": "Test",
-  "description": "Test",
+  "name": "Une grosse patate",
+  "description": "J'aime pas les figues séchées",
   "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "discord.js": "11.3.2",
-    "request": "2.81.0"
+    "discord.js": "latest",
+    "request": "latest"
   }
 }
