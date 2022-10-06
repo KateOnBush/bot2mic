@@ -7,7 +7,8 @@ const {
 	SlashCommandBuilder,
 	Client,
 	Routes,
-	GatewayIntentBits
+	GatewayIntentBits,
+	AttachmentBuilder
 
 } = require('discord.js');;
 const { Aki } = require("aki-api");
@@ -158,17 +159,18 @@ async function processChatInteraction(interaction){
 
 			interaction.member.startedAkinator = rep.id;
 
-			/*setTimeout(()=>{
+			setTimeout(()=>{
 
 				if(interaction.member.startedAkinator && interaction.member.startedAkinator == rep.id && !interaction.member.akiParty){
 
 					interaction.member.akiParty = null;
 					interaction.member.startedAkinator = null;
+					interaciton.message.delete();
 					interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
 
 				}
 
-			}, 40000)*/
+			}, 40000)
 
 
 	}
@@ -195,8 +197,8 @@ async function processButtonInteraction(interaction){
 		}
 		
 		let reg = "fr";
-		if(bid === "aki_obj") reg = "fr_objects";
-		if(bid === "aki_anim") reg = "fr_animals";
+		if(bid == "aki_obj") reg = "fr_objects";
+		if(bid == "aki_anim") reg = "fr_animals";
 
 		await interaction.deferReply();
 
@@ -225,6 +227,7 @@ async function processButtonInteraction(interaction){
 
 				interaction.member.akiParty = null;
 				interaction.member.startedAkinator = null;
+				interaciton.message.delete();
 				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
 
 			}
@@ -272,7 +275,9 @@ async function processButtonInteraction(interaction){
 		if(aki.progress >= 70 || aki.currentStep >= 78){
 
 			await aki.win();
-			await interaction.message.edit("Tu penses à **" + aki.answers[0].name + "**, c'est ça?", { files: [aki.answers[0].picture_path]});
+			const file = new AttachmentBuilder(aki.answers[0].picture_path);
+			await interaction.reply({content: "Tu penses à **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
+			await interaction.message.delete();
 			interaction.member.akiParty = null;
 			interaction.member.startedAkinator = null;
 
@@ -310,6 +315,7 @@ async function processButtonInteraction(interaction){
 
 				interaction.member.akiParty = null;
 				interaction.member.startedAkinator = null;
+				interaciton.message.delete();
 				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
 
 			}
@@ -336,7 +342,9 @@ async function processButtonInteraction(interaction){
 		interaction.member.akiParty = null;
 		interaction.member.startedAkinator = null;
 
-		interaction.message.edit("Partie d'Akinator terminée.")
+		await interaction.reply({content: "Partie terminée!", ephemeral: true});
+
+		await interaction.message.delete("Partie d'Akinator terminée.");
 
 	}
 
