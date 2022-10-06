@@ -179,7 +179,7 @@ async function processChatInteraction(interaction){
 
 async function processButtonInteraction(interaction){
 
-	const bid = interaction.customId;
+	let bid = interaction.customId;
 
 	if(bid.startsWith("grp_")){
 
@@ -201,7 +201,6 @@ async function processButtonInteraction(interaction){
 		const aki = new Aki({region: reg});
 		await aki.start();
 
-		
 		interaction.member.akiParty = aki;
 
 		const row = new ActionRowBuilder();
@@ -254,7 +253,7 @@ async function processButtonInteraction(interaction){
 
 		let ans = parseInt(bid.replace("akirep_",""));
 
-		if (ans == NaN) return;
+		if (ans == NaN) console.log("Can't get a number");
 
 		aki.step(ans);
 
@@ -307,7 +306,14 @@ async function processButtonInteraction(interaction){
 
 		}
 
-		aki.win();
+		if(!interaction.member.akiParty){
+
+			await interaction.reply({content: "Tu n'as pas commencé de partie?", ephemeral: true});
+			return;
+
+		}
+
+		interaction.member.akiParty.win();
 		message.member.akiParty = null;
 		message.member.startedAkinator = null;
 
