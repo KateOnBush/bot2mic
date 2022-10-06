@@ -95,7 +95,7 @@ async function processChatInteraction(interaction){
 		const sents = [t[0] + " gagnera surement en " + reason,
 					t[1] + "est meilleur(e) en " + reason,
 					reason + "? Y'a que " + t[0] + " qui sait faire",
-					"Honnêtement en " + reason + ", personne ne gagne" + t[0],
+					"Honnêtement en " + reason + ", personne ne gagne " + t[0],
 					"Perso je pense " + t[0],
 					"La vie de moi " + t[0] + " il gagne.",
 					"Surement " + t[0],
