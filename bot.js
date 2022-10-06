@@ -125,7 +125,7 @@ async function processChatInteraction(interaction){
 
 		await wait(2000 + Math.random()*1000|0);
 
-		await interaction.edit(rep);
+		await reply.edit(rep);
 
 	}
 
