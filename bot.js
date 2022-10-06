@@ -74,9 +74,11 @@ async function processChatInteraction(interaction){
 
 async function processButtonInteraction(interaction){
 
+	await interaction.reply({content: "Bah oui :)", ephemeral: true});
+
 	if(interaction.id.startsWith("grp_")){
 
-		interaction.reply({content: "Bah oui :)", ephemeral: true});
+		await interaction.reply({content: "Bah oui :)", ephemeral: true});
 
 	}
 
