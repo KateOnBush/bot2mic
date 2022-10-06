@@ -16,15 +16,15 @@ const commands = [
 	new SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!'),
 	new SlashCommandBuilder().setName('quigagnera').setDescription('Qui gagnera entre les deux?')
 		.addUserOption(option=>
-			option.setName("u1")
+			option.setName("Entre")
 				.setDescription("Adversaire N° 1")
 				.setRequired(true))
 		.addUserOption(option=>
-			option.setName("u2")
+			option.setName("Et")
 				.setDescription("Adversaire N° 2")
 				.setRequired(true))
 		.addStringOption(option=>
-			option.setName("what")
+			option.setName("En")
 				.setDescription("En quoi?")
 				.setRequired(true)),
 
