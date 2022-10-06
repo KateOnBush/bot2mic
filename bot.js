@@ -83,8 +83,8 @@ async function processChatInteraction(interaction){
 		await interaction.reply({ content: 'Choisi ton groupe mon poto!', components: [row] });
 	} else if(n === "quigagnera"){
 
-		const u1 = interaction.options.getUser("u1");
-		const u2 = interaction.options.getUser("u2");
+		const u1 = interaction.options.getUser("u1").toString();
+		const u2 = interaction.options.getUser("u2").toString();
 		const reason = interaction.options.getString("what");
 
 		var t = [u1, u2];
