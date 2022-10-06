@@ -6,10 +6,11 @@ const {
 	REST,
 	SlashCommandBuilder,
 	Client,
-	Routes
+	Routes,
+	GatewayIntentBits
 
 } = require('discord.js');
-const client = new Client({intents: [Discord.GatewayIntentBits.Guilds]});
+const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 const commands = [
 	new SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!')
@@ -22,7 +23,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
 	try {
 		
-	await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1027322663061966868"), { body: commands });
+		await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1027322663061966868"), { body: commands });
 		
 		console.log("OK!");
 		
