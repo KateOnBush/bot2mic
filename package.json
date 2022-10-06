@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "discord.js": "latest",
-    "request": "latest"
+    "request": "latest",
+    "aki-api": "latest"
   }
 }

@@ -9,8 +9,11 @@ const {
 	Routes,
 	GatewayIntentBits
 
-} = require('discord.js');
+} = require('discord.js');;
+const { Aki } = require("aki-api");
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
+
+
 
 const commands = [
 	new SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!'),
@@ -27,7 +30,8 @@ const commands = [
 			option.setName("enquoi")
 				.setDescription("En quoi?")
 				.setRequired(true)),
-
+	new SlashCommandBuilder().setName("bourremetre").setDescription("Pour savoir combien t'es bourré en general"),
+	new SlashCommandBuilder().setName("akinator").setDescription("Tu veux jouer à akinator? :D"),
 ]
 	.map(command => command.toJSON());
 
@@ -52,6 +56,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 })();
 
 
+//grosse bite
 async function wait(ms){
 
 	return new Promise((resolve, reject)=>{
@@ -96,6 +101,7 @@ async function processChatInteraction(interaction){
 			);
 
 		await interaction.reply({ content: 'Choisi ton groupe mon poto!', components: [row] });
+
 	} else if(n === "quigagnera"){
 
 		const u1 = interaction.options.getUser("qui").toString();
@@ -115,7 +121,8 @@ async function processChatInteraction(interaction){
 					"La vie de moi " + t[0] + " il gagne.",
 					"Surement " + t[0],
 					t[1] + " il est nul en " + reason,
-					t[1] + " gagnera autant de fois que j'ai de prix Noble"]
+					t[1] + " gagnera autant de fois que j'ai de prix Noble",
+					"J'hésite... Mais " + t[1] + " il est nul, donc sûrement " + t[0]]
 
 		const rep = sents[Math.random()*sents.length|0];
 
@@ -127,6 +134,43 @@ async function processChatInteraction(interaction){
 
 		await reply.edit(rep);
 
+	} else if (n === "akinator"){
+
+		const row = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('aki_per')
+					.setLabel('Personne')
+					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('aki_anim')
+					.setLabel('Objet')
+					.setStyle(ButtonStyle.Secondary),
+				new ButtonBuilder()
+					.setCustomId('aki_obj')
+					.setLabel('Animal')
+					.setStyle(ButtonStyle.Secondary)
+			);
+
+			await interaction.reply({ content: "On commence une partie d'Akinator? Pour commencer dèja, choisi une catégorie:", components: [row] });
+
+			let rep = await interaction.fetchReply();
+
+			interaction.member.startedAkinator = rep.id;
+
+			setTimeout(()=>{
+
+				if(interaction.member.startedAkinator && interaction.member.startedAkinator == rep.id && !interaction.member.akiParty){
+
+					interaction.member.akiParty = null;
+					interaction.member.startedAkinator = null;
+					interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+
+				}
+
+			}, 40000)
+
+
 	}
 
 }
@@ -135,11 +179,142 @@ async function processChatInteraction(interaction){
 
 async function processButtonInteraction(interaction){
 
-	if(interaction.customId.startsWith("grp_")){
+	const bid = interaction.customId;
+
+	if(bid.startsWith("grp_")){
 
 		await interaction.reply({content: "Normalement là je devrai te donner un role mais Baptiste ne m'a pas encore donné les IDs des roles.", ephemeral: true});
+ 
+	} else if(bid.startsWith("aki_")){
+
+		if(!interaction.member.startedAkinator || interaction.member.startedAkinator !== interaction.message.id) {
+
+			await interaction.reply({content: "C'est pas à toi cette partie :(", ephemeral: true});
+			return;
+
+		}
+		
+		let reg = "fr";
+		if(bid === "aki_obj") reg = "fr_objects";
+		if(bid === "aki_anim") reg = "fr_animals";
+
+		const aki = new Aki({region: reg});
+		await aki.start();
+
+		
+		interaction.member.akiParty = aki;
+
+		const row = new ActionRowBuilder();
+
+		aki.answers.forEach((answer,i)=>{
+			row.addComponents(new ButtonBuilder()
+						.setLabel(answer)
+						.setCustomId("akirep_"+i)
+						.setStyle(i === 0 ? ButtonStyle.Success : (i === 4 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+						));
+		});
+
+		let sID = interaction.member.startedAkinator;
+		let cstep = aki.currentStep;
+		setTimeout(()=>{
+
+			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
+
+				interaction.member.akiParty = null;
+				interaction.member.startedAkinator = null;
+				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+
+			}
+
+		}, 40000)
+
+		const endGame = new ActionRowBuilder();
+		endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+
+		await interaction.message.edit({content: aki.question, components: [row, endGame]});
+
+	} else if(bid.startsWith("akirep_")){
+
+		if(!interaction.member.startedAkinator || interaction.member.startedAkinator !== interaction.message.id) {
+
+			await interaction.reply({content: "C'est pas à toi cette partie :(", ephemeral: true});
+			return;
+
+		}
+
+		if(!interaction.member.akiParty){
+
+			await interaction.reply({content: "Tu n'as pas commencé de partie?", ephemeral: true});
+			return;
+
+		}
+
+		let aki = interaction.member.akiParty;
+
+		let ans = parseInt(bid.replace("akirep_",""));
+
+		if (ans == NaN) return;
+
+		aki.step(ans);
+
+		if(aki.progress >= 70 || aki.currentStep >= 78){
+
+			await aki.win();
+			await interaction.message.edit("Tu penses à **" + aki.answers[0].name + "**, c'est ça?", { files: [aki.answers[0].picture_path]});
+			message.member.akiParty = null;
+			message.member.startedAkinator = null;
+
+		} else {
+
+			const row = new ActionRowBuilder();
+
+			aki.answers.forEach((answer,i)=>{
+				row.addComponents(new ButtonBuilder()
+							.setLabel(answer)
+							.setCustomId("akirep_"+i)
+							.setStyle(i === 0 ? ButtonStyle.Success : (i === 4 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+							));
+			});
+
+			const endGame = new ActionRowBuilder();
+			endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+
+			await interaction.message.edit({content: aki.question, components: [row, endGame]});
+
+		}
+
+		let sID = interaction.member.startedAkinator;
+		let cstep = aki.currentStep;
+		setTimeout(()=>{
+
+			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
+
+				interaction.member.akiParty = null;
+				interaction.member.startedAkinator = null;
+				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+
+			}
+
+		}, 40000)
+
+	} else if(bid.startsWith("akiend")){
+
+		if(!interaction.member.startedAkinator || interaction.member.startedAkinator !== interaction.message.id) {
+
+			await interaction.reply({content: "C'est pas à toi cette partie :(", ephemeral: true});
+			return;
+
+		}
+
+		aki.win();
+		message.member.akiParty = null;
+		message.member.startedAkinator = null;
+
+		interaction.message.edit("Partie d'Akinator terminée.")
 
 	}
+
+	
 
 }
 
