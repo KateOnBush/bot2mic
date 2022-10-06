@@ -85,7 +85,7 @@ async function processChatInteraction(interaction){
 
 		const u1 = interaction.options.getMember("u1");
 		const u2 = interaction.options.getMember("u2");
-		const reason = interaction.options.getMessage("what");
+		const reason = interaction.options.getString("what");
 
 		var t = [u1, u2];
 		if(Math.random()>Math.random()) t = [u2, u1];
