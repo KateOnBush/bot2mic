@@ -27,7 +27,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 		
 		console.log("OK!");
 		
-		
+
 	} catch(err){
 	
 		console.log("Erreur de sa mere " + err);
@@ -45,11 +45,11 @@ client.on('interactionCreate', async interaction => {
 		const row = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
-					.setCustomId('primary')
+					.setCustomId('mica')
 					.setLabel('MIC A!')
 					.setStyle(ButtonStyle.Secondary),
 				new ButtonBuilder()
-					.setCustomId('primary')
+					.setCustomId('micb')
 					.setLabel('MIC B!')
 					.setStyle(ButtonStyle.Secondary)
 			);
