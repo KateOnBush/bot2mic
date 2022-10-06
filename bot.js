@@ -279,7 +279,7 @@ async function processButtonInteraction(interaction){
 			const endGame = new ActionRowBuilder();
 			endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
 
-			await interaction.message.edit({content: aki.question, components: [row, endGame]});
+			await interaction.message.edit({content: aki.question});
 
 		}
 
