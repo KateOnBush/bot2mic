@@ -46,7 +46,12 @@ client.on('interactionCreate', async interaction => {
 					.setCustomId('primary')
 					.setLabel('MIC A!')
 					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('primary')
+					.setLabel('MIC B!')
+					.setStyle(ButtonStyle.Primary)
 			);
+
 
 		await interaction.reply({ content: 'Choisi ton groupe mon poto!', components: [row] });
 	}
