@@ -198,10 +198,13 @@ async function processButtonInteraction(interaction){
 		if(bid === "aki_obj") reg = "fr_objects";
 		if(bid === "aki_anim") reg = "fr_animals";
 
+		await interaction.deferReply();
+
 		const aki = new Aki({region: reg});
 		await aki.start();
 
 		interaction.member.akiParty = aki;
+		aki.memberID = interaction.member.id;
 
 		const row = new ActionRowBuilder();
 
@@ -216,7 +219,7 @@ async function processButtonInteraction(interaction){
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
 
-		/*setTimeout(()=>{
+		setTimeout(()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
@@ -226,12 +229,19 @@ async function processButtonInteraction(interaction){
 
 			}
 
-		}, 40000)*/
+		}, 40000)
 
 		const endGame = new ActionRowBuilder();
 		endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
 
-		await interaction.message.edit({content: aki.question, components: [row, endGame]});
+		await interaction.message.delete();
+
+		let rep = await interaction.reply({content: aki.question, components: [row, endGame]});
+
+		let rep = await interaction.fetchReply();
+
+		interaction.member.startedAkinator = rep.id;
+
 
 	} else if(bid.startsWith("akirep_")){
 
@@ -255,14 +265,16 @@ async function processButtonInteraction(interaction){
 
 		if (ans == NaN) console.log("Can't get a number");
 
+		await interaction.deferReply();
+
 		await aki.step(ans);
 
 		if(aki.progress >= 70 || aki.currentStep >= 78){
 
 			await aki.win();
 			await interaction.message.edit("Tu penses à **" + aki.answers[0].name + "**, c'est ça?", { files: [aki.answers[0].picture_path]});
-			message.member.akiParty = null;
-			message.member.startedAkinator = null;
+			interaction.member.akiParty = null;
+			interaction.member.startedAkinator = null;
 
 		} else {
 
@@ -279,13 +291,20 @@ async function processButtonInteraction(interaction){
 			const endGame = new ActionRowBuilder();
 			endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
 
-			await interaction.message.edit({content: aki.question});
+			await interaction.message.delete();
+
+			await interaction.reply({content: aki.question, components: [row, endGame]});
+
+			let rep = await interaction.fetchReply();
+
+			interaction.member.startedAkinator = rep.id;
 
 		}
 
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
-		/*setTimeout(()=>{
+
+		setTimeout(()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
@@ -295,7 +314,7 @@ async function processButtonInteraction(interaction){
 
 			}
 
-		}, 40000)*/
+		}, 40000)
 
 	} else if(bid.startsWith("akiend")){
 
@@ -314,8 +333,8 @@ async function processButtonInteraction(interaction){
 		}
 
 		await interaction.member.akiParty.win();
-		message.member.akiParty = null;
-		message.member.startedAkinator = null;
+		interaction.member.akiParty = null;
+		interaction.member.startedAkinator = null;
 
 		interaction.message.edit("Partie d'Akinator terminée.")
 
