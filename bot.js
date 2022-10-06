@@ -255,7 +255,7 @@ async function processButtonInteraction(interaction){
 
 		if (ans == NaN) console.log("Can't get a number");
 
-		aki.step(ans);
+		await aki.step(ans);
 
 		if(aki.progress >= 70 || aki.currentStep >= 78){
 
@@ -313,7 +313,7 @@ async function processButtonInteraction(interaction){
 
 		}
 
-		interaction.member.akiParty.win();
+		await interaction.member.akiParty.win();
 		message.member.akiParty = null;
 		message.member.startedAkinator = null;
 
