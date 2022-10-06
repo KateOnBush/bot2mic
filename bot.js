@@ -158,7 +158,7 @@ async function processChatInteraction(interaction){
 
 			interaction.member.startedAkinator = rep.id;
 
-			setTimeout(()=>{
+			/*setTimeout(()=>{
 
 				if(interaction.member.startedAkinator && interaction.member.startedAkinator == rep.id && !interaction.member.akiParty){
 
@@ -168,7 +168,7 @@ async function processChatInteraction(interaction){
 
 				}
 
-			}, 40000)
+			}, 40000)*/
 
 
 	}
@@ -216,7 +216,8 @@ async function processButtonInteraction(interaction){
 
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
-		setTimeout(()=>{
+
+		/*setTimeout(()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
@@ -226,7 +227,7 @@ async function processButtonInteraction(interaction){
 
 			}
 
-		}, 40000)
+		}, 40000)*/
 
 		const endGame = new ActionRowBuilder();
 		endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
@@ -285,7 +286,7 @@ async function processButtonInteraction(interaction){
 
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
-		setTimeout(()=>{
+		/*setTimeout(()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
@@ -295,7 +296,7 @@ async function processButtonInteraction(interaction){
 
 			}
 
-		}, 40000)
+		}, 40000)*/
 
 	} else if(bid.startsWith("akiend")){
 
