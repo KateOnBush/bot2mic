@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({intents: [Discord.GatewayIntentBits.Guilds]});
 
 const commands = [
-	new Discord.SlashCommandBuilder().setName('salut').setDescription('Bonsoir!')
+	new Discord.SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!')
 ]
 	.map(command => command.toJSON());
 
@@ -27,7 +27,7 @@ const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
   
-	if (interaction.commandName === 'salut') {
+	if (interaction.commandName === 'groupe') {
 	  await interaction.reply('Bonsoir!');
 	}
   });
