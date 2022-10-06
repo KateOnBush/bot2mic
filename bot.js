@@ -236,7 +236,7 @@ async function processButtonInteraction(interaction){
 
 		await interaction.message.delete();
 
-		let rep = await interaction.reply({content: aki.question, components: [row, endGame]});
+		await interaction.reply({content: aki.question, components: [row, endGame]});
 
 		let rep = await interaction.fetchReply();
 
