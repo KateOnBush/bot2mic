@@ -119,11 +119,13 @@ async function processChatInteraction(interaction){
 
 		const rep = sents[Math.random()*sents.length|0];
 
-		let reply = await interaction.reply(e);
+		await interaction.reply(e);
+
+		//let reply = await interaction.fetchReply();
 
 		await wait(2000 + Math.random()*1000|0);
 
-		await reply.edit(rep);
+		await interaction.followUp(rep);
 
 	}
 
