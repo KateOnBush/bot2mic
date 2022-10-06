@@ -236,7 +236,7 @@ async function processButtonInteraction(interaction){
 
 		await interaction.message.delete();
 
-		await interaction.reply({content: aki.question, components: [row, endGame]});
+		await interaction.editReply({content: aki.question, components: [row, endGame]});
 
 		let rep = await interaction.fetchReply();
 
@@ -293,7 +293,7 @@ async function processButtonInteraction(interaction){
 
 			await interaction.message.delete();
 
-			await interaction.reply({content: aki.question, components: [row, endGame]});
+			await interaction.editReply({content: aki.question, components: [row, endGame]});
 
 			let rep = await interaction.fetchReply();
 
