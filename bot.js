@@ -27,6 +27,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 		
 		console.log("OK!");
 		
+		
 	} catch(err){
 	
 		console.log("Erreur de sa mere " + err);
