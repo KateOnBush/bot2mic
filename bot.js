@@ -14,6 +14,19 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 const commands = [
 	new SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!'),
+	new SlashCommandBuilder().setName('quigagnera').setDescription('Qui gagnera entre les deux?')
+		.addUserOption(option=>
+			option.setName("u1")
+				.setDescription("Adversaire N° 1")
+				.setRequired(true))
+		.addUserOption(option=>
+			option.setName("u2")
+				.setDescription("Adversaire N° 2")
+				.setRequired(true))
+		.addStringOption(option=>
+			option.setName("what")
+				.setDescription("En quoi?")
+				.setRequired(true)),
 
 ]
 	.map(command => command.toJSON());
@@ -41,7 +54,8 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 ///Chat Input Interaction
 async function processChatInteraction(interaction){
 
-	if (interaction.commandName === 'groupe') {
+	const n = interaction.commandName;
+	if (n === 'groupe') {
 		const row = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
@@ -67,18 +81,40 @@ async function processChatInteraction(interaction){
 			);
 
 		await interaction.reply({ content: 'Choisi ton groupe mon poto!', components: [row] });
+	} else if(n === "quigagnera"){
+
+		const u1 = interaction.options.getMember("u1");
+		const u2 = interaction.options.getMember("u2");
+		const reason = interaction.options.getMessage("what");
+
+		var t = [u1, u2];
+		if(Math.random()>Math.random()) t = [u2, u1];
+
+		const sents = [t[0] + " gagnera surement en " + reason,
+					t[1] + "est meilleur(e) en " + reason,
+					reason + "? Y'a que " + t[0] + " qui sait faire",
+					"Honnêtement en " + reason + ", personne ne gagne" + t[0],
+					"Perso je pense " + t[0],
+					"La vie de moi " + t[0] + " il gagne.",
+					"Surement " + t[0],
+					t[1] + " il est nul en " + reason,
+					t[1] + " gagnera autant de fois que j'ai de prix Noble"]
+
+		const rep = sents[Math.random()*sents.length|0];
+
+		await interaction.reply(rep);
+
 	}
 
 }
 
 
+
 async function processButtonInteraction(interaction){
 
-	await interaction.reply({content: "Bah oui :)", ephemeral: true});
+	if(interaction.customId.startsWith("grp_")){
 
-	if(interaction.id.startsWith("grp_")){
-
-		await interaction.reply({content: "Bah oui :)", ephemeral: true});
+		await interaction.reply({content: "Normalement là je devrai te donner un role mais Baptiste ne m'a pas encore donné les IDs des roles.", ephemeral: true});
 
 	}
 
