@@ -24,6 +24,13 @@ const rest = new Discord.REST({ version: '10' }).setToken(process.env.BOT_TOKEN)
 
 })();
 
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+  
+	if (interaction.commandName === 'salut') {
+	  await interaction.reply('Bonsoir!');
+	}
+  });
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
