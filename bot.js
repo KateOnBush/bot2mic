@@ -52,6 +52,20 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 })();
 
 
+async function wait(ms){
+
+	return new Promise((resolve, reject)=>{
+
+		setTimeout(()=>{
+			
+		},ms)
+
+	});
+
+}
+
+
+
 ///Chat Input Interaction
 async function processChatInteraction(interaction){
 
@@ -91,7 +105,7 @@ async function processChatInteraction(interaction){
 		var t = [u1, u2];
 		if(Math.random()>Math.random()) t = [u2, u1];
 
-		const e = "Qui gagnera entre " + u1 + " et " + u2 + " en " + reason;
+		const e = "Qui gagnera entre " + u1 + " et " + u2 + " en " + reason + "? Hmmm....";
 
 		const sents = [t[0] + " gagnera surement en " + reason,
 					t[1] + "est meilleur(e) en " + reason,
@@ -105,7 +119,11 @@ async function processChatInteraction(interaction){
 
 		const rep = sents[Math.random()*sents.length|0];
 
-		await interaction.reply(e + "\n" + rep);
+		let reply = await interaction.reply(e);
+
+		await wait(2000 + Math.random()*1000|0);
+
+		await reply.edit(rep);
 
 	}
 
