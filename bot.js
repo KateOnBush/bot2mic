@@ -16,15 +16,15 @@ const commands = [
 	new SlashCommandBuilder().setName('groupe').setDescription('Choisi ton groupe 2MIC!'),
 	new SlashCommandBuilder().setName('quigagnera').setDescription('Qui gagnera entre les deux?')
 		.addUserOption(option=>
-			option.setName("Entre")
+			option.setName("qui")
 				.setDescription("Adversaire N° 1")
 				.setRequired(true))
 		.addUserOption(option=>
-			option.setName("Et")
+			option.setName("etqui")
 				.setDescription("Adversaire N° 2")
 				.setRequired(true))
 		.addStringOption(option=>
-			option.setName("En")
+			option.setName("enquoi")
 				.setDescription("En quoi?")
 				.setRequired(true)),
 
@@ -90,6 +90,8 @@ async function processChatInteraction(interaction){
 		var t = [u1, u2];
 		if(Math.random()>Math.random()) t = [u2, u1];
 
+		const e = "Qui gagnera entre " + u1 + " et " + u2 + " en " + reason;
+
 		const sents = [t[0] + " gagnera surement en " + reason,
 					t[1] + "est meilleur(e) en " + reason,
 					reason + "? Y'a que " + t[0] + " qui sait faire",
@@ -102,7 +104,7 @@ async function processChatInteraction(interaction){
 
 		const rep = sents[Math.random()*sents.length|0];
 
-		await interaction.reply(rep);
+		await interaction.reply(e + "\n" + rep);
 
 	}
 
