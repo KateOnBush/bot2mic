@@ -24,7 +24,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 		
 	await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1027322663061966868"), { body: commands });
 		
-		console.log("OK!")
+		console.log("OK!");
 		
 	} catch(err){
 	
@@ -45,11 +45,11 @@ client.on('interactionCreate', async interaction => {
 				new ButtonBuilder()
 					.setCustomId('primary')
 					.setLabel('MIC A!')
-					.setStyle(ButtonStyle.Primary),
+					.setStyle(ButtonStyle.Secondary),
 				new ButtonBuilder()
 					.setCustomId('primary')
 					.setLabel('MIC B!')
-					.setStyle(ButtonStyle.Primary)
+					.setStyle(ButtonStyle.Secondary)
 			);
 
 
