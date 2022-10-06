@@ -276,7 +276,7 @@ async function processButtonInteraction(interaction){
 
 			await aki.win();
 			const file = new AttachmentBuilder(aki.answers[0].picture_path);
-			await interaction.reply({content: "Tu penses à **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
+			await interaction.editReply({content: "Tu penses à **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
 			await interaction.message.delete();
 			interaction.member.akiParty = null;
 			interaction.member.startedAkinator = null;
