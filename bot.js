@@ -11,7 +11,7 @@ const {
 	AttachmentBuilder
 
 } = require('discord.js');;
-const { Aki } = require("aki-api");
+const { Aki, regions } = require("aki-api");
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 
@@ -192,7 +192,7 @@ async function processButtonInteraction(interaction){
 
 	let bid = interaction.customId;
 
-	let u = interaction.member;
+	let u = interaction.user;
 
 	if(bid.startsWith("grp_")){
 
@@ -207,7 +207,8 @@ async function processButtonInteraction(interaction){
 
 		}
 		
-		let reg = "fr";
+		let reg = "fr_objects";
+		console.log(regions);
 		if(bid == "aki_obj") reg = "fr_objects";
 		if(bid == "aki_anim") reg = "fr_animals";
 
