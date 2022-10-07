@@ -43,7 +43,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
 	try {
 		
-		await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1027322663061966868"), { body: commands });
+		await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1011738225490010113"), { body: commands });
 		
 		console.log("OK!");
 		
