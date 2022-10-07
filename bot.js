@@ -275,7 +275,7 @@ async function processButtonInteraction(interaction){
 		if(aki.progress >= 70 || aki.currentStep >= 78){
 
 			await aki.win();
-			const file = new AttachmentBuilder(aki.answers[0].picture_path);
+			const file = new AttachmentBuilder(aki.answers[0].absolute_picture_path);
 			await interaction.editReply({content: "Tu penses à **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
 			await interaction.message.delete();
 			interaction.member.akiParty = null;
