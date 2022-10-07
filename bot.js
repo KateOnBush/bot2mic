@@ -273,6 +273,8 @@ async function processButtonInteraction(interaction){
 
 		let aki = interaction.member.akiParty;
 
+		await interaction.deferReply();
+
 		if (bid === "akiback"){
 
 			await aki.back();
@@ -282,8 +284,6 @@ async function processButtonInteraction(interaction){
 			let ans = parseInt(bid.replace("akirep_",""));
 
 			if (ans == NaN) console.log("Can't get a number");
-
-			await interaction.deferReply();
 
 			await aki.step(ans);
 
