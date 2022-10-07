@@ -309,7 +309,7 @@ async function processButtonInteraction(interaction){
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
 
-		setTimeout(()=>{
+		setTimeout(async ()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
