@@ -192,7 +192,7 @@ async function processButtonInteraction(interaction){
 
 	let bid = interaction.customId;
 
-	let u = interaction.user;
+	let u = interaction.user.toString();
 
 	if(bid.startsWith("grp_")){
 
@@ -207,8 +207,7 @@ async function processButtonInteraction(interaction){
 
 		}
 		
-		let reg = "fr_objects";
-		console.log(regions);
+		let reg = "fr";
 		if(bid == "aki_obj") reg = "fr_objects";
 		if(bid == "aki_anim") reg = "fr_animals";
 
