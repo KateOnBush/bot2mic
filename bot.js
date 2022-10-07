@@ -312,7 +312,7 @@ async function processButtonInteraction(interaction){
 			});
 
 			const endGame = new ActionRowBuilder();
-			if (aki.currentStep>1) endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Primary));
+			if (aki.currentStep>=1) endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Primary));
 			endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Primary));
 
 			await interaction.message.delete();
