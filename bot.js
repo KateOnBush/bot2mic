@@ -153,11 +153,13 @@ async function processChatInteraction(interaction){
 				new ButtonBuilder()
 					.setCustomId('aki_anim')
 					.setLabel('Objet')
-					.setStyle(ButtonStyle.Secondary),
+					.setStyle(ButtonStyle.Secondary)
+					.setDisabled(true),
 				new ButtonBuilder()
 					.setCustomId('aki_obj')
 					.setLabel('Animal')
 					.setStyle(ButtonStyle.Secondary)
+					.setDisabled(true)
 			);
 
 			await interaction.reply({ content: "On commence une partie d'Akinator? Pour commencer dèja, choisi une catégorie:", components: [row] });
@@ -221,7 +223,7 @@ async function processButtonInteraction(interaction){
 			row.addComponents(new ButtonBuilder()
 						.setLabel(answer)
 						.setCustomId("akirep_"+i)
-						.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+						.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Danger : ButtonStyle.Secondary)
 						));
 		});
 
@@ -243,8 +245,7 @@ async function processButtonInteraction(interaction){
 		}, 40000)
 
 		const endGame = new ActionRowBuilder();
-		endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Danger)
-								,new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+		endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Primary));
 
 		await interaction.message.delete();
 
@@ -306,13 +307,13 @@ async function processButtonInteraction(interaction){
 				row.addComponents(new ButtonBuilder()
 							.setLabel(answer)
 							.setCustomId("akirep_"+i)
-							.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+							.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Danger : ButtonStyle.Secondary)
 							));
 			});
 
 			const endGame = new ActionRowBuilder();
-			endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Danger)
-								,new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+			endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Primary)
+								,new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Primary));
 
 			await interaction.message.delete();
 
