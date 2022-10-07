@@ -192,6 +192,8 @@ async function processButtonInteraction(interaction){
 
 	let bid = interaction.customId;
 
+	let u = interaction.member;
+
 	if(bid.startsWith("grp_")){
 
 		await interaction.reply({content: "Normalement là je devrai te donner un role mais Baptiste ne m'a pas encore donné les IDs des roles.", ephemeral: true});
@@ -249,7 +251,7 @@ async function processButtonInteraction(interaction){
 
 		await interaction.message.delete();
 
-		await interaction.editReply({content: aki.question, components: [row, endGame]});
+		await interaction.editReply({content: u + ", " + aki.question, components: [row, endGame]});
 
 		let rep = await interaction.fetchReply();
 
@@ -294,7 +296,7 @@ async function processButtonInteraction(interaction){
 
 			await aki.win();
 			const file = new AttachmentBuilder(aki.answers[0].absolute_picture_path);
-			await interaction.editReply({content: "Tu penses à **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
+			await interaction.editReply({content: u + ", tu penses à: **" + aki.answers[0].name + "**, c'est ça?", components: [], files: [file]});
 			await interaction.message.delete();
 			interaction.member.akiParty = null;
 			interaction.member.startedAkinator = null;
@@ -317,7 +319,7 @@ async function processButtonInteraction(interaction){
 
 			await interaction.message.delete();
 
-			await interaction.editReply({content: aki.question, components: [row, endGame]});
+			await interaction.editReply({content: u + ", "+ aki.question, components: [row, endGame]});
 
 			let rep = await interaction.fetchReply();
 
@@ -364,7 +366,7 @@ async function processButtonInteraction(interaction){
 
 		await interaction.reply({content: "Partie terminée!", ephemeral: true});
 
-		await interaction.message.delete("Partie d'Akinator terminée.");
+		await interaction.message.delete();
 
 	}
 
