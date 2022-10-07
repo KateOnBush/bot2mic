@@ -159,14 +159,14 @@ async function processChatInteraction(interaction){
 
 			interaction.member.startedAkinator = rep.id;
 
-			setTimeout(()=>{
+			setTimeout(async ()=>{
 
 				if(interaction.member.startedAkinator && interaction.member.startedAkinator == rep.id && !interaction.member.akiParty){
 
 					interaction.member.akiParty = null;
 					interaction.member.startedAkinator = null;
-					interaciton.message.delete();
-					interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+					await interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+					await interaction.message.delete();
 
 				}
 
@@ -221,14 +221,14 @@ async function processButtonInteraction(interaction){
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
 
-		setTimeout(()=>{
+		setTimeout(async ()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
 				interaction.member.akiParty = null;
 				interaction.member.startedAkinator = null;
-				interaciton.message.delete();
-				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+				await interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+				await interaction.message.delete();
 
 			}
 
@@ -315,8 +315,8 @@ async function processButtonInteraction(interaction){
 
 				interaction.member.akiParty = null;
 				interaction.member.startedAkinator = null;
-				interaciton.message.delete();
-				interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+				await interaction.reply({ content: "Tu as pris trop de temps, partie est terminée.", ephemeral: true});
+				await interaction.message.delete();
 
 			}
 
