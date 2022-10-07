@@ -166,7 +166,7 @@ async function processChatInteraction(interaction){
 
 			interaction.member.startedAkinator = rep.id;
 
-			setTimeout(async ()=>{
+			interaction.member.lastAkiTimeout = setTimeout(async ()=>{
 
 				if(interaction.member.startedAkinator && interaction.member.startedAkinator == rep.id && !interaction.member.akiParty){
 
@@ -221,14 +221,15 @@ async function processButtonInteraction(interaction){
 			row.addComponents(new ButtonBuilder()
 						.setLabel(answer)
 						.setCustomId("akirep_"+i)
-						.setStyle(i === 0 ? ButtonStyle.Success : (i === 4 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+						.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Primary : ButtonStyle.Secondary)
 						));
 		});
 
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
 
-		setTimeout(async ()=>{
+		if (interaction.member.lastAkiTimeout) clearTimeout(interaction.member.lastAkiTimeout);
+		interaction.member.lastAkiTimeout = setTimeout(async ()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
@@ -242,7 +243,8 @@ async function processButtonInteraction(interaction){
 		}, 40000)
 
 		const endGame = new ActionRowBuilder();
-		endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+		endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Danger)
+								,new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
 
 		await interaction.message.delete();
 
@@ -253,7 +255,7 @@ async function processButtonInteraction(interaction){
 		interaction.member.startedAkinator = rep.id;
 
 
-	} else if(bid.startsWith("akirep_")){
+	} else if(bid.startsWith("akirep_") || bid === "akiback"){
 
 		if(!interaction.member.startedAkinator || interaction.member.startedAkinator !== interaction.message.id) {
 
@@ -271,13 +273,21 @@ async function processButtonInteraction(interaction){
 
 		let aki = interaction.member.akiParty;
 
-		let ans = parseInt(bid.replace("akirep_",""));
+		if (bid === "akiback"){
 
-		if (ans == NaN) console.log("Can't get a number");
+			await aki.back();
 
-		await interaction.deferReply();
+		} else {
 
-		await aki.step(ans);
+			let ans = parseInt(bid.replace("akirep_",""));
+
+			if (ans == NaN) console.log("Can't get a number");
+
+			await interaction.deferReply();
+
+			await aki.step(ans);
+
+		}
 
 		if(aki.progress >= 70 || aki.currentStep >= 78){
 
@@ -296,12 +306,13 @@ async function processButtonInteraction(interaction){
 				row.addComponents(new ButtonBuilder()
 							.setLabel(answer)
 							.setCustomId("akirep_"+i)
-							.setStyle(i === 0 ? ButtonStyle.Success : (i === 4 ? ButtonStyle.Primary : ButtonStyle.Secondary)
+							.setStyle(i === 0 ? ButtonStyle.Success : (i === 1 ? ButtonStyle.Primary : ButtonStyle.Secondary)
 							));
 			});
 
 			const endGame = new ActionRowBuilder();
-			endGame.addComponents(new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
+			endGame.addComponents(new ButtonBuilder().setLabel("Revenir en arrière").setCustomId("akiback").setStyle(ButtonStyle.Danger)
+								,new ButtonBuilder().setLabel("Finir la partie").setCustomId("akiend").setStyle(ButtonStyle.Danger));
 
 			await interaction.message.delete();
 
@@ -316,7 +327,8 @@ async function processButtonInteraction(interaction){
 		let sID = interaction.member.startedAkinator;
 		let cstep = aki.currentStep;
 
-		setTimeout(async ()=>{
+		if (interaction.member.lastAkiTimeout) clearTimeout(interaction.member.lastAkiTimeout);
+		interaction.member.lastAkiTimeout = setTimeout(async ()=>{
 
 			if(interaction.member.startedAkinator === sID && interaction.member.akiParty && interaction.member.akiParty.currentStep === cstep){
 
