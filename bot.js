@@ -140,6 +140,7 @@ async function processChatInteraction(interaction){
 		if(interaction.member.startedAkinator || interaction.member.akiParty){
 
 			await interaction.reply({content: "Tu as dèja commence une partie, termine ta partie avant de commencer une nouvelle.", ephemeral: true})
+			return;
 
 		}
 
