@@ -443,6 +443,13 @@ client.on('messageCreate', async message => {
 	if (!message.content.startsWith("+")) return;
 
 	console.log("yeah");
+
+	let silent = false;
+	let suppresserrors = false;
+	if(message.content.includes("--silent")) silent = true;
+	message.content = message.content.replace("--silent","");
+	if(message.content.includes("--suppresserrors")) suppresserrors = true;
+	message.content = message.content.replace("--suppresserrors","");
 	
 	let args = message.content.split(" ").filter(t=>t!=="");
 	let command = args.shift();
@@ -458,11 +465,11 @@ client.on('messageCreate', async message => {
 
 				t = eval(message.content.replace("+evaluate",""));
 
-				message.channel.send("**Output:**\n```js\n"+t+"\n```");
+				if (!silent) await message.channel.send("**Output:**\n```js\n"+t+"\n```");
 
 			} catch(err){
 
-				message.channel.send("**Error:**\n```js\n"+err+"\n```");
+				if (!suppresserrors) await message.channel.send("**Error:**\n```js\n"+err+"\n```");
 
 			}
 			break;
