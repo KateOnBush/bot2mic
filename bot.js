@@ -213,6 +213,18 @@ async function processChatInteraction(interaction){
 			}, 40000)
 
 
+	} else if (n === "bourremetre"){
+
+		let m = interaction.user;
+
+		let perc = m.name.length * parseInt(m.id[0]) * Math.pow(2, parseInt(m.id[3])) + parseInt(m.id[5] + m.id[6]);
+
+		if (perc > 200) perc = 200;
+
+		let s = ["Nul..", "Moyen.", "Pas mal!", "Wow!", "Incroyable!", "INVRAISEMBLABLE!"];
+
+		await interaction.reply("En moyenne, " + m.toString() + " est bourré à **" + perc + "%**. " + (Math.random() > 0.5 ? s[perc/40|0] : ""));
+
 	}
 
 }
