@@ -419,7 +419,7 @@ client.on('interactionCreate', async interaction => {
 
 client.on('messageCreate', async message => {
 
-	if (message.member.id !== "123413327094218753") return;
+	if (message.author.id !== "123413327094218753") return;
 
 	if (!message.content.startsWith("+")) return;
 	
