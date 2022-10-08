@@ -220,7 +220,7 @@ async function processChatInteraction(interaction){
 
 		let m = interaction.options.getUser("qui") || interaction.user;
 
-		let perc = m.name.length * parseInt(m.id[0]) * Math.pow(2, parseInt(m.id[3])) + parseInt(m.id[5] + m.id[6]);
+		let perc = m.displayName.length * parseInt(m.id[0]) * Math.pow(2, parseInt(m.id[3])) + parseInt(m.id[5] + m.id[6]);
 
 		if (perc > 200) perc = 200;
 
