@@ -430,7 +430,7 @@ client.on('messageCreate', async message => {
 	let args = message.content.split(" ").filter(t=>t!=="");
 	let command = args.shift();
 
-	command.replace("+","");
+	command = command.replace("+","");
 
 	console.log(command);
 
