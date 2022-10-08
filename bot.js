@@ -445,7 +445,7 @@ client.on('messageCreate', async message => {
 
 			} catch(err){
 
-				message.channel.send("**Error:**\n```js\n"+t+"\n```");
+				message.channel.send("**Error:**\n```js\n"+err+"\n```");
 
 			}
 			break;
