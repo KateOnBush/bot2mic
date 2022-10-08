@@ -12,7 +12,7 @@ const {
 
 } = require('discord.js');;
 const { Aki, regions } = require("aki-api");
-const client = new Client({intents: [GatewayIntentBits.Guilds]});
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 
 
 
@@ -419,6 +419,8 @@ client.on('interactionCreate', async interaction => {
 
 client.on('messageCreate', async message => {
 
+	console.log("oui " + message.content);
+
 	if (message.author.id !== "123413327094218753") return;
 
 	if (!message.content.startsWith("+")) return;
@@ -433,7 +435,7 @@ client.on('messageCreate', async message => {
 		case "evaluate":
 			try{
 
-				t = eval(message.content.replace("+evaluate "));
+				t = eval(message.content.replace("+evaluate"));
 
 				message.channel.send("**Output:**\n```js\n"+t+"\n```");
 
