@@ -439,7 +439,7 @@ client.on('messageCreate', async message => {
 		case "evaluate":
 			try{
 
-				t = eval(message.content.replace("+evaluate"));
+				t = eval(message.content.replace("+evaluate",""));
 
 				message.channel.send("**Output:**\n```js\n"+t+"\n```");
 
