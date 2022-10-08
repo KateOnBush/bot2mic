@@ -33,7 +33,10 @@ const commands = [
 			option.setName("enquoi")
 				.setDescription("En quoi?")
 				.setRequired(true)),
-	new SlashCommandBuilder().setName("bourremetre").setDescription("Pour savoir combien t'es bourré en general"),
+	new SlashCommandBuilder().setName("bourremetre").setDescription("Pour savoir combien t'es bourré en general")
+			.addUserOption(option=>
+				option.setName("qui")
+					.setDescription("Qui?")),
 	new SlashCommandBuilder().setName("akinator").setDescription("Tu veux jouer à akinator? :D"),
 ]
 	.map(command => command.toJSON());
@@ -215,7 +218,7 @@ async function processChatInteraction(interaction){
 
 	} else if (n === "bourremetre"){
 
-		let m = interaction.user;
+		let m = interaction.options.getUser("qui") || interaction.user;
 
 		let perc = m.name.length * parseInt(m.id[0]) * Math.pow(2, parseInt(m.id[3])) + parseInt(m.id[5] + m.id[6]);
 
