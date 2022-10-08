@@ -452,7 +452,7 @@ client.on('messageCreate', async message => {
 
 		case "uptime":
 
-			message.channel.send("**Uptime:** " + msToString(upTime,"**",true));
+			message.channel.send("**Uptime:** " + msToString(client.uptime,"**",true));
 
 			break;
 
