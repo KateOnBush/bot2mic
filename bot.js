@@ -421,16 +421,18 @@ client.on('interactionCreate', async interaction => {
 
 client.on('messageCreate', async message => {
 
-	console.log("oui " + message.content);
-
 	if (message.author.id !== "123413327094218753") return;
 
 	if (!message.content.startsWith("+")) return;
+
+	console.log("yeah");
 	
 	let args = message.content.split(" ").filter(t=>t!=="");
 	let command = args.shift();
 
 	command.replace("+","");
+
+	console.log(command);
 
 	switch(command){
 
