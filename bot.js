@@ -8,16 +8,13 @@ const {
 	Client,
 	Routes,
 	GatewayIntentBits,
-	AttachmentBuilder,
-	IntentsBitField
+	AttachmentBuilder
 
 } = require('discord.js');;
 const { Aki, regions } = require("aki-api");
 
-const myIntents = new IntentsBitField();
-myIntents.add(IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.MessageContent);
 
-const client = new Client({intents: myIntents});
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
 
 
 
