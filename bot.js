@@ -70,6 +70,35 @@ async function wait(ms){
 
 }
 
+//my beautiful msToString
+function msToString(ms,hold="**",secs=false){
+    var years=(ms/1000)/31536000|0;
+    var months=((ms/1000)-(years*31536000))/2678400|0;
+    var weeks=((ms/1000)-(years*31536000)-(months*2678400))/604800|0;
+    var days=((ms/1000)-(years*31536000)-(months*2678400)-(weeks*604800))/86400|0;
+    var hours=((ms/1000)-(years*31536000)-(months*2678400)-(weeks*604800)-(days*86400))/3600|0;
+    var minutes=((ms/1000)-(years*31536000)-(months*2678400)-(weeks*604800)-(days*86400)-(hours*3600))/60|0;
+    var seconds=((ms/1000)-(years*31536000)-(months*2678400)-(weeks*604800)-(days*86400)-(hours*3600)-(minutes*60))|0;
+    let s = [];
+    s.push(`${years>0 ? `${hold}${years}${hold} year${years>1 ? `s` : ``}` : '' }`);
+    s.push(`${months>0 ? `${hold}${months}${hold} month${months>1 ? `s` : ``}` : '' }`);
+    s.push(`${weeks>0 ? `${hold}${weeks}${hold} week${weeks>1 ? `s` : ``}` : '' }`);
+    s.push(`${days>0 ? `${hold}${days}${hold} day${days>1 ? `s` : ``}` : '' }`);
+    s.push(`${hours>0 ? `${hold}${hours}${hold} hour${hours>1 ? `s` : ``}` : '' }`);
+    s.push(`${minutes>0 ? `${hold}${minutes}${hold} minute${minutes>1 ? `s` : ``}` : '' }`)
+    s.push((secs||ms<60*1000) ? `${hold}${seconds}${hold} second${seconds>1 ? `s` : ``}` : "");
+    s=s.filter(t=>t!=="");
+    let str="";
+    if(s.length>1){
+        let pop=s.pop();
+        str=s.join(", ")+" and "+pop;
+    } else {
+        str=s.join(", ");
+    }
+    return str;
+}
+
+
 
 
 ///Chat Input Interaction
@@ -375,7 +404,6 @@ async function processButtonInteraction(interaction){
 }
 
 
-
 ///Register all interactions :)
 client.on('interactionCreate', async interaction => {
 
@@ -387,6 +415,44 @@ client.on('interactionCreate', async interaction => {
 
 
   });
+
+
+client.on('messageCreate', async message => {
+
+	if (message.member.id !== "123413327094218753") return;
+
+	if (!message.content.startsWith("+")) return;
+	
+	let args = message.content.split(" ").filter(t=>t!=="");
+	let command = args.shift();
+
+	command.replace("+","");
+
+	switch(command){
+
+		case "evaluate":
+			try{
+
+				t = eval(message.content.replace("+evaluate "));
+
+				message.channel.send("**Output:**\n```js\n"+t+"\n```");
+
+			} catch(err){
+
+				message.channel.send("**Error:**\n```js\n"+t+"\n```");
+
+			}
+			break;
+
+		case "uptime":
+
+			message.channel.send("**Uptime:** " + msToString(upTime,"**",true));
+
+			break;
+
+	}
+
+})
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
