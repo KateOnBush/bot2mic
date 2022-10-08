@@ -45,7 +45,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
 	try {
 		
-		await rest.put(Routes.applicationGuildCommands("1027321324714070106", "1011738225490010113"), { body: commands });
+		await rest.put(Routes.applicationCommands("1027321324714070106"), { body: commands });
 		
 		console.log("OK!");
 		
@@ -420,6 +420,8 @@ async function processButtonInteraction(interaction){
 
 ///Register all interactions :)
 client.on('interactionCreate', async interaction => {
+
+	if (!interaction.inGuild()) return;
 
 	if (interaction.isChatInputCommand()) await processChatInteraction(interaction);
 
