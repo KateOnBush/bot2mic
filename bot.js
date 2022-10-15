@@ -38,6 +38,15 @@ const commands = [
 				option.setName("qui")
 					.setDescription("Qui?")),
 	new SlashCommandBuilder().setName("akinator").setDescription("Tu veux jouer à akinator? :D"),
+	new SlashCommandBuilder().setName("lc").setDescription("Love compatibility?")
+			.addUserOption(option=>
+					option.setName("qui")
+						.setDescription("Lover N° 1")
+						.setRequired(true))
+				.addUserOption(option=>
+					option.setName("etqui")
+						.setDescription("Lover N° 2")
+						.setRequired(true))
 ]
 	.map(command => command.toJSON());
 
@@ -221,13 +230,24 @@ async function processChatInteraction(interaction){
 		let m = interaction.options.getUser("qui") || interaction.user;
 
 		let perc = m.username.length * parseInt(m.id[0]) * Math.pow(2, parseInt(m.id[3])) + parseInt(m.id[5] + m.id[6]);
+		perc /= 2;
 
-		if (perc > 200) perc = 200;
+		if (perc > 500) perc = 500;
 
 		let s = ["Nul..", "Moyen.", "Pas mal!", "Wow!", "Incroyable!", "INVRAISEMBLABLE!"];
 
-		await interaction.reply("En moyenne, " + m.toString() + " est bourré à **" + perc + "%**. " + (Math.random() > 0.5 ? s[perc/40|0] : ""));
+		await interaction.reply("En moyenne, " + m.toString() + " est bourré à **" + perc + "%**. " + (Math.random() > 0.5 ? s[perc*6/500|0] : ""));
 
+	} else if (n == "lc"){
+	
+		const u1 = interaction.options.getUser("qui")
+		const u2 = interaction.options.getUser("etqui");
+		
+		let perc = parseInt(u1.id[6] + u1.id[7]) + parseInt(u2.id[6] + u2.id[7])|0;
+		perc = perc > 100 ? 100 : perc;
+		
+		await interaction.reply("Love compatibility entre **"+u1.toString()+"** et **"+u2.toString()+"** : **"+perc+"%**");
+		
 	}
 
 }
